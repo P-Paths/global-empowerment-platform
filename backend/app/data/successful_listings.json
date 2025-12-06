@@ -1,0 +1,154 @@
+{
+  "successful_listings": [
+    {
+      "id": "listing_001",
+      "make": "Honda",
+      "model": "Civic",
+      "year": 2019,
+      "mileage": 45000,
+      "location": "Detroit, MI",
+      "sold_price": 18500,
+      "days_on_market": 3,
+      "listing_price": 19200,
+      "features": ["Automatic", "Backup Camera", "Bluetooth", "Cruise Control"],
+      "condition": "Excellent",
+      "photos_count": 12,
+      "description_keywords": ["clean", "well maintained", "one owner", "no accidents"],
+      "sold_date": "2024-01-15",
+      "market_insights": {
+        "price_per_mile": 0.41,
+        "market_demand": "High",
+        "seasonal_factor": "Winter discount applied",
+        "local_preference": "Automatic transmission preferred"
+      }
+    },
+    {
+      "id": "listing_002", 
+      "make": "Toyota",
+      "model": "Camry",
+      "year": 2017,
+      "mileage": 78000,
+      "location": "Detroit, MI",
+      "sold_price": 16200,
+      "days_on_market": 5,
+      "listing_price": 16800,
+      "features": ["Automatic", "Heated Seats", "Sunroof", "Navigation"],
+      "condition": "Good",
+      "photos_count": 15,
+      "description_keywords": ["reliable", "fuel efficient", "comfortable", "family car"],
+      "sold_date": "2024-01-20",
+      "market_insights": {
+        "price_per_mile": 0.21,
+        "market_demand": "Very High",
+        "seasonal_factor": "Standard pricing",
+        "local_preference": "Toyota reliability valued"
+      }
+    },
+    {
+      "id": "listing_003",
+      "make": "Ford",
+      "model": "F-150",
+      "year": 2015,
+      "mileage": 120000,
+      "location": "Detroit, MI", 
+      "sold_price": 18500,
+      "days_on_market": 7,
+      "listing_price": 19500,
+      "features": ["4WD", "Crew Cab", "Towing Package", "Bed Liner"],
+      "condition": "Good",
+      "photos_count": 18,
+      "description_keywords": ["work truck", "towing capacity", "4x4", "reliable"],
+      "sold_date": "2024-01-25",
+      "market_insights": {
+        "price_per_mile": 0.15,
+        "market_demand": "High",
+        "seasonal_factor": "Winter 4WD premium",
+        "local_preference": "Trucks in high demand"
+      }
+    },
+    {
+      "id": "listing_004",
+      "make": "Infiniti",
+      "model": "Q50",
+      "year": 2014,
+      "mileage": 129993,
+      "location": "Detroit, MI",
+      "sold_price": 7200,
+      "days_on_market": 12,
+      "listing_price": 7800,
+      "features": ["Automatic", "Leather Seats", "Navigation", "Premium Audio"],
+      "condition": "Good",
+      "photos_count": 10,
+      "description_keywords": ["luxury", "smooth ride", "well equipped", "affordable luxury"],
+      "sold_date": "2024-02-01",
+      "market_insights": {
+        "price_per_mile": 0.06,
+        "market_demand": "Medium",
+        "seasonal_factor": "Luxury market slow",
+        "local_preference": "Value luxury segment"
+      }
+    },
+    {
+      "id": "listing_005",
+      "make": "BMW",
+      "model": "3 Series",
+      "year": 2016,
+      "mileage": 85000,
+      "location": "Detroit, MI",
+      "sold_price": 16800,
+      "days_on_market": 8,
+      "listing_price": 17500,
+      "features": ["Automatic", "Leather", "Sunroof", "Premium Package"],
+      "condition": "Excellent",
+      "photos_count": 14,
+      "description_keywords": ["sporty", "luxury", "well maintained", "performance"],
+      "sold_date": "2024-02-05",
+      "market_insights": {
+        "price_per_mile": 0.20,
+        "market_demand": "High",
+        "seasonal_factor": "Luxury market active",
+        "local_preference": "BMW brand recognition strong"
+      }
+    }
+  ],
+  "market_trends": {
+    "detroit_mi": {
+      "avg_days_on_market": 7.2,
+      "price_trends": {
+        "honda_civic": "+3% this month",
+        "toyota_camry": "+5% this month", 
+        "ford_f150": "+2% this month",
+        "luxury_cars": "-1% this month"
+      },
+      "seasonal_factors": {
+        "winter": "4WD premium +15%, luxury cars -10%",
+        "spring": "Convertibles +20%, all cars +5%",
+        "summer": "Standard pricing",
+        "fall": "All cars +3%"
+      },
+      "local_preferences": {
+        "transmission": "Automatic preferred (85% of sales)",
+        "features": "Backup camera, Bluetooth, heated seats",
+        "condition": "Well-maintained cars sell 40% faster",
+        "pricing": "Cars priced at $X,XXX sell better than $XX,XXX"
+      }
+    }
+  },
+  "success_patterns": {
+    "photo_count_impact": {
+      "8_or_more": "Sell 40% faster",
+      "12_or_more": "Sell 60% faster", 
+      "15_or_more": "Sell 80% faster"
+    },
+    "description_keywords": {
+      "high_impact": ["clean", "well maintained", "one owner", "no accidents"],
+      "medium_impact": ["reliable", "fuel efficient", "comfortable"],
+      "low_impact": ["nice", "good", "runs great"]
+    },
+    "pricing_strategies": {
+      "quick_sale": "List 5-8% below market",
+      "market_price": "List at market value",
+      "premium": "List 3-5% above market"
+    }
+  }
+}

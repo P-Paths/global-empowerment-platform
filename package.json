@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "dev": "concurrently \"cd backend && bash -c 'source .venv/bin/activate && uvicorn app.main:app --reload --host 0.0.0.0 --port 8000'\" \"cd frontend && npm run dev\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:wsl": "bash start-dev.sh"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.2.0",
+    "@mui/material": "^7.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.8.1",
+    "@types/react-dom": "^19.2.2",
+    "concurrently": "^9.2.0"
+  }
+}

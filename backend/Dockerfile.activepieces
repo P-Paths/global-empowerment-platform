@@ -1,0 +1,20 @@
+# Activepieces Dockerfile for Google Cloud Run
+FROM activepieces/activepieces:latest
+
+# Set environment variables for production
+ENV AP_FRONTEND_URL=https://activepieces-accorria-19949436301.us-central1.run.app
+ENV AP_POSTGRES_HOST=db.your-project-ref.supabase.co
+ENV AP_POSTGRES_PORT=5432
+ENV AP_POSTGRES_USERNAME=postgres
+ENV AP_POSTGRES_PASSWORD=${SUPABASE_DB_PASSWORD}
+ENV AP_POSTGRES_DATABASE=postgres
+ENV AP_REDIS_HOST=redis
+ENV AP_REDIS_PORT=6379
+ENV AP_ENCRYPTION_KEY=${AP_ENCRYPTION_KEY}
+ENV AP_JWT_SECRET=${AP_JWT_SECRET}
+
+# Expose port 8080 for Cloud Run
+EXPOSE 8080
+
+# Start Activepieces
+CMD ["node", "dist/packages/server/main.js"]

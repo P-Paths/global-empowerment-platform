@@ -1,0 +1,150 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+*.log
+*.env
+venv/
+.venv/
+.env.*
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual Environments (CRITICAL SECURITY)
+.venv/
+venv/
+env/
+ENV/
+backend/.venv/
+backend/venv/
+frontend/.venv/
+frontend/venv/
+
+# Environment files (CRITICAL SECURITY)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.staging
+.env.backup
+*.env
+*.env.yaml
+*.env.yml
+env.yaml
+env.yml
+backend/env.yaml
+backend/env.yml
+
+# API Keys and Secrets (CRITICAL SECURITY)
+secrets.json
+credentials.json
+service-account-key.json
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# Browser session files (CRITICAL SECURITY)
+fb_session.json
+*_session.json
+preview.png
+
+# Database files (CRITICAL SECURITY)
+*.db
+*.sqlite
+*.sqlite3
+accorria.db
+quickflip.db
+
+# Database connection directories (CRITICAL SECURITY)
+*:*@*:*/
+username:password@*/
+*@localhost:*/
+
+# VS Code
+.vscode/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.next/
+out/
+build/
+dist/
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+.dockerignore
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Test files
+test_venv/
+test_*.py
+*_test.py
+# Exception: test_apis.py is an API endpoint, not a test file
+!backend/app/api/v1/test_apis.py
+
+# Security files
+setup_secure_env.sh
+secure-env-setup.sh
+
+# Strategic Documentation (CRITICAL SECURITY)
+SECRET_WEAPON_*.md
+ACCORRIA_TRILION_DOLLAR_VISION.md
+FORD_DEMO_RESULT.md
+DEMO_TUTORIAL.md
+*_STRATEGY_*.md
+*_PLAN_*.md
+*_VISION_*.md
+PUSH_AND_CHECK_SUMMARY.md
+EMAIL_SETUP_GUIDE.md
+BETA_SIGNUP_ERROR_ANALYSIS.md
+
+# All Markdown Documentation (CRITICAL SECURITY)
+*.md
+# Exception: Testing documentation should be included
+!PRODUCTION_READINESS_CHECKLIST.md
+!MANUAL_TESTING_GUIDE.md
+!TESTING_SUMMARY.md
+# Exception: README files
+!README.md
+!README*.md
+
+# Password files (CRITICAL SECURITY)
+*password*.txt
+*.password
+.audit_*_password.txt
+
+# Large binary files
+*.tar.gz
+google-cloud-cli-*.tar.gz

@@ -1,0 +1,86 @@
+# Accorria Backend Cloud Build Configuration
+# Enterprise-Grade CI/CD Pipeline
+# Automated deployment with security scanning
+
+steps:
+  # Step 1: Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '-t', 'gcr.io/$PROJECT_ID/accorria-backend:$COMMIT_SHA',
+      '-t', 'gcr.io/$PROJECT_ID/accorria-backend:latest',
+      '.'
+    ]
+    dir: 'backend'
+
+  # Step 2: Push the image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'push',
+      'gcr.io/$PROJECT_ID/accorria-backend:$COMMIT_SHA'
+    ]
+
+  # Step 3: Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args: [
+      'run',
+      'deploy',
+      'accorria-backend',
+      '--image', 'gcr.io/$PROJECT_ID/accorria-backend:$COMMIT_SHA',
+      '--region', 'us-central1',
+      '--platform', 'managed',
+      '--allow-unauthenticated',
+      '--memory', '2Gi',
+      '--cpu', '2',
+      '--timeout', '300',
+      '--concurrency', '100',
+      '--max-instances', '50',
+      '--min-instances', '1',
+      '--port', '8000',
+      '--service-account', 'accorria-backend-deploy@accorria-beta.iam.gserviceaccount.com',
+      '--set-env-vars', 'ENVIRONMENT=production,APP_NAME=Accorria,APP_VERSION=1.0.0',
+      '--set-env-vars', 'ENABLE_RATE_LIMITING=true,ENABLE_AUDIT_LOGGING=true,ENABLE_PII_ENCRYPTION=true',
+      '--set-env-vars', 'RATE_LIMIT_DEFAULT=100,RATE_LIMIT_AUTH=10,RATE_LIMIT_CHAT=5',
+      '--set-env-vars', 'ALLOWED_ORIGINS=http://localhost:3000,https://accorria.com,https://www.accorria.com,https://accorria.vercel.app'
+    ]
+
+  # Step 4: Health check
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        echo "🔍 Running health check..."
+        SERVICE_URL=$(gcloud run services describe accorria-backend --region=us-central1 --format="value(status.url)")
+        echo "Service URL: $SERVICE_URL"
+        
+        # Wait for service to be ready
+        sleep 30
+        
+        # Test health endpoint
+        if curl -f "$SERVICE_URL/health"; then
+          echo "✅ Health check passed!"
+        else
+          echo "❌ Health check failed!"
+          exit 1
+        fi
+
+# Configuration
+options:
+  logging: CLOUD_LOGGING_ONLY
+  machineType: 'E2_HIGHCPU_8'
+
+# Substitutions
+substitutions:
+  _REGION: 'us-central1'
+  _SERVICE_NAME: 'accorria-backend'
+  _PROJECT_ID: 'accorria-beta'
+
+# Timeout
+timeout: '1200s'
+
+# Images to be pushed to Artifact Registry
+images:
+  - 'gcr.io/$PROJECT_ID/accorria-backend:$COMMIT_SHA'
+  - 'gcr.io/$PROJECT_ID/accorria-backend:latest'

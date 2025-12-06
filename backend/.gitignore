@@ -1,0 +1,68 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+*.log
+
+# Virtual Environments (CRITICAL SECURITY)
+.venv/
+venv/
+env/
+ENV/
+
+# Environment files (CRITICAL SECURITY)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.staging
+.env.backup
+*.env
+
+# API Keys and Secrets (CRITICAL SECURITY)
+secrets.json
+credentials.json
+service-account-key.json
+workload-identity-config.json
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# Database files (CRITICAL SECURITY)
+*.db
+*.sqlite
+*.sqlite3
+
+# Database connection directories (CRITICAL SECURITY)
+*:*@*:*/
+username:password@*/
+*@localhost:*/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Test files
+test_*.py
+*_test.py

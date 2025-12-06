@@ -1,0 +1,46 @@
+steps:
+  # Build the container image from backend directory only
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/accorria-backend/accorria-backend-beta', '.']
+    dir: './backend'
+  
+  # Push the container image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/accorria-backend/accorria-backend-beta']
+  
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'accorria-backend-beta'
+      - '--image'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/accorria-backend/accorria-backend-beta'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--port'
+      - '8000'
+      - '--memory'
+      - '2Gi'
+      - '--cpu'
+      - '2'
+      - '--min-instances'
+      - '0'
+      - '--max-instances'
+      - '10'
+      - '--timeout'
+      - '300'
+      - '--concurrency'
+      - '80'
+      - '--set-env-vars'
+      - 'CLOUDBUILD=true,PORT=8000'
+      - '--service-account'
+      - '19949436301-compute@developer.gserviceaccount.com'
+
+images:
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/accorria-backend/accorria-backend-beta'
+
