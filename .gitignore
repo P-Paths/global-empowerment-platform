@@ -130,15 +130,8 @@ PUSH_AND_CHECK_SUMMARY.md
 EMAIL_SETUP_GUIDE.md
 BETA_SIGNUP_ERROR_ANALYSIS.md
 
-# All Markdown Documentation (CRITICAL SECURITY)
-*.md
-# Exception: Testing documentation should be included
-!PRODUCTION_READINESS_CHECKLIST.md
-!MANUAL_TESTING_GUIDE.md
-!TESTING_SUMMARY.md
-# Exception: README files
-!README.md
-!README*.md
+# All Markdown Documentation - Keeping all .md files as requested
+# *.md  # Commented out to allow all markdown files
 
 # Password files (CRITICAL SECURITY)
 *password*.txt
