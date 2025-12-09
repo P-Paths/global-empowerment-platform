@@ -175,11 +175,15 @@ export default function GrowthCoachPage() {
     // Try to complete via API
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+      };
+      if (session?.access_token) {
+        headers['Authorization'] = `Bearer ${session.access_token}`;
+      }
       const response = await fetch(`${apiUrl}/api/v1/growth/tasks/${taskId}/complete`, {
         method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${user?.access_token}`,
-        },
+        headers,
       });
       if (response.ok) {
         fetchData();
