@@ -184,7 +184,48 @@ export default function CommunityFeedPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-        <Header />
+        {/* Landing Page Header */}
+        <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+          <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center h-16">
+              <div className="flex items-center">
+                <Link href="/" className="flex items-center">
+                  <Image 
+                    src="/GEP LOGO.png" 
+                    alt="Global Empowerment Platform" 
+                    width={120}
+                    height={40}
+                    className="h-8 w-auto"
+                    priority
+                  />
+                </Link>
+              </div>
+              
+              <div className="hidden md:flex items-center space-x-8">
+                <Link href="/about" className="text-gray-600 hover:text-gray-900 text-sm font-medium">About</Link>
+                <Link href="/how-it-works" className="text-gray-600 hover:text-gray-900 text-sm font-medium">How it works</Link>
+                <Link href="/community" className="text-blue-600 hover:text-blue-700 text-sm font-medium">Community</Link>
+              </div>
+              
+              <div className="flex items-center space-x-4">
+                {user ? (
+                  <Link href="/dashboard" className="bg-gep-gold text-gep-navy px-4 py-2 rounded-lg text-sm font-medium hover:bg-gep-gold/90">
+                    Dashboard
+                  </Link>
+                ) : (
+                  <>
+                    <Link href="/login" className="text-gray-600 hover:text-gray-900 text-sm font-medium">
+                      Sign in
+                    </Link>
+                    <Link href="/register" className="bg-gep-gold text-gep-navy px-4 py-2 rounded-lg text-sm font-medium hover:bg-gep-gold/90">
+                      Get started
+                    </Link>
+                  </>
+                )}
+              </div>
+            </div>
+          </nav>
+        </header>
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
