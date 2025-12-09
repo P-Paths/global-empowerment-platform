@@ -28,11 +28,11 @@ export default function SidebarWrapper({ children }: SidebarWrapperProps) {
   }
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex bg-gray-50 dark:bg-gray-900">
       {/* Sidebar - fixed on mobile, relative on desktop */}
       <Sidebar isOpen={isOpen} onToggle={toggle} />
       {/* Content area - shifts on desktop when sidebar is open */}
-      <div className={`flex-1 flex flex-col min-w-0 transition-all duration-300 ease-in-out ${isOpen ? 'lg:ml-0' : 'lg:ml-0'}`}>
+      <div className="flex-1 flex flex-col min-w-0">
         {children}
       </div>
     </div>
