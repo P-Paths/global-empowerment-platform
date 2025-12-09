@@ -499,7 +499,14 @@ export function useTasks() {
         setTasks(data);
         setError(null);
       } catch (err: any) {
-        setError(err.message || 'Failed to fetch tasks');
+        // Silently handle network errors - don't set error state for network failures
+        if (err.isNetworkError || err.message?.includes('Failed to connect') || err.message?.includes('Failed to fetch')) {
+          // Use empty array for network errors - components can use mock data
+          setTasks([]);
+          setError(null);
+        } else {
+          setError(err.message || 'Failed to fetch tasks');
+        }
       } finally {
         setLoading(false);
       }
@@ -518,7 +525,14 @@ export function useTasks() {
         setTasks(data);
         setError(null);
       } catch (err: any) {
-        setError(err.message || 'Failed to fetch tasks');
+        // Silently handle network errors - don't set error state for network failures
+        if (err.isNetworkError || err.message?.includes('Failed to connect') || err.message?.includes('Failed to fetch')) {
+          // Use empty array for network errors - components can use mock data
+          setTasks([]);
+          setError(null);
+        } else {
+          setError(err.message || 'Failed to fetch tasks');
+        }
       } finally {
         setLoading(false);
       }
@@ -627,7 +641,14 @@ export function useFundingScoreLogs() {
         setLogs(data);
         setError(null);
       } catch (err: any) {
-        setError(err.message || 'Failed to fetch funding score logs');
+        // Silently handle network errors - don't set error state for network failures
+        if (err.isNetworkError || err.message?.includes('Failed to connect') || err.message?.includes('Failed to fetch')) {
+          // Use empty array for network errors - components can use mock data
+          setLogs([]);
+          setError(null);
+        } else {
+          setError(err.message || 'Failed to fetch funding score logs');
+        }
       } finally {
         setLoading(false);
       }
@@ -658,7 +679,14 @@ export function usePersonaClones() {
         setClones(data);
         setError(null);
       } catch (err: any) {
-        setError(err.message || 'Failed to fetch persona clones');
+        // Silently handle network errors - don't set error state for network failures
+        if (err.isNetworkError || err.message?.includes('Failed to connect') || err.message?.includes('Failed to fetch')) {
+          // Use empty array for network errors - components can use mock data
+          setClones([]);
+          setError(null);
+        } else {
+          setError(err.message || 'Failed to fetch persona clones');
+        }
       } finally {
         setLoading(false);
       }

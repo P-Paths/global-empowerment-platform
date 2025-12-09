@@ -179,10 +179,6 @@ export default function GetPaidPage() {
           </div>
         </div>
       </section>
-
-              <footer className="bg-slate-900 py-10 text-center text-sm text-slate-200">
-        © {new Date().getFullYear()} Global Empowerment Platform. All rights reserved.
-      </footer>
     </div>
   );
 }

@@ -33,45 +33,31 @@ interface PlatformInfo {
 
 const PLATFORMS: PlatformInfo[] = [
   {
-    id: 'facebook_marketplace',
-    name: 'Facebook Marketplace',
+    id: 'facebook',
+    name: 'Facebook',
     icon: '📘',
-    description: 'Post to Facebook Marketplace',
+    description: 'Connect your Facebook account',
     requiresAuth: true
   },
   {
-    id: 'offerup',
-    name: 'OfferUp',
-    icon: '📱',
-    description: 'Post to OfferUp',
+    id: 'tiktok',
+    name: 'TikTok',
+    icon: '🎵',
+    description: 'Connect your TikTok account',
     requiresAuth: true
   },
   {
-    id: 'craigslist',
-    name: 'Craigslist',
-    icon: '📋',
-    description: 'Post to Craigslist',
+    id: 'instagram',
+    name: 'Instagram',
+    icon: '📷',
+    description: 'Connect your Instagram account',
     requiresAuth: true
   },
   {
-    id: 'ebay',
-    name: 'eBay Motors',
-    icon: '🛒',
-    description: 'Post to eBay Motors',
-    requiresAuth: true
-  },
-  {
-    id: 'autotrader',
-    name: 'AutoTrader',
-    icon: '🚗',
-    description: 'Post to AutoTrader',
-    requiresAuth: true
-  },
-  {
-    id: 'cars_com',
-    name: 'Cars.com',
-    icon: '🚙',
-    description: 'Post to Cars.com',
+    id: 'youtube',
+    name: 'YouTube',
+    icon: '▶️',
+    description: 'Connect your YouTube account',
     requiresAuth: true
   }
 ];

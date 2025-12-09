@@ -54,20 +54,29 @@ export async function authenticatedFetch(
         const timeout = url.includes('market-intelligence') ? 60 : 30;
         throw new Error(`Request to ${url} timed out after ${timeout} seconds`);
       } else if (fetchError.message?.includes('Failed to fetch') || fetchError.message?.includes('network')) {
-        // For connection status checks, return a rejected promise that can be caught gracefully
-        // Don't throw a noisy error for backend connection checks
+        // For connection status checks and common API endpoints, mark as silent network error
+        // Components will handle these gracefully with mock data
+        const isSilentEndpoint = url.includes('connection-status') || 
+                                 url.includes('/api/v1/clone') ||
+                                 url.includes('/api/v1/tasks') ||
+                                 url.includes('/api/v1/funding-score') ||
+                                 url.includes('/api/v1/community/feed');
+        
         const error = new Error(`Failed to connect to ${url}. Check your network connection.`);
         // Mark as network error so components can handle gracefully
         (error as any).isNetworkError = true;
-        (error as any).isSilent = url.includes('connection-status'); // Mark connection-status checks as silent
+        (error as any).isSilent = isSilentEndpoint; // Mark common endpoints as silent
         throw error;
       }
       throw fetchError;
     }
     
     return response;
-  } catch (error) {
-    console.error('Authenticated fetch error:', error);
+  } catch (error: any) {
+    // Only log errors that aren't silent network errors
+    if (!error?.isSilent && !error?.isNetworkError) {
+      console.error('Authenticated fetch error:', error);
+    }
     throw error;
   }
 }

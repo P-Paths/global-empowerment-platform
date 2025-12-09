@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { SidebarProvider } from "@/contexts/SidebarContext";
+import SidebarWrapper from "@/components/SidebarWrapper";
 import ScrollToTop from "@/components/ScrollToTop";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -93,9 +95,13 @@ export default function RootLayout({
       >
         <AuthProvider>
           <ThemeProvider>
-            <ScrollToTop />
-            {children}
-            <Analytics />
+            <SidebarProvider>
+              <SidebarWrapper>
+                <ScrollToTop />
+                {children}
+              </SidebarWrapper>
+              <Analytics />
+            </SidebarProvider>
           </ThemeProvider>
         </AuthProvider>
       </body>

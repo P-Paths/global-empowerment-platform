@@ -87,38 +87,6 @@ export default function TermsPage() {
           </div>
         </div>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-slate-900 py-10 text-center text-sm text-slate-200">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <h3 className="font-semibold text-white mb-4">Company</h3>
-              <ul className="space-y-2">
-                <li><Link href="/about" className="hover:text-amber-300">About</Link></li>
-                <li><Link href="/contact" className="hover:text-amber-300">Contact</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold text-white mb-4">Support</h3>
-              <ul className="space-y-2">
-                <li><Link href="/qa" className="hover:text-amber-300">FAQ</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold text-white mb-4">Legal</h3>
-              <ul className="space-y-2">
-                <li><Link href="/privacy" className="hover:text-amber-300">Privacy Policy</Link></li>
-                <li><Link href="/terms" className="hover:text-amber-300">Terms of Service</Link></li>
-                <li><Link href="/cookies" className="hover:text-amber-300">Cookie Policy</Link></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-slate-700 pt-8">
-            <p>© {new Date().getFullYear()} Global Empowerment Platform. All rights reserved. | <a href="https://globalempowerment.app" className="hover:text-amber-300">globalempowerment.app</a></p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

@@ -3,6 +3,43 @@
 import { useState } from 'react';
 import { useTasks, useCreateTask, useCompleteTask, Task } from '@/hooks/useGEMPlatform';
 import { CheckCircle2, Circle, Plus, X } from 'lucide-react';
+import Header from '@/components/Header';
+
+// Mock tasks for demo
+const mockTasks: Task[] = [
+  {
+    id: '1',
+    title: 'Post a business update on Instagram',
+    description: 'Share your progress and engage with your audience. Post should include a clear call-to-action.',
+    completed: false,
+    created_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+    completed_at: null,
+  },
+  {
+    id: '2',
+    title: 'Create a LinkedIn article about your industry insights',
+    description: 'Write a 500-word article sharing your expertise. This will boost your brand clarity score.',
+    completed: false,
+    created_at: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+    completed_at: null,
+  },
+  {
+    id: '3',
+    title: 'Respond to 5 comments on your recent posts',
+    description: 'Engagement is key to building community. Take time to respond thoughtfully.',
+    completed: true,
+    created_at: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+    completed_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    id: '4',
+    title: 'Add pricing information to your product catalog',
+    description: 'Complete your product listings with pricing to improve revenue signals.',
+    completed: false,
+    created_at: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
+    completed_at: null,
+  },
+];
 
 export default function TasksPage() {
   const { tasks, loading, error, refetch } = useTasks();
@@ -11,6 +48,10 @@ export default function TasksPage() {
   const [showNewTask, setShowNewTask] = useState(false);
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [newTaskDescription, setNewTaskDescription] = useState('');
+
+  // Use mock data if no tasks or network error
+  const displayTasks = tasks.length > 0 ? tasks : mockTasks;
+  const usingMockData = tasks.length === 0;
 
   const handleCreateTask = async () => {
     if (!newTaskTitle.trim()) return;
@@ -36,33 +77,48 @@ export default function TasksPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading tasks...</p>
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
+        <Header />
+        <div className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+            <p className="mt-4 text-gray-600 dark:text-gray-400">Loading tasks...</p>
+          </div>
         </div>
       </div>
     );
   }
 
-  if (error) {
+  // Don't show error screen for network errors - use mock data instead
+  // Only show error screen for actual API errors (not network failures)
+  if (error && !error.includes('Failed to connect') && !error.includes('Failed to fetch')) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-red-600">Error: {error}</p>
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
+        <Header />
+        <div className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <p className="text-red-600 dark:text-red-400">Error: {error}</p>
+          </div>
         </div>
       </div>
     );
   }
 
-  const incompleteTasks = tasks.filter(t => !t.completed);
-  const completedTasks = tasks.filter(t => t.completed);
+  const incompleteTasks = displayTasks.filter(t => !t.completed);
+  const completedTasks = displayTasks.filter(t => t.completed);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-3xl mx-auto px-4">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">AI Growth Coach Tasks</h1>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
+      <Header />
+      <div className="flex-1 overflow-y-auto">
+          <div className="max-w-3xl mx-auto px-4 py-8 pb-24">
+            {usingMockData && (
+              <div className="mb-6 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg text-sm text-blue-700 dark:text-blue-300">
+                <span className="font-semibold">Demo Mode:</span> Showing sample tasks. Connect to backend to see your personalized tasks.
+              </div>
+            )}
+            <div className="flex items-center justify-between mb-8">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Global Empowerment Coach Tasks</h1>
           <button
             onClick={() => setShowNewTask(!showNewTask)}
             className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
@@ -74,9 +130,9 @@ export default function TasksPage() {
 
         {/* New Task Form */}
         {showNewTask && (
-          <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-bold text-gray-900">Create New Task</h2>
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white">Create New Task</h2>
               <button
                 onClick={() => {
                   setShowNewTask(false);
@@ -128,31 +184,31 @@ export default function TasksPage() {
 
         {/* Incomplete Tasks */}
         <div className="mb-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Active Tasks</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Active Tasks</h2>
           {incompleteTasks.length === 0 ? (
-            <div className="bg-white rounded-lg shadow-md p-8 text-center">
-              <p className="text-gray-500">No active tasks. Great job!</p>
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 text-center">
+              <p className="text-gray-500 dark:text-gray-400">No active tasks. Great job!</p>
             </div>
           ) : (
             <div className="space-y-3">
               {incompleteTasks.map((task) => (
                 <div
                   key={task.id}
-                  className="bg-white rounded-lg shadow-md p-4 flex items-start gap-4"
+                  className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 flex items-start gap-4"
                 >
                   <button
                     onClick={() => handleCompleteTask(task.id)}
                     disabled={completing}
-                    className="mt-1 text-gray-400 hover:text-green-600 transition-colors"
+                    className="mt-1 text-gray-400 dark:text-gray-500 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                   >
                     <Circle className="w-6 h-6" />
                   </button>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-gray-900 mb-1">{task.title}</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-1">{task.title}</h3>
                     {task.description && (
-                      <p className="text-gray-600 text-sm mb-2">{task.description}</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">{task.description}</p>
                     )}
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
                       Created {new Date(task.created_at).toLocaleDateString()}
                     </p>
                   </div>
@@ -165,20 +221,20 @@ export default function TasksPage() {
         {/* Completed Tasks */}
         {completedTasks.length > 0 && (
           <div>
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Completed Tasks</h2>
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Completed Tasks</h2>
             <div className="space-y-3">
               {completedTasks.map((task) => (
                 <div
                   key={task.id}
-                  className="bg-white rounded-lg shadow-md p-4 flex items-start gap-4 opacity-75"
+                  className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 flex items-start gap-4 opacity-75"
                 >
                   <CheckCircle2 className="w-6 h-6 text-green-600 mt-1" />
                   <div className="flex-1">
-                    <h3 className="font-semibold text-gray-900 mb-1 line-through">{task.title}</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-white mb-1 line-through">{task.title}</h3>
                     {task.description && (
-                      <p className="text-gray-600 text-sm mb-2 line-through">{task.description}</p>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-2 line-through">{task.description}</p>
                     )}
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
                       Completed {task.completed_at ? new Date(task.completed_at).toLocaleDateString() : 'recently'}
                     </p>
                   </div>
@@ -187,6 +243,7 @@ export default function TasksPage() {
             </div>
           </div>
         )}
+        </div>
       </div>
     </div>
   );
