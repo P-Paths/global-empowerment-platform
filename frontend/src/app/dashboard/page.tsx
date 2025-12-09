@@ -48,7 +48,7 @@ interface Post {
 }
 
 export default function Dashboard() {
-  const { user, loading, isEmailVerified } = useAuth();
+  const { user, session, loading, isEmailVerified } = useAuth();
   const router = useRouter();
   const [checkingOnboarding, setCheckingOnboarding] = useState(true);
   const [fundingScore, setFundingScore] = useState<FundingScore | null>(null);
@@ -106,10 +106,12 @@ export default function Dashboard() {
       
       // Fetch funding score
       try {
+        const headers: HeadersInit = {};
+        if (session?.access_token) {
+          headers['Authorization'] = `Bearer ${session.access_token}`;
+        }
         const scoreRes = await fetch(`${apiUrl}/api/v1/growth/funding-score`, {
-          headers: {
-            'Authorization': `Bearer ${user?.access_token}`,
-          },
+          headers,
           signal: AbortSignal.timeout(5000),
         });
         if (scoreRes.ok) {
@@ -125,10 +127,12 @@ export default function Dashboard() {
 
       // Fetch tasks
       try {
+        const headers: HeadersInit = {};
+        if (session?.access_token) {
+          headers['Authorization'] = `Bearer ${session.access_token}`;
+        }
         const tasksRes = await fetch(`${apiUrl}/api/v1/growth/tasks`, {
-          headers: {
-            'Authorization': `Bearer ${user?.access_token}`,
-          },
+          headers,
           signal: AbortSignal.timeout(5000),
         });
         if (tasksRes.ok) {
@@ -167,11 +171,15 @@ export default function Dashboard() {
   const completeTask = async (taskId: string) => {
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+      };
+      if (session?.access_token) {
+        headers['Authorization'] = `Bearer ${session.access_token}`;
+      }
       const response = await fetch(`${apiUrl}/api/v1/growth/tasks/${taskId}/complete`, {
         method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${user?.access_token}`,
-        },
+        headers,
       });
       if (response.ok) {
         fetchDashboardData();
