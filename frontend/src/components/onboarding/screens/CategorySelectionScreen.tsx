@@ -134,9 +134,6 @@ export default function CategorySelectionScreen({ initialData, onNext, onBack }:
                 {category.description && (
                   <p className="text-xs text-gray-600 mt-1">{category.description}</p>
                 )}
-                {category.status === 'coming_soon' && (
-                  <p className="text-xs text-gray-500">Coming Soon</p>
-                )}
               </button>
             ))}
           </div>
