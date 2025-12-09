@@ -46,8 +46,8 @@ export default function AboutPage() {
               <span className="text-blue-600"> Global Empowerment Platform</span>
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600 max-w-3xl mx-auto">
-              We're building the future of car selling with AI-powered listings and secure escrow protection. 
-              Making it easier, faster, and safer to sell your car online.
+              We're building the future of entrepreneurship by transforming members into funded founders through 
+              digital influence growth, AI-powered business coaching, and VC-ready preparation.
             </p>
           </div>
         </div>
@@ -60,8 +60,9 @@ export default function AboutPage() {
           <section>
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-6">Our Mission</h2>
             <p className="text-lg text-gray-600 mb-8">
-              To make buying and selling cars safer, faster, and more transparent through AI automation and blockchain technology. 
-              We believe everyone should be able to sell their car without worrying about scams, fake checks, or getting ripped off.
+              To transform entrepreneurs into funded founders by growing their digital influence, building their brand, 
+              and preparing them for capital investment. We believe every entrepreneur should have access to the tools, 
+              community, and connections needed to turn their vision into a fundable business.
             </p>
           </section>
 
@@ -70,20 +71,20 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-6">What We Do</h2>
             <div className="grid gap-6 sm:grid-cols-2">
               <div className="bg-blue-50 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">🤖 AI-Powered Listings</h3>
-                <p className="text-gray-600">Upload photos, get professional listings in seconds. No more staring at blank screens.</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">📱 Digital Influence Growth</h3>
+                <p className="text-gray-600">Build your following across Facebook, Instagram, TikTok, and YouTube. Post to all platforms simultaneously and grow your brand.</p>
               </div>
               <div className="bg-blue-50 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">🛡️ Secure Escrow</h3>
-                <p className="text-gray-600">Built-in protection with 1% fee. No scams, no fake checks, no delays.</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">🤖 AI Growth Coach</h3>
+                <p className="text-gray-600">Get daily personalized tasks, AI-generated content, and guidance to boost your Funding Readiness Score.</p>
               </div>
               <div className="bg-blue-50 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">📱 Multi-Platform Posting</h3>
-                <p className="text-gray-600">Post to Facebook, Craigslist, and more with one click.</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">💰 Funding Readiness Score</h3>
+                <p className="text-gray-600">Track your progress with a 0-100 score based on posting frequency, engagement, business clarity, and traction.</p>
               </div>
               <div className="bg-blue-50 rounded-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">⚡ Faster Sales</h3>
-                <p className="text-gray-600">Better listings get more views and higher offers from serious buyers.</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">👥 Community & Networking</h3>
+                <p className="text-gray-600">Connect with 8,000+ entrepreneurs, collaborate, and build partnerships within our growing community.</p>
               </div>
             </div>
           </section>
@@ -93,21 +94,22 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-6">Why Now?</h2>
             <div className="bg-gray-50 rounded-2xl p-8">
               <p className="text-lg text-gray-600 mb-6">
-                The $1.4 trillion used car market is broken. People lose money to scams, spend hours writing listings, 
-                and deal with fake buyers. We're fixing this with technology that actually works.
+                The path from entrepreneur to funded founder is broken. Great ideas struggle to get visibility, 
+                founders lack the digital presence VCs look for, and connections to investors are hard to find. 
+                We're fixing this by combining social growth, AI coaching, and VC matching in one platform.
               </p>
               <div className="grid gap-4 sm:grid-cols-3 text-center">
                 <div>
-                  <div className="text-3xl font-bold text-blue-600">$1.4T</div>
-                  <div className="text-sm text-gray-600">Used car market</div>
+                  <div className="text-3xl font-bold text-blue-600">8,000+</div>
+                  <div className="text-sm text-gray-600">Active Members</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-blue-600">10x</div>
-                  <div className="text-sm text-gray-600">Faster listings</div>
+                  <div className="text-3xl font-bold text-blue-600">4</div>
+                  <div className="text-sm text-gray-600">Social Platforms</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-blue-600">100%</div>
-                  <div className="text-sm text-gray-600">Secure payments</div>
+                  <div className="text-3xl font-bold text-blue-600">0-100</div>
+                  <div className="text-sm text-gray-600">Funding Score</div>
                 </div>
               </div>
             </div>
@@ -131,8 +133,9 @@ export default function AboutPage() {
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Preston Eaton</h3>
                   <p className="text-blue-600 font-semibold mb-4">Founder & CEO</p>
                   <p className="text-gray-600 mb-6">
-                    Preston is a serial entrepreneur with deep experience in automotive technology and marketplace platforms. 
-                    He founded Global Empowerment Platform to transform entrepreneurs into funded founders through digital influence growth.
+                    Preston is a serial entrepreneur passionate about empowering founders. 
+                    He founded Global Empowerment Platform to bridge the gap between great ideas and capital investment, 
+                    helping entrepreneurs build the digital presence and traction needed to attract VCs and investors.
                   </p>
                   <a 
                     href="https://linkedin.com/in/prestoneaton" 
@@ -155,12 +158,12 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-8">Current Status</h2>
             <div className="bg-blue-50 border border-blue-200 rounded-2xl p-8">
               <div className="flex items-center gap-3 mb-6">
-                <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">PRIVATE BETA</span>
-                <span className="text-blue-800 font-semibold">Cars Only - Available Now</span>
+                <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">LIVE</span>
+                <span className="text-blue-800 font-semibold">Platform Available Now</span>
               </div>
               <p className="text-gray-700 mb-6 text-lg">
-                We're currently in private beta for car listings. Our AI-powered photo analysis, listing generation, 
-                and escrow integration are live and working. Homes and high-value items are coming in Q2 2026.
+                Our platform is live and helping entrepreneurs grow their digital influence and prepare for funding. 
+                Join 8,000+ members building their brand, completing daily tasks, and tracking their Funding Readiness Score.
               </p>
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
@@ -168,19 +171,23 @@ export default function AboutPage() {
                   <ul className="text-gray-700 space-y-2">
                     <li className="flex items-center gap-2">
                       <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                      AI photo analysis & listing generation
+                      Community Feed & Networking
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                      Car escrow (1% fee, min $39, cap $149)
+                      AI Growth Coach & Daily Tasks
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                      Facebook Marketplace posting
+                      Funding Readiness Score Tracking
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                      Mobile-optimized interface
+                      Social Media Integration (Facebook, Instagram, TikTok, YouTube)
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                      Multi-platform Posting
                     </li>
                   </ul>
                 </div>
@@ -189,19 +196,19 @@ export default function AboutPage() {
                   <ul className="text-gray-700 space-y-2">
                     <li className="flex items-center gap-2">
                       <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                      Craigslist & OfferUp posting
+                      VC Matching & Investor Connections
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                      Home listings (Q2 2026)
+                      AI Content Tools (Captions, Flyers, Pitch Decks)
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                      Bulk dealer import tools
+                      Advanced Analytics & Insights
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                      AI negotiation agent
+                      Direct Messaging & Collaboration Tools
                     </li>
                   </ul>
                 </div>
@@ -211,16 +218,16 @@ export default function AboutPage() {
 
           {/* CTA Section */}
           <section className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-4">Ready to Get Started?</h2>
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-4">Ready to Transform Your Business?</h2>
             <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-              Join our private beta and experience the future of car selling. 
-              Upload photos, get perfect listings, and sell safely with escrow protection.
+              Join 8,000+ entrepreneurs building their digital influence and preparing for funding. 
+              Start growing your brand, complete daily tasks, and watch your Funding Readiness Score improve.
             </p>
             <Link 
-              href="/beta-signup" 
-              className="inline-flex items-center px-8 py-4 bg-blue-600 text-white rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors"
+              href="/register" 
+              className="inline-flex items-center px-8 py-4 bg-gep-gold text-gep-navy rounded-lg text-lg font-semibold hover:bg-gep-gold/90 transition-colors"
             >
-              Join Beta - It's Free
+              Get Started Free
             </Link>
           </section>
         </div>
