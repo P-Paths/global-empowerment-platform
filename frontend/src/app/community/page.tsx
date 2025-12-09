@@ -107,7 +107,7 @@ const mockCommunityPosts: Post[] = [
 ];
 
 export default function CommunityFeedPage() {
-  const { user } = useAuth();
+  const { user, session } = useAuth();
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [usingMockData, setUsingMockData] = useState(false);
@@ -157,13 +157,20 @@ export default function CommunityFeedPage() {
 
   const handleLike = async (postId: string) => {
     try {
+      const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+      };
+      
+      // Add auth token if available
+      if (session?.access_token) {
+        headers['Authorization'] = `Bearer ${session.access_token}`;
+      }
+      
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/v1/community/posts/${postId}/like`,
         {
           method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${user?.access_token}`,
-          },
+          headers,
         }
       );
       if (response.ok) {
