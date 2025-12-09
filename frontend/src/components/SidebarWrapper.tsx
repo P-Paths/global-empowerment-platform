@@ -20,8 +20,29 @@ export default function SidebarWrapper({ children }: SidebarWrapperProps) {
     }
   }, [pathname, close]);
 
-  // Don't show sidebar on admin pages or home page
-  const hideSidebar = pathname?.startsWith('/admin') || pathname === '/';
+  // Don't show sidebar on admin pages, home page, or public landing pages
+  const publicLandingPages = [
+    '/',
+    '/about',
+    '/how-it-works',
+    '/pricing',
+    '/demo',
+    '/register',
+    '/login',
+    '/terms',
+    '/privacy',
+    '/cookies',
+    '/contact',
+    '/qa',
+    '/beta-signup',
+    '/get-paid',
+    '/community', // Community page should be public, accessible from landing page
+  ];
+  
+  const hideSidebar = 
+    pathname?.startsWith('/admin') || 
+    publicLandingPages.includes(pathname || '') ||
+    pathname?.startsWith('/auth');
 
   if (hideSidebar) {
     return <>{children}</>;
