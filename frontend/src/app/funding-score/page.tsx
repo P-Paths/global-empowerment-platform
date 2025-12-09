@@ -23,17 +23,23 @@ const mockScore = {
 const mockLogs: FundingScoreLog[] = [
   {
     id: '1',
+    user_id: 'mock-user-1',
     score: 68,
+    details: {},
     created_at: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
   },
   {
     id: '2',
+    user_id: 'mock-user-1',
     score: 70,
+    details: {},
     created_at: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
   },
   {
     id: '3',
+    user_id: 'mock-user-1',
     score: 72,
+    details: {},
     created_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
   },
 ];
