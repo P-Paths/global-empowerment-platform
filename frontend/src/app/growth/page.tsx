@@ -86,7 +86,7 @@ const mockFundingScore: FundingScore = {
 };
 
 export default function GrowthCoachPage() {
-  const { user } = useAuth();
+  const { user, session } = useAuth();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [fundingScore, setFundingScore] = useState<FundingScore | null>(null);
   const [loading, setLoading] = useState(true);
@@ -110,10 +110,12 @@ export default function GrowthCoachPage() {
       
       // Fetch tasks
       try {
+        const headers: HeadersInit = {};
+        if (session?.access_token) {
+          headers['Authorization'] = `Bearer ${session.access_token}`;
+        }
         const tasksRes = await fetch(`${apiUrl}/api/v1/growth/tasks`, {
-          headers: {
-            'Authorization': `Bearer ${user?.access_token}`,
-          },
+          headers,
         });
         if (tasksRes.ok) {
           const tasksData = await tasksRes.json();
@@ -134,10 +136,12 @@ export default function GrowthCoachPage() {
 
       // Fetch funding score
       try {
+        const headers: HeadersInit = {};
+        if (session?.access_token) {
+          headers['Authorization'] = `Bearer ${session.access_token}`;
+        }
         const scoreRes = await fetch(`${apiUrl}/api/v1/growth/funding-score`, {
-          headers: {
-            'Authorization': `Bearer ${user?.access_token}`,
-          },
+          headers,
         });
         if (scoreRes.ok) {
           const scoreData = await scoreRes.json();
