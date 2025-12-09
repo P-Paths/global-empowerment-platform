@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     SUPABASE_SERVICE_ROLE_KEY: str = ""
     
     # Database (fallback for local development)
-    DATABASE_URL: str = "sqlite:///./accorria.db"
+    DATABASE_URL: str = "sqlite:///./gep.db"
     
     # Redis (optional for caching)
     REDIS_URL: str = ""
@@ -23,7 +23,7 @@ class Settings(BaseSettings):
     # Security
     SECRET_KEY: str = "your-secret-key-here"
     ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 120
     
     # JWT Configuration
     JWT_SECRET_KEY: str = "your-jwt-secret-key-here"
@@ -61,42 +61,61 @@ class Settings(BaseSettings):
     ALLOWED_HOSTS: List[str] = [
         "localhost",
         "127.0.0.1",
-        "accorria-backend-tv2qihivdq-uc.a.run.app",
-        "accorria-backend-19949436301.us-central1.run.app",
-        "accorria-backend-beta-tv2qihivdq-uc.a.run.app",
-        "accorria-backend-beta-19949436301.us-central1.run.app",
-        "*.accorria.com"
+        "gep-backend-tv2qihivdq-uc.a.run.app",
+        "gep-backend-19949436301.us-central1.run.app",
+        "gep-backend-beta-tv2qihivdq-uc.a.run.app",
+        "gep-backend-beta-19949436301.us-central1.run.app",
+        "gem-backend-1094576259070.us-central1.run.app",  # GEM Platform backend
+        "*.run.app",  # Allow all Cloud Run services
+        "*.gep.com",
+        "*.globalempowerment.app"
     ]
     
     # CORS
     ALLOWED_ORIGINS: List[str] = [
         "http://localhost:3000",
-        "http://localhost:3001",
-        "http://10.0.0.67:3000",
-        "http://10.0.0.67:3001",
-        "http://localhost:5173",
-        "https://accorria.vercel.app",
-        "https://accorria.com",
-        "https://www.accorria.com"
+        "http://127.0.0.1:3000",
+        "https://gep.vercel.app",
+        "https://globalempowerment.app",
+        "https://www.globalempowerment.app"
     ]
     
-    # OpenAI
+    # AI Services
     OPENAI_API_KEY: Optional[str] = None
-    
-    # Google API
-    GOOGLE_API_KEY: Optional[str] = None
     GEMINI_API_KEY: Optional[str] = None
+    NANOBANANA_API_KEY: Optional[str] = None
     
-    # Platform API Keys (optional for MVP)
-    FACEBOOK_ACCESS_TOKEN: Optional[str] = None
-    OFFERUP_API_KEY: Optional[str] = None
-    CARGURUS_API_KEY: Optional[str] = None
+    # Image/Video Enhancement
+    CLOUDINARY_CLOUD_NAME: Optional[str] = None
+    CLOUDINARY_API_KEY: Optional[str] = None
+    CLOUDINARY_API_SECRET: Optional[str] = None
     
-    # Facebook OAuth2 Configuration (Multi-Tenant)
+    # Social Platform APIs - Facebook/Instagram (Meta)
     FACEBOOK_APP_ID: Optional[str] = None
     FACEBOOK_APP_SECRET: Optional[str] = None
     FACEBOOK_REDIRECT_URI: Optional[str] = None
+    
+    INSTAGRAM_APP_ID: Optional[str] = None
+    INSTAGRAM_APP_SECRET: Optional[str] = None
+    INSTAGRAM_REDIRECT_URI: Optional[str] = None
+    
+    # YouTube
+    YOUTUBE_CLIENT_ID: Optional[str] = None
+    YOUTUBE_CLIENT_SECRET: Optional[str] = None
+    YOUTUBE_REDIRECT_URI: Optional[str] = None
+    
+    # TikTok
+    TIKTOK_CLIENT_KEY: Optional[str] = None
+    TIKTOK_CLIENT_SECRET: Optional[str] = None
+    
+    # Security
     TOKEN_ENCRYPTION_KEY: Optional[str] = None
+    
+    # Email/Notifications
+    SMTP_HOST: Optional[str] = None
+    SMTP_PORT: int = 587
+    SMTP_USERNAME: Optional[str] = None
+    SMTP_PASSWORD: Optional[str] = None
     
     # AI Reply Settings
     MIN_REPLY_DELAY_MINUTES: int = 1
