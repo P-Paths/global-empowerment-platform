@@ -1,7 +1,7 @@
 """
-Accorria - Main FastAPI Application
+Global Empowerment Platform (GEP) - Main FastAPI Application
 
-Entry point for the Accorria backend API.
+Entry point for the GEP backend API.
 """
 
 from contextlib import asynccontextmanager
@@ -24,34 +24,15 @@ from app.api.v1 import (
     auth as auth_router,
     user as user_router,
     analytics,
-    car_listing_generator as car_listing_generator_router,
-    car_analysis as car_analysis_router,
-    market_intelligence as market_intelligence_router,
-    enhanced_analysis as enhanced_analysis_router,
-    synthesis as synthesis_router,
-    flip_car as flip_car_router,
-    listings,
-    platform_posting as platform_posting_router,
     messages as messages_router,
-    replies as replies_router,
-    deals as deals_router,
-    chat as chat_router,
-    inventory as inventory_router,
-    search_history as search_history_router,
     facebook_oauth as facebook_oauth_router,
     user_facebook_posting as user_facebook_posting_router,
-    user_ebay_posting as user_ebay_posting_router,
-    speech_to_text as speech_to_text_router
 )
 # Import test_apis_router separately since it's optional
 try:
     from app.api.v1 import test_apis_router
 except ImportError:
     test_apis_router = None
-from app.api.v1.market_search import router as market_search_router
-from app.api.v1.market_search_real_scrape import router as market_search_real_scrape_router
-from app.api.v1.market_search_scrapingbee import router as market_search_scrapingbee_router
-from app.api.v1.market_search_scraping import router as market_search_scraping_router
 from app.middleware import rate_limit_middleware, cleanup_rate_limits
 from app.core.security import (
     SecurityConfig, 
@@ -74,7 +55,7 @@ limiter = Limiter(key_func=get_remote_address)
 async def lifespan(app: FastAPI):
     """Application lifespan manager"""
     # Startup
-    print("🚀 Starting Accorria...")
+    print("🚀 Starting Global Empowerment Platform (GEP)...")
     
     # Start rate limit cleanup task
     cleanup_task = asyncio.create_task(cleanup_rate_limits())
@@ -82,7 +63,7 @@ async def lifespan(app: FastAPI):
     yield
     
     # Shutdown
-    print("🛑 Shutting down Accorria...")
+    print("🛑 Shutting down Global Empowerment Platform (GEP)...")
     cleanup_task.cancel()
     try:
         await cleanup_task
@@ -90,8 +71,8 @@ async def lifespan(app: FastAPI):
         pass
 
 app = FastAPI(
-    title="Global Empowerment Platform API",
-    description="Multi-platform goods selling platform API",
+    title="Global Empowerment Platform (GEP) API",
+    description="Social growth engine for entrepreneurs - AI coaching, community, and funding readiness",
     version="1.0.0",
     lifespan=lifespan
 )
@@ -101,13 +82,13 @@ app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # CORS middleware - MUST be first to handle preflight requests
-# Ensure localhost:3000 is always included and all accorria.com domains
+# Ensure localhost:3000 is always included and all GEP domains
 cors_origins = list(set(settings.ALLOWED_ORIGINS + [
     "http://localhost:3000", 
     "http://127.0.0.1:3000",
-    "https://www.accorria.com",
-    "https://accorria.com",
-    "https://accorria.vercel.app"
+    "https://www.globalempowerment.com",
+    "https://globalempowerment.com",
+    "https://gep.vercel.app"
 ]))
 logger.info(f"CORS origins configured: {cors_origins}")
 app.add_middleware(
@@ -209,87 +190,41 @@ async def add_security_headers(request: Request, call_next):
 #     response = await call_next(request)
 #     return response
 
-# Include routers - Full version
+# Include routers - GEP Platform MVP
 app.include_router(auth_router.router, prefix="/api/v1/auth", tags=["Authentication"])
 app.include_router(user_router.router, prefix="/api/v1", tags=["User"])
 app.include_router(analytics.router, prefix="/api/v1", tags=["Analytics"])
-app.include_router(car_listing_generator_router.router, prefix="/api/v1", tags=["Car Listing Generator"])
-app.include_router(car_analysis_router.router, prefix="/api/v1", tags=["Car Analysis"])
-app.include_router(market_intelligence_router.router, prefix="/api/v1", tags=["Market Intelligence"])
-app.include_router(enhanced_analysis_router.router, prefix="/api/v1", tags=["Enhanced Analysis"])
-
-# Add helpful error messages for common wrong paths (for backward compatibility)
-@app.post("/analyze-car")
-async def redirect_analyze_car():
-    """Old /analyze-car endpoint - moved to /api/v1/enhanced-analyze"""
-    raise HTTPException(
-        status_code=404, 
-        detail="Endpoint moved. Use /api/v1/enhanced-analyze instead"
-    )
-
-@app.post("/enhanced-analyze")
-async def redirect_enhanced_analyze():
-    """Old /enhanced-analyze endpoint - moved to /api/v1/enhanced-analyze"""
-    raise HTTPException(
-        status_code=404, 
-        detail="Endpoint moved. Use /api/v1/enhanced-analyze instead"
-    )
-
-@app.post("/enhanced-analyze-with-rag")
-async def redirect_enhanced_analyze_with_rag():
-    """Old /enhanced-analyze-with-rag endpoint - moved to /api/v1/enhanced-analyze-with-rag"""
-    raise HTTPException(
-        status_code=404, 
-        detail="Endpoint moved. Use /api/v1/enhanced-analyze-with-rag instead"
-    )
-
-@app.post("/api/v1/enhanced_analysis/real-analyze")
-async def redirect_enhanced_analysis_real_analyze():
-    """Wrong path - use /api/v1/real-analyze instead"""
-    raise HTTPException(
-        status_code=404, 
-        detail="Wrong path. Use /api/v1/real-analyze instead"
-    )
-
-@app.post("/api/v1/enhanced_analysis/enhanced-analyze-with-rag")
-async def redirect_enhanced_analysis_with_rag():
-    """Wrong path - use /api/v1/enhanced-analyze-with-rag instead"""
-    raise HTTPException(
-        status_code=404, 
-        detail="Wrong path. Use /api/v1/enhanced-analyze-with-rag instead"
-    )
-app.include_router(synthesis_router.router, prefix="/api/v1", tags=["Synthesis"])
-app.include_router(flip_car_router.router, prefix="/api/v1", tags=["Flip Car"])
-app.include_router(listings.router, prefix="/api/v1/listings", tags=["Listings"])
-app.include_router(platform_posting_router.router, prefix="/api/v1", tags=["Platform Posting"])
 app.include_router(messages_router.router, prefix="/api/v1/messages", tags=["Messages"])
-app.include_router(replies_router.router, prefix="/api/v1", tags=["AI Replies"])
-app.include_router(deals_router.router, prefix="/api/v1", tags=["Deals"])
-app.include_router(chat_router.router, prefix="/api/v1/chat", tags=["Chat"])
-app.include_router(inventory_router.router, prefix="/api/v1", tags=["Inventory"])
-app.include_router(search_history_router.router, prefix="/api/v1/search-history", tags=["Search History"])
-app.include_router(market_search_router, prefix="/api/v1/market-search", tags=["Market Search"])
-app.include_router(market_search_real_scrape_router, prefix="/api/v1/market-search", tags=["Market Search"])
-app.include_router(market_search_scrapingbee_router, prefix="/api/v1/market-search", tags=["Market Search"])
-app.include_router(market_search_scraping_router, prefix="/api/v1/market-search", tags=["Market Search"])
 
 # Facebook OAuth2 and User-Specific Posting
 app.include_router(facebook_oauth_router.router, prefix="/api/v1/auth", tags=["Facebook OAuth2"])
 app.include_router(user_facebook_posting_router.router, prefix="/api/v1/facebook", tags=["User Facebook Posting"])
 
-# eBay User-Specific Posting
-app.include_router(user_ebay_posting_router.router, prefix="/api/v1/ebay", tags=["User eBay Posting"])
-
 # User Presets
 from app.api.v1 import user_presets
 app.include_router(user_presets.router, prefix="/api/v1", tags=["User Presets"])
 
-# Speech-to-Text
-app.include_router(speech_to_text_router.router, prefix="/api/v1/speech-to-text", tags=["Speech-to-Text"])
+# GEP Community Features
+from app.api.v1 import community_feed, member_directory, growth_coach
+app.include_router(community_feed.router, prefix="/api/v1/community", tags=["Community Feed"])
+app.include_router(member_directory.router, prefix="/api/v1", tags=["Member Directory"])
+app.include_router(growth_coach.router, prefix="/api/v1/growth", tags=["AI Growth Coach"])
 
-# Knowledge Graph (Phase 0)
-from app.api.v1 import knowledge_graph as knowledge_graph_router
-app.include_router(knowledge_graph_router.router, prefix="/api/v1", tags=["Knowledge Graph"])
+# GEM Platform MVP Routes
+from app.api.v1 import profiles, posts, comments, followers, messages_dm, tasks, score, clone, pitchdeck
+app.include_router(profiles.router, prefix="/api/v1", tags=["Profiles"])
+app.include_router(posts.router, prefix="/api/v1", tags=["Posts"])
+app.include_router(comments.router, prefix="/api/v1", tags=["Comments"])
+app.include_router(followers.router, prefix="/api/v1", tags=["Followers"])
+app.include_router(messages_dm.router, prefix="/api/v1", tags=["Direct Messages"])
+app.include_router(tasks.router, prefix="/api/v1", tags=["Tasks"])
+app.include_router(score.router, prefix="/api/v1", tags=["Funding Score"])
+app.include_router(clone.router, prefix="/api/v1", tags=["Persona Clone"])
+app.include_router(pitchdeck.router, prefix="/api/v1", tags=["Pitch Deck"])
+
+# Learning System (Personalized AI Assistant)
+from app.api.v1 import learning
+app.include_router(learning.router, prefix="/api/v1", tags=["Learning"])
 
 # API Testing
 if test_apis_router:
@@ -309,31 +244,31 @@ async def test_market_search(request: dict):
         "received": request
     }
 
-# Chat endpoint
+# Chat endpoint - GEP AI Assistant
 @app.post("/chat/enhanced")
 async def enhanced_chat(request: Request):
     """
-    Enhanced chat endpoint for Accorria AI agent
+    Enhanced chat endpoint for GEP AI agent
     """
     try:
         body = await request.json()
         messages = body.get("messages", [])
         
-        # Simple response for testing
+        # Simple response for GEP
         return {
-            "response": "Hello! I'm Accorria's AI agent. I'm here to help you list cars and homes for sale. How can I assist you today?",
+            "response": "Hello! I'm GEP's AI assistant. I'm here to help you grow your digital influence, build your brand, and prepare for funding. How can I assist you today?",
             "success": True
         }
         
     except Exception as e:
-        print(f"Chat error: {str(e)}")
+        logger.error(f"Chat error: {str(e)}")
         return {"error": f"Chat service error: {str(e)}", "success": False}
 
 @app.get("/")
 async def root():
     """Root endpoint"""
     return {
-        "message": "Accorria API",
+        "message": "Global Empowerment Platform (GEP) API",
         "version": "1.0.0",
         "status": "healthy"
     }

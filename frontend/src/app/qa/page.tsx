@@ -12,12 +12,12 @@ export default function QAPage() {
 
   const faqs = [
     {
-      question: "How does Accorria work?",
-      answer: "Accorria uses AI to analyze your car photos and generate professional listings. Upload 5-12 photos of your car, and our AI will detect features, analyze market data, and create optimized listings for Facebook Marketplace, Craigslist, and other platforms."
+      question: "How does Global Empowerment Platform work?",
+      answer: "Global Empowerment Platform helps entrepreneurs build their digital influence and prepare for funding. Post content across social media platforms, track your growth, and get matched with investors when you're VC-ready."
     },
     {
-      question: "What makes Accorria different from other listing tools?",
-      answer: "Accorria combines image analysis, market intelligence, and AI-generated content in one platform. We don't just help you list - we help you price competitively, write compelling descriptions, and even handle buyer communication through our AI messenger bot."
+      question: "What makes Global Empowerment Platform different?",
+      answer: "Global Empowerment Platform combines social media growth, AI-powered business coaching, and investor matching in one platform. We don't just help you post - we help you build your brand, track your progress, and get matched with VCs and investors when you're ready."
     },
     {
       question: "How accurate is the AI analysis?",
@@ -52,8 +52,8 @@ export default function QAPage() {
       answer: "Yes! All plans include email support. Growth and Dealer Pro plans include priority support with faster response times. We're here to help you succeed with your car flipping business."
     },
     {
-      question: "Can I use Accorria for multiple cars?",
-      answer: "Yes! Your post limit applies to the total number of unique car listings you create. You can analyze and list as many different cars as you want within your plan's post limit."
+      question: "Can I use Global Empowerment Platform for multiple businesses?",
+      answer: "Yes! You can manage multiple business profiles and track growth across all of them. Build your digital presence for any business venture you're working on."
     },
     {
       question: "How do I get started?",
@@ -72,8 +72,8 @@ export default function QAPage() {
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
           <div className="flex items-center gap-3">
             <img 
-              src="/LogoinBLUEONEword.png" 
-              alt="Accorria" 
+              src="/GEP LOGO.png" 
+              alt="Global Empowerment Platform" 
               className="h-[175px] w-auto"
             />
           </div>
@@ -121,7 +121,7 @@ export default function QAPage() {
             <span className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 bg-clip-text text-transparent">Frequently Asked Questions</span>
           </h1>
           <p className="text-xl text-slate-800">
-            Everything you need to know about Accorria and car flipping with AI
+            Everything you need to know about Global Empowerment Platform and building your digital influence
           </p>
         </div>
 

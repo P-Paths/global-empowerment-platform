@@ -1,5 +1,5 @@
 """
-Supabase Service for Aquaria
+Supabase Service for Global Empowerment Platform (GEP)
 
 Handles database operations using Supabase instead of Firestore
 """

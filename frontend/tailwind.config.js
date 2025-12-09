@@ -7,7 +7,13 @@ module.exports = {
   ],
   darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'gep-navy': '#0D1125',      // Dark blue from Global Empowerment
+        'gep-gold': '#D4AF37',       // Gold from Global Empowerment
+        'gep-royal-blue': '#1238FF', // Royal blue accent
+      },
+    },
   },
   plugins: [],
 }

@@ -12,8 +12,8 @@ export default function AboutPage() {
             <div className="flex items-center">
               <Link href="/" className="flex items-center">
                 <Image 
-                  src="/LogoinBLUEONEword.png" 
-                  alt="Accorria" 
+                  src="/GEP LOGO.png" 
+                  alt="Global Empowerment Platform" 
                   width={120}
                   height={40}
                   className="h-8 w-auto"
@@ -43,7 +43,7 @@ export default function AboutPage() {
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl">
               About
-              <span className="text-blue-600"> Accorria</span>
+              <span className="text-blue-600"> Global Empowerment Platform</span>
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600 max-w-3xl mx-auto">
               We're building the future of car selling with AI-powered listings and secure escrow protection. 
@@ -132,7 +132,7 @@ export default function AboutPage() {
                   <p className="text-blue-600 font-semibold mb-4">Founder & CEO</p>
                   <p className="text-gray-600 mb-6">
                     Preston is a serial entrepreneur with deep experience in automotive technology and marketplace platforms. 
-                    He founded Accorria to solve the trust and efficiency problems he witnessed firsthand in the used car market.
+                    He founded Global Empowerment Platform to transform entrepreneurs into funded founders through digital influence growth.
                   </p>
                   <a 
                     href="https://linkedin.com/in/prestoneaton" 
@@ -233,7 +233,7 @@ export default function AboutPage() {
             <div className="col-span-1 md:col-span-2">
               <Image 
                 src="/LogoinBLUEONEword.png" 
-                alt="Accorria" 
+                alt="Global Empowerment Platform" 
                 width={120}
                 height={40}
                 className="h-8 w-auto mb-4"
@@ -261,7 +261,7 @@ export default function AboutPage() {
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8">
             <p className="text-gray-400 text-sm text-center">
-              © {new Date().getFullYear()} Accorria. All rights reserved.
+              © {new Date().getFullYear()} Global Empowerment Platform. All rights reserved.
             </p>
           </div>
         </div>

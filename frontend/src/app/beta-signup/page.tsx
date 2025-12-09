@@ -103,11 +103,11 @@ export default function BetaSignup() {
               </svg>
             </div>
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Welcome to Accorria!</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Welcome to Global Empowerment Platform!</h2>
           <p className="text-gray-600 mb-6">
             {typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('duplicate') === 'true' 
               ? "You're already signed up! We'll notify you when early access is ready."
-              : "Thanks for joining the beta. You'll get early access to the Accorria platform as soon as we're ready."
+              : "Thanks for joining the beta. You'll get early access to the Global Empowerment Platform as soon as we're ready."
             }
           </p>
           <div className="space-y-3">
@@ -135,8 +135,8 @@ export default function BetaSignup() {
             <div className="flex items-center">
               <Link href="/" className="flex-shrink-0">
                 <Image 
-                  src="/AccorriaYwLOGO.png" 
-                  alt="Accorria" 
+                  src="/GEP LOGO.png" 
+                  alt="Global Empowerment Platform" 
                   width={175}
                   height={175}
                   className="h-[175px] w-auto"
@@ -156,7 +156,7 @@ export default function BetaSignup() {
               Get Early Access
             </h2>
             <p className="mt-2 text-sm text-gray-600">
-              Join the beta and be among the first to try the Accorria platform.
+              Join the beta and be among the first to try the Global Empowerment Platform.
             </p>
           </div>
 

@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "dev": "concurrently \"cd backend && bash -c 'source .venv/bin/activate && uvicorn app.main:app --reload --host 0.0.0.0 --port 8000'\" \"cd frontend && npm run dev\"",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && bash -c 'source venv/bin/activate && python start_server.py'",
     "dev:frontend": "cd frontend && npm run dev",
     "dev:wsl": "bash start-dev.sh"
   },

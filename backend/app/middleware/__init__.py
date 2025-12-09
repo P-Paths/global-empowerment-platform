@@ -1,5 +1,5 @@
 """
-Middleware package for Aquaria API
+Middleware package for Global Empowerment Platform (GEP) API
 
 Provides security and performance middleware components.
 """

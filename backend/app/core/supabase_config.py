@@ -1,5 +1,5 @@
 """
-Supabase Configuration for Aquaria
+Supabase Configuration for Global Empowerment Platform (GEP)
 Simplified database and auth setup using Supabase
 """
 

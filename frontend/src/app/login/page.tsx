@@ -64,8 +64,8 @@ export default function LoginPage() {
         <div className="text-center mb-8">
           <Link href="/" className="inline-block">
             <Image 
-              src="/AccorriaYwLOGO.png" 
-              alt="Accorria" 
+              src="/GEP LOGO.png" 
+              alt="GEP" 
               width={120}
               height={120}
               className="h-[120px] w-auto mx-auto"

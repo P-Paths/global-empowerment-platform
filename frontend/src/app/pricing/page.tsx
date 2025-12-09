@@ -103,8 +103,8 @@ export default function PricingPage() {
             <div className="flex items-center">
               <Link href="/">
                 <Image 
-                  src="/LogoinBLUEONEword.png" 
-                  alt="Accorria" 
+                  src="/GEP LOGO.png" 
+                  alt="Global Empowerment Platform" 
                   width={120}
                   height={40}
                   className="h-8 w-auto"
@@ -284,7 +284,7 @@ export default function PricingPage() {
               Ready to start selling smarter?
             </h2>
             <p className="mt-4 text-xl text-blue-100">
-              Join thousands of sellers who are already using Accorria to sell faster and for more money.
+              Join thousands of entrepreneurs who are already using Global Empowerment Platform to grow their digital influence and get funded.
             </p>
             <div className="mt-8">
               <Link
@@ -305,7 +305,7 @@ export default function PricingPage() {
             <div className="col-span-1 md:col-span-2">
               <Image 
                 src="/LogoinBLUEONEword.png" 
-                alt="Accorria" 
+                alt="Global Empowerment Platform" 
                 width={120}
                 height={40}
                 className="h-8 w-auto mb-4"
@@ -333,7 +333,7 @@ export default function PricingPage() {
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8">
             <p className="text-gray-400 text-sm text-center">
-              © {new Date().getFullYear()} Accorria. All rights reserved.
+              © {new Date().getFullYear()} Global Empowerment Platform. All rights reserved.
             </p>
           </div>
         </div>

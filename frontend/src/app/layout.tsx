@@ -17,9 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Accorria – #1 Trust-Native Listing Platform',
+  title: 'Global Empowerment Platform (GEP) – Transform Members Into Funded Entrepreneurs',
   description:
-    'The future of selling starts here. Secure listings, instant escrow, and AI-powered posting for cars, homes, and high-value items. Upload photos, we\'ll flip the rest.',
+    'Grow your digital influence, build your brand, and prepare for capital investment. The social growth engine that transforms entrepreneurs into fundable founders.',
   viewport: {
     width: 'device-width',
     initialScale: 1,
@@ -35,17 +35,17 @@ export const metadata: Metadata = {
     shortcut: '/favicon.ico',
   },
   openGraph: {
-    title: 'Accorria – #1 Trust-Native Listing Platform',
+    title: 'Global Empowerment Platform (GEP) – Transform Members Into Funded Entrepreneurs',
     description:
-      'The future of selling starts here. Secure listings, instant escrow, and AI-powered posting for cars, homes, and high-value items.',
-    url: 'https://accorria.com',
-    siteName: 'Accorria',
+      'Grow your digital influence, build your brand, and prepare for capital investment. The social growth engine for entrepreneurs.',
+    url: 'https://globalempowerment.app',
+    siteName: 'Global Empowerment Platform',
     images: [
       {
-        url: 'https://accorria.com/LogoinBLUEONEword.png',
+        url: 'https://globalempowerment.app/logo.png',
         width: 1200,
         height: 630,
-        alt: 'Accorria - Trust-Native Listing Platform',
+        alt: 'Global Empowerment Platform',
       },
     ],
     locale: 'en_US',
@@ -53,10 +53,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Accorria – #1 Trust-Native Listing Platform',
+    title: 'Global Empowerment Platform (GEP) – Transform Members Into Funded Entrepreneurs',
     description:
-      'The future of selling starts here. Secure listings, instant escrow, and AI-powered posting for cars, homes, and high-value items.',
-    images: ['https://accorria.com/LogoinBLUEONEword.png'],
+      'Grow your digital influence, build your brand, and prepare for capital investment. The social growth engine for entrepreneurs.',
+    images: ['https://globalempowerment.app/logo.png'],
   },
 };
 
@@ -75,13 +75,13 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'Organization',
-              name: 'Accorria',
-              url: 'https://accorria.com',
-              logo: 'https://accorria.com/LogoinBLUEONEword.png',
-              description: 'The future of selling starts here. Secure listings, instant escrow, and AI-powered posting for cars, homes, and high-value items.',
+              name: 'Global Empowerment Platform',
+              url: 'https://globalempowerment.app',
+              logo: 'https://globalempowerment.app/logo.png',
+              description: 'Transform members into funded entrepreneurs through digital influence growth, AI-powered business coaching, and VC-ready preparation.',
               sameAs: [
-                'https://www.facebook.com/accorria',
-                'https://www.linkedin.com/company/accorria',
+                'https://www.facebook.com/globalempowerment',
+                'https://www.linkedin.com/company/globalempowerment',
               ],
             }),
           }}

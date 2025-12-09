@@ -9,8 +9,8 @@ export default function TermsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <Link href="/" className="flex items-center space-x-2">
-              <img src="/AccorriaYwLOGO.png" alt="Accorria" className="h-8 w-auto" />
-              <span className="text-xl font-bold text-white">Accorria</span>
+              <img src="/GEP LOGO.png" alt="Global Empowerment Platform" className="h-8 w-auto" />
+              <span className="text-xl font-bold text-white">Global Empowerment Platform</span>
             </Link>
             <nav className="hidden md:flex space-x-8">
               <Link href="/" className="text-slate-300 hover:text-white transition-colors">Home</Link>
@@ -28,12 +28,12 @@ export default function TermsPage() {
           
           <div className="prose prose-lg max-w-none">
             <p className="text-xl text-slate-700 mb-8">
-              Welcome to Accorria. By using our website and services, you agree to these terms.
+              Welcome to Global Empowerment Platform. By using our website and services, you agree to these terms.
             </p>
 
             <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">Use of Service</h2>
             <ul className="list-disc list-inside text-slate-700 mb-8 space-y-2">
-              <li>You must be at least 18 years old to use Accorria.</li>
+              <li>You must be at least 18 years old to use Global Empowerment Platform.</li>
               <li>You agree to provide accurate information when creating listings.</li>
               <li>You are responsible for the legality of the items you list.</li>
             </ul>
@@ -47,12 +47,12 @@ export default function TermsPage() {
             <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">Escrow & Payments</h2>
             <p className="text-slate-700 mb-8">
               Escrow and payment services are provided through trusted third-party partners.  
-              Accorria is not a bank and does not directly hold funds.
+              Global Empowerment Platform is not a bank and does not directly hold funds.
             </p>
 
             <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">Liability</h2>
             <p className="text-slate-700 mb-8">
-              Accorria provides services "as is" and is not liable for damages resulting from misuse of the platform.
+              Global Empowerment Platform provides services "as is" and is not liable for damages resulting from misuse of the platform.
             </p>
 
             <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">Changes to Terms</h2>
@@ -62,10 +62,10 @@ export default function TermsPage() {
 
             <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4" id="data-deletion">Data Deletion</h2>
             <p className="text-slate-700 mb-4">
-              You have the right to request deletion of your personal data from Accorria. To request data deletion:
+              You have the right to request deletion of your personal data from Global Empowerment Platform. To request data deletion:
             </p>
             <ul className="list-disc list-inside text-slate-700 mb-8 space-y-2">
-              <li>Email us at <a href="mailto:privacy@accorria.com" className="text-amber-600 hover:text-amber-700">privacy@accorria.com</a></li>
+              <li>Email us at <a href="mailto:privacy@globalempowerment.app" className="text-amber-600 hover:text-amber-700">privacy@globalempowerment.app</a></li>
               <li>Include "Data Deletion Request" in the subject line</li>
               <li>Provide your account email address for verification</li>
               <li>We will process your request within 30 days</li>
@@ -76,7 +76,7 @@ export default function TermsPage() {
 
             <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">Contact</h2>
             <p className="text-slate-700 mb-8">
-              <a href="mailto:support@accorria.com" className="text-amber-600 hover:text-amber-700">support@accorria.com</a>
+              <a href="mailto:support@globalempowerment.app" className="text-amber-600 hover:text-amber-700">support@globalempowerment.app</a>
             </p>
 
             <div className="mt-12 pt-8 border-t border-slate-200">
@@ -115,7 +115,7 @@ export default function TermsPage() {
             </div>
           </div>
           <div className="border-t border-slate-700 pt-8">
-            <p>© {new Date().getFullYear()} Accorria. All rights reserved. | <a href="https://accorria.com" className="hover:text-amber-300">accorria.com</a></p>
+            <p>© {new Date().getFullYear()} Global Empowerment Platform. All rights reserved. | <a href="https://globalempowerment.app" className="hover:text-amber-300">globalempowerment.app</a></p>
           </div>
         </div>
       </footer>

@@ -1,6 +1,9 @@
-# Global Empowerment Platform
+# Global Empowerment Platform (GEP)
 
-Multi-platform goods selling platform enabling members to post and sell products across Facebook, Instagram, YouTube, and TikTok.
+Transform members into funded entrepreneurs through digital influence growth, AI-powered business coaching, and VC-ready preparation. A social growth engine that combines community, AI tools, and real social media integration to build fundable founders.
+
+**Repository:** [P-Paths/Global_Empowerment_Platform](https://github.com/P-Paths/Global_Empowerment_Platform)  
+**Google Cloud Project:** gem-platform-480517
 
 ## Tech Stack
 - Backend: FastAPI (Python)

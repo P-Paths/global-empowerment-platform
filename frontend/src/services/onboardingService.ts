@@ -1,14 +1,15 @@
 import { supabaseBrowser } from '@/lib/supabaseBrowser';
+import { getApiUrl } from '@/config/api';
+import { authenticatedFetch } from '@/utils/api';
 
 export interface OnboardingData {
   first_name?: string;
   last_name?: string;
-  email?: string;
   phone?: string;
   zip?: string;
   city?: string;
   experience_level?: 'beginner' | 'intermediate' | 'experienced';
-  selected_category?: 'automotive' | 'real_estate' | 'luxury_items' | 'small_businesses' | 'high_value_goods' | 'art_collectibles';
+  selected_category?: 'social_media' | 'ecommerce' | 'consulting' | 'content_creation' | 'saas' | 'other';
   messaging_preference?: 'auto_reply' | 'human_in_loop' | 'manual';
   wants_escrow?: boolean;
   onboarding_complete?: boolean;
@@ -34,6 +35,12 @@ export class OnboardingService {
    */
   async getOnboardingStatus(userId: string): Promise<boolean> {
     try {
+      // Check if this is a demo/mock user (demo login)
+      if (userId === '00000000-0000-0000-0000-000000000123') {
+        console.log('Demo user detected - skipping Supabase check');
+        return false; // Demo users need to complete onboarding
+      }
+
       const { data, error } = await this.supabase
         .from('profiles')
         .select('onboarding_complete')
@@ -46,18 +53,33 @@ export class OnboardingService {
           console.log('Profile does not exist yet or RLS issue, onboarding not complete');
           return false;
         }
-        console.error('Error fetching onboarding status:', error);
+        // Log error details for debugging
+        console.warn('Error fetching onboarding status:', {
+          code: error.code,
+          message: error.message,
+          details: error.details,
+          hint: error.hint
+        });
+        // Return false to allow onboarding to proceed
         return false;
       }
 
       // If no data, profile doesn't exist
       if (!data) {
+        console.log('Profile does not exist - onboarding not complete');
         return false;
       }
 
       return data.onboarding_complete ?? false;
     } catch (error) {
-      console.error('Error in getOnboardingStatus:', error);
+      // Catch any unexpected errors and log them properly
+      console.warn('Error in getOnboardingStatus:', {
+        error,
+        errorType: typeof error,
+        errorMessage: error instanceof Error ? error.message : String(error),
+        userId
+      });
+      // Return false to allow onboarding to proceed (fail gracefully)
       return false;
     }
   }
@@ -65,7 +87,7 @@ export class OnboardingService {
   /**
    * Ensure profile exists (wait for trigger or create it)
    */
-  private async ensureProfileExists(userId: string, email?: string): Promise<{ error: Error | null }> {
+  private async ensureProfileExists(userId: string): Promise<{ error: Error | null }> {
     // Check if profile exists
     const { data: existingProfile } = await this.supabase
       .from('profiles')
@@ -102,7 +124,7 @@ export class OnboardingService {
         .from('profiles')
         .upsert({
           id: userId,
-          email: email || '',
+          user_id: userId, // Use user_id instead of email (email is in auth.users)
           created_at: now,
           updated_at: now
         }, {
@@ -173,8 +195,7 @@ export class OnboardingService {
           message: errorObj?.message,
           details: errorObj?.details,
           hint: errorObj?.hint,
-          userId,
-          email
+          userId
         };
 
         console.error('❌ Error creating profile - full error info:', errorInfo);
@@ -211,8 +232,7 @@ export class OnboardingService {
         exceptionType: typeof exception,
         exceptionMessage: exception?.message,
         exceptionStack: exception?.stack,
-        userId,
-        email
+        userId
       });
       
       const errorMsg = exception?.message || String(exception) || 'Failed to create profile';
@@ -239,7 +259,7 @@ export class OnboardingService {
 
       // Try to ensure profile exists (non-blocking - won't fail if it doesn't exist yet)
       // Wait a bit longer for the trigger to create the profile
-      const profileResult = await this.ensureProfileExists(userId, data.email);
+      const profileResult = await this.ensureProfileExists(userId);
       
       // If profile creation failed with foreign key error, wait a bit more and try again
       if (profileResult.error && profileResult.error.message?.includes('still being set up')) {
@@ -259,265 +279,47 @@ export class OnboardingService {
         }
       }
 
-      const now = new Date().toISOString();
+      // Use backend API to bypass RLS (uses service role)
+      // The backend API handles both create and update (upsert)
+      const apiUrl = getApiUrl('api/v1/profiles/onboarding');
       
-      // Get existing profile to check current email
-      const { data: existingProfile } = await this.supabase
-        .from('profiles')
-        .select('id, email')
-        .eq('id', userId)
-        .maybeSingle();
-      
-      // If profile doesn't exist yet, wait a bit more and try again
-      if (!existingProfile) {
-        console.log('Profile not found, waiting for trigger...');
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        // Check again
-        const { data: retryProfile } = await this.supabase
-          .from('profiles')
-          .select('id, email')
-          .eq('id', userId)
-          .maybeSingle();
-        
-        if (!retryProfile) {
-          // Profile still doesn't exist - use UPSERT to create/update in one operation
-          try {
-            const upsertData: any = {
-              id: userId,
-              email: data.email || '',
-              first_name: data.first_name || '',
-              last_name: data.last_name || '',
-              phone: data.phone || '',
-              zip: data.zip || '',
-              city: data.city || '',
-              experience_level: data.experience_level,
-              selected_category: data.selected_category,
-              messaging_preference: data.messaging_preference,
-              wants_escrow: data.wants_escrow,
-              onboarding_complete: data.onboarding_complete,
-              created_at: now,
-              updated_at: now
-            };
-
-            // Remove undefined values
-            Object.keys(upsertData).forEach(key => {
-              if (upsertData[key] === undefined || upsertData[key] === null) {
-                delete upsertData[key];
-              }
-            });
-
-            const result = await this.supabase
-              .from('profiles')
-              .upsert(upsertData, { onConflict: 'id' });
-
-            // Log the full result object
-            console.log('Upsert onboarding data result:', {
-              hasData: !!result.data,
-              hasError: !!result.error,
-              errorType: typeof result.error,
-              errorValue: result.error,
-              errorKeys: result.error ? Object.keys(result.error) : [],
-              data: result.data,
-              status: (result as any).status,
-              statusText: (result as any).statusText
-            });
-
-            // If we have data, success!
-            if (result.data) {
-              console.log('✅ Profile created/updated successfully via upsert with onboarding data');
-              return { error: null };
-            }
-            
-            // Check for errors
-            const errorObj = result.error;
-            if (errorObj) {
-              const errorMessage = errorObj?.message || errorObj?.details || errorObj?.hint || JSON.stringify(errorObj) || 'Failed to save onboarding data';
-              const errorCode = errorObj?.code;
-              
-              console.log('Error from upsert:', {
-                code: errorCode,
-                message: errorMessage,
-                errorObj: JSON.stringify(errorObj)
-              });
-              
-              // If foreign key error, user doesn't exist in auth.users yet - wait and retry
-              if (errorCode === '23503' || errorMessage.includes('foreign key') || errorMessage.includes('violates foreign key')) {
-                console.warn('⚠️ Foreign key constraint error - waiting 3 seconds and retrying...');
-                await new Promise(resolve => setTimeout(resolve, 3000));
-                
-                // Retry once
-                const retryResult = await this.supabase
-                  .from('profiles')
-                  .upsert(upsertData, { onConflict: 'id' });
-                
-                if (retryResult.data || !retryResult.error) {
-                  console.log('✅ Retry successful - profile created');
-                  return { error: null };
-                }
-                
-                // Check if profile exists anyway
-                const { data: checkProfile } = await this.supabase
-                  .from('profiles')
-                  .select('id')
-                  .eq('id', userId)
-                  .maybeSingle();
-                
-                if (checkProfile) {
-                  console.log('✅ Profile exists after retry - treating as success');
-                  return { error: null };
-                }
-                
-                return { error: new Error('Your account is still being set up. Please wait a moment and try again, or refresh the page.') };
-              }
-              
-              // Other errors - return them
-              return { error: new Error(errorMessage) };
-            }
-
-            // No error but no data - check if profile exists now
-            const { data: checkProfile } = await this.supabase
-              .from('profiles')
-              .select('id')
-              .eq('id', userId)
-              .maybeSingle();
-
-            if (checkProfile) {
-              console.log('✅ Profile exists after upsert - treating as success');
-              return { error: null };
-            } else {
-              console.warn('⚠️ Upsert completed but profile still doesn\'t exist - continuing anyway (trigger may create it)');
-              // Continue anyway - the trigger should create it eventually
-              return { error: null }; // Don't block onboarding
-            }
-          } catch (exception: any) {
-            // Catch any exceptions that might be thrown
-            console.error('Exception upserting onboarding data:', {
-              exception,
-              exceptionType: typeof exception,
-              exceptionMessage: exception?.message,
-              exceptionStack: exception?.stack,
-              userId
-            });
-            
-            const errorMsg = exception?.message || String(exception) || 'Failed to save onboarding data';
-            return { error: new Error(errorMsg) };
-          }
-
-          console.log('Successfully upserted onboarding data for user:', userId);
-          return { error: null };
-        }
-      }
-
-      // Profile exists - use UPSERT to be safe (handles both insert and update)
-      const upsertData: any = {
-        id: userId,
-        updated_at: now
+      const requestBody = {
+        user_id: userId,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        city: data.city,
+        selected_category: data.selected_category,
+        onboarding_complete: data.onboarding_complete
       };
-
-      // Only include fields that are provided
-      if (data.first_name !== undefined) upsertData.first_name = data.first_name;
-      if (data.last_name !== undefined) upsertData.last_name = data.last_name;
-      if (data.phone !== undefined) upsertData.phone = data.phone;
-      if (data.zip !== undefined) upsertData.zip = data.zip;
-      if (data.city !== undefined) upsertData.city = data.city;
-      if (data.experience_level !== undefined) upsertData.experience_level = data.experience_level;
-      if (data.selected_category !== undefined) upsertData.selected_category = data.selected_category;
-      if (data.messaging_preference !== undefined) upsertData.messaging_preference = data.messaging_preference;
-      if (data.wants_escrow !== undefined) upsertData.wants_escrow = data.wants_escrow;
-      if (data.onboarding_complete !== undefined) upsertData.onboarding_complete = data.onboarding_complete;
-
-      // Only update email if provided and different
-      if (data.email && data.email !== existingProfile?.email) {
-        upsertData.email = data.email;
-      } else if (!existingProfile?.email && data.email) {
-        upsertData.email = data.email;
-      } else if (existingProfile?.email) {
-        upsertData.email = existingProfile.email;
-      }
-
-      // If profile doesn't exist, include created_at
-      if (!existingProfile) {
-        upsertData.created_at = now;
-      }
       
-      const { data: upsertResult, error } = await this.supabase
-        .from('profiles')
-        .upsert(upsertData, { onConflict: 'id' });
+      console.log('📤 Calling backend API to update profile:', { apiUrl, userId });
       
-      // If we have data, success!
-      if (upsertResult) {
-        console.log('✅ Successfully saved onboarding data');
-        return { error: null };
-      }
+      const response = await authenticatedFetch(apiUrl, {
+        method: 'POST',
+        body: JSON.stringify(requestBody)
+      });
       
-      if (error) {
-        // Log full error details for debugging
-        console.error('Error upserting onboarding data - full error:', {
-          error,
-          code: error.code,
-          message: error.message,
-          details: error.details,
-          hint: error.hint,
-          userId,
-          dataKeys: Object.keys(upsertData),
-          upsertData
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ detail: response.statusText }));
+        const errorMessage = errorData.detail || errorData.message || `HTTP ${response.status}: ${response.statusText}`;
+        console.error('❌ Backend API error:', {
+          status: response.status,
+          statusText: response.statusText,
+          error: errorData,
+          userId
         });
-
-        // Extract error message from multiple possible sources
-        const errorMessage = error.message || error.details || error.hint || JSON.stringify(error) || 'Failed to save onboarding data';
-        const errorCode = error.code;
-        
-        // Check for foreign key constraint errors - wait and retry
-        if (errorCode === '23503' || errorMessage.includes('foreign key') || errorMessage.includes('violates foreign key')) {
-          console.warn('⚠️ Foreign key constraint error - waiting 3 seconds and retrying...');
-          await new Promise(resolve => setTimeout(resolve, 3000));
-          
-          // Retry once
-          const retryResult = await this.supabase
-            .from('profiles')
-            .upsert(upsertData, { onConflict: 'id' });
-          
-          if (retryResult.data || !retryResult.error) {
-            console.log('✅ Retry successful');
-            return { error: null };
-          }
-          
-          // Check if profile exists anyway
-          const { data: checkProfile } = await this.supabase
-            .from('profiles')
-            .select('id')
-            .eq('id', userId)
-            .maybeSingle();
-          
-          if (checkProfile) {
-            console.log('✅ Profile exists - treating as success');
-            return { error: null };
-          }
-          
-          // Still failing - don't block onboarding
-          console.warn('⚠️ Profile creation still failing after retry - continuing anyway');
-          return { error: null }; // Don't block onboarding - trigger should create it
-        }
-        
         return { error: new Error(errorMessage) };
       }
       
-      // No error and no data - check if profile exists
-      const { data: finalCheck } = await this.supabase
-        .from('profiles')
-        .select('id')
-        .eq('id', userId)
-        .maybeSingle();
+      const result = await response.json();
       
-      if (finalCheck) {
-        console.log('✅ Profile exists - treating as success');
+      if (result.success) {
+        console.log('✅ Successfully saved onboarding data via backend API');
         return { error: null };
+      } else {
+        console.error('❌ Backend API returned unsuccessful result:', result);
+        return { error: new Error(result.message || 'Failed to save onboarding data') };
       }
-      
-      console.log('Successfully saved onboarding data for user:', userId);
-
-      return { error: null };
     } catch (error) {
       console.error('Error in updateOnboardingData:', error);
       const errorMessage = error instanceof Error ? error.message : JSON.stringify(error);

@@ -1,18 +1,19 @@
 """
-Aquaria - Agent System
+Global Empowerment Platform (GEP) - Agent System
 
-This module contains all AI agents for the car flipping platform.
+This module contains all AI agents for the Global Empowerment Platform.
 """
 
 from datetime import datetime
 from .base_agent import BaseAgent, AgentOutput
-from .market_intelligence_agent import MarketIntelligenceAgent
-from .listening_agent import ListeningAgent
-from .scout_agent import ScoutAgent
-from .visual_agent import VisualAgent
-from .intake_agent import IntakeAgent
-from .data_extraction_agent import DataExtractionAgent
-from .pricing_strategy_agent import PricingStrategyAgent
+# Removed car-specific agents:
+# from .market_intelligence_agent import MarketIntelligenceAgent
+# from .listening_agent import ListeningAgent
+# from .scout_agent import ScoutAgent
+# from .visual_agent import VisualAgent
+# from .intake_agent import IntakeAgent
+# from .data_extraction_agent import DataExtractionAgent
+# from .pricing_strategy_agent import PricingStrategyAgent
 from .content_generation_agent import ContentGenerationAgent
 
 class ValuationAgent(BaseAgent):
@@ -76,19 +77,20 @@ class OrchestratorAgent(BaseAgent):
     """Orchestrator Agent - Makes final recommendations"""
     def __init__(self, config=None):
         super().__init__("orchestrator_agent", config)
-        self.visual_agent = VisualAgent()
-        self.intake_agent = IntakeAgent()
+        # self.visual_agent = VisualAgent()  # Removed - car-specific
+        # self.intake_agent = IntakeAgent()  # Removed - car-specific
     
     async def process(self, input_data):
         """Process input data through multiple agents and return combined results"""
         try:
             # Start with intake processing
-            intake_result = await self.intake_agent.process(input_data)
+            # intake_result = await self.intake_agent.process(input_data)  # Removed - car-specific
             
             # Process visual analysis if image data is provided
             visual_result = None
-            if input_data.get("image_path") or input_data.get("image_url") or input_data.get("image_data"):
-                visual_result = await self.visual_agent.process(input_data)
+            # if input_data.get("image_path") or input_data.get("image_url") or input_data.get("image_data"):
+            #     visual_result = await self.visual_agent.process(input_data)  # Removed - car-specific
+            intake_result = None
             
             # Combine results
             combined_data = {
@@ -154,13 +156,13 @@ class LearningAgent(BaseAgent):
 
 __all__ = [
     "BaseAgent",
-    "MarketIntelligenceAgent",
-    "ListeningAgent",
-    "ScoutAgent",
-    "VisualAgent",
-    "IntakeAgent",
-    "DataExtractionAgent",
-    "PricingStrategyAgent",
+    # "MarketIntelligenceAgent",  # Removed - car-specific
+    # "ListeningAgent",  # Removed - car-specific
+    # "ScoutAgent",  # Removed - car-specific
+    # "VisualAgent",  # Removed - car-specific
+    # "IntakeAgent",  # Removed - car-specific
+    # "DataExtractionAgent",  # Removed - car-specific
+    # "PricingStrategyAgent",  # Removed - car-specific
     "ContentGenerationAgent",
     "ValuationAgent", 
     "InspectionAgent",

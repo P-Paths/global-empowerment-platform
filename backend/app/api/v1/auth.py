@@ -13,7 +13,7 @@ from passlib.context import CryptContext
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.database import get_db
 from app.core.config import settings
-from app.models.comprehensive_models import User
+from app.models.user import User
 import logging
 
 logger = logging.getLogger(__name__)

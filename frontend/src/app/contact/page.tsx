@@ -9,8 +9,8 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <Link href="/" className="flex items-center space-x-2">
-              <img src="/AccorriaYwLOGO.png" alt="Accorria" className="h-8 w-auto" />
-              <span className="text-xl font-bold text-white">Accorria</span>
+              <img src="/GEP LOGO.png" alt="Global Empowerment Platform" className="h-8 w-auto" />
+              <span className="text-xl font-bold text-white">Global Empowerment Platform</span>
             </Link>
             <nav className="hidden md:flex space-x-8">
               <Link href="/" className="text-slate-300 hover:text-white transition-colors">Home</Link>
@@ -28,35 +28,35 @@ export default function ContactPage() {
           
           <div className="prose prose-lg max-w-none">
             <p className="text-xl text-slate-700 mb-8">
-              Get in touch with the Accorria team. We'd love to hear from you!
+              Get in touch with the Global Empowerment Platform team. We'd love to hear from you!
             </p>
 
             <div className="grid md:grid-cols-2 gap-8 mb-8">
               <div>
                 <h2 className="text-2xl font-bold text-slate-900 mb-4">General Inquiries</h2>
                 <p className="text-slate-700 mb-4">
-                  <a href="mailto:hello@accorria.com" className="text-amber-600 hover:text-amber-700">hello@accorria.com</a>
+                  <a href="mailto:hello@globalempowerment.app" className="text-amber-600 hover:text-amber-700">hello@globalempowerment.app</a>
                 </p>
               </div>
               
               <div>
                 <h2 className="text-2xl font-bold text-slate-900 mb-4">Support</h2>
                 <p className="text-slate-700 mb-4">
-                  <a href="mailto:support@accorria.com" className="text-amber-600 hover:text-amber-700">support@accorria.com</a>
+                  <a href="mailto:support@globalempowerment.app" className="text-amber-600 hover:text-amber-700">support@globalempowerment.app</a>
                 </p>
               </div>
               
               <div>
                 <h2 className="text-2xl font-bold text-slate-900 mb-4">Business Partnerships</h2>
                 <p className="text-slate-700 mb-4">
-                  <a href="mailto:partnerships@accorria.com" className="text-amber-600 hover:text-amber-700">partnerships@accorria.com</a>
+                  <a href="mailto:partnerships@globalempowerment.app" className="text-amber-600 hover:text-amber-700">partnerships@globalempowerment.app</a>
                 </p>
               </div>
               
               <div>
                 <h2 className="text-2xl font-bold text-slate-900 mb-4">Media & Press</h2>
                 <p className="text-slate-700 mb-4">
-                  <a href="mailto:press@accorria.com" className="text-amber-600 hover:text-amber-700">press@accorria.com</a>
+                  <a href="mailto:press@globalempowerment.app" className="text-amber-600 hover:text-amber-700">press@globalempowerment.app</a>
                 </p>
               </div>
             </div>
@@ -104,7 +104,7 @@ export default function ContactPage() {
             </div>
           </div>
           <div className="border-t border-slate-700 pt-8">
-            <p>© {new Date().getFullYear()} Accorria. All rights reserved. | <a href="https://accorria.com" className="hover:text-amber-300">accorria.com</a></p>
+            <p>© {new Date().getFullYear()} Global Empowerment Platform. All rights reserved. | <a href="https://globalempowerment.app" className="hover:text-amber-300">globalempowerment.app</a></p>
           </div>
         </div>
       </footer>

@@ -1,5 +1,5 @@
 """
-Rate Limiting Middleware for Aquaria API
+Rate Limiting Middleware for Global Empowerment Platform (GEP) API
 
 Provides rate limiting functionality to prevent API abuse and ensure fair usage.
 """

@@ -62,13 +62,13 @@ export default function Header({ currentMode = 'solo', onModeChange }: HeaderPro
         <Link href="/dashboard" className="flex items-center space-x-2 sm:space-x-3 hover:opacity-80 transition-opacity">
           <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white dark:bg-gray-700 rounded-xl flex items-center justify-center border border-gray-200 dark:border-gray-600 shadow-sm">
             <img 
-              src="/LogoinBLUEONEword.png" 
-              alt="Accorria" 
+              src="/GEP LOGO.png" 
+              alt="GEP" 
               className="h-6 w-auto sm:h-8"
             />
           </div>
           <div>
-            <h1 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">Accorria</h1>
+            <h1 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">GEP</h1>
           </div>
         </Link>
 

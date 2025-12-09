@@ -1,0 +1,459 @@
+📁 .
+📁 .git
+📄 .gitignore
+📄 BRANDING_UPDATE.md
+📄 Dockerfile
+📄 GEP_BUILD_SUMMARY.md
+📄 GEP_DIAGNOSTIC_REPORT.md
+📄 PROJECT_INFO.md
+📄 PROJECT_SUMMARY.md
+📄 PROJECT_TREE.txt
+📄 README.md
+📄 REBRANDING_STATUS.md
+📄 SETUP_COMPLETE.md
+📄 SETUP_NOTES.md
+📄 SETUP_STATUS.md
+📁 backend
+│   ├── 📄 .env
+│   ├── 📄 .gitignore
+│   ├── 📁 .scrapy
+│   │   ├── 📁 httpcache
+│   │   │   ├── 📁 cargurus_cars
+│   │   │   │   ├── 📁 c7
+│   │   │   │   │   ├── 📁 c7d8304d883e46c44c25874f6646c6bb838da8e7
+│   │   │   │   │   │   ├── 📄 meta
+│   │   │   │   │   │   ├── 📄 pickled_meta
+│   │   │   │   │   │   ├── 📄 request_body
+│   │   │   │   │   │   ├── 📄 request_headers
+│   │   │   │   │   │   ├── 📄 response_body
+│   │   │   │   │   │   ├── 📄 response_headers
+│   │   │   ├── 📁 ebay_cars
+│   │   │   │   ├── 📁 64
+│   │   │   │   │   ├── 📁 64f7523ba5d8ad800f79d6df358b577f6354e9c1
+│   │   │   │   │   │   ├── 📄 meta
+│   │   │   │   │   │   ├── 📄 pickled_meta
+│   │   │   │   │   │   ├── 📄 request_body
+│   │   │   │   │   │   ├── 📄 request_headers
+│   │   │   │   │   │   ├── 📄 response_body
+│   │   │   │   │   │   ├── 📄 response_headers
+│   ├── 📁 .venv
+│   ├── 📄 ADD_LISTINGS_TABLE.sql
+│   ├── 📄 CREATE_INVENTORY_TABLE.sql
+│   ├── 📄 CREATE_LEADS_TABLE.sql
+│   ├── 📄 Dockerfile
+│   ├── 📄 Dockerfile.activepieces
+│   ├── 📄 Dockerfile.test
+│   ├── 📄 FIX_LEADS_TABLE_RLS.sql
+│   ├── 📄 SETUP_ACTIVEPIECES_DATABASE.sql
+│   ├── 📄 ULTIMATE_BEAST_SCHEMA.sql
+│   ├── 📁 app
+│   │   ├── 📄 __init__.py
+│   │   ├── 📁 __pycache__
+│   │   ├── 📁 agents
+│   │   │   ├── 📄 __init__.py
+│   │   │   ├── 📁 __pycache__
+│   │   │   ├── 📄 base_agent.py
+│   │   │   ├── 📄 content_generation_agent.py
+│   │   │   ├── 📄 data_extraction_agent.py
+│   │   │   ├── 📄 growth_coach_agent.py
+│   │   │   ├── 📄 intake_agent.py
+│   │   │   ├── 📄 listening_agent.py
+│   │   │   ├── 📄 market_intelligence_agent.py
+│   │   │   ├── 📄 negotiator_agent.py
+│   │   │   ├── 📄 pricing_strategy_agent.py
+│   │   │   ├── 📄 scout_agent.py
+│   │   │   ├── 📄 scout_scraper.py
+│   │   │   ├── 📄 synthesis_agent.py
+│   │   │   ├── 📄 visual_agent.py
+│   │   ├── 📄 ai_brain.py
+│   │   ├── 📁 api
+│   │   │   ├── 📄 __init__.py
+│   │   │   ├── 📁 __pycache__
+│   │   │   ├── 📁 v1
+│   │   │   │   ├── 📄 __init__.py
+│   │   │   │   ├── 📁 __pycache__
+│   │   │   │   ├── 📄 analytics.py
+│   │   │   │   ├── 📄 auth.py
+│   │   │   │   ├── 📄 car_analysis.py
+│   │   │   │   ├── 📄 car_listing_generator.py
+│   │   │   │   ├── 📁 chat
+│   │   │   │   │   ├── 📄 __init__.py
+│   │   │   │   │   ├── 📁 __pycache__
+│   │   │   │   │   ├── 📄 enhanced.py
+│   │   │   │   ├── 📄 community_feed.py
+│   │   │   │   ├── 📄 data_collection.py
+│   │   │   │   ├── 📄 data_test.py
+│   │   │   │   ├── 📄 deals.py
+│   │   │   │   ├── 📄 debug_status.py
+│   │   │   │   ├── 📄 demo_test.py
+│   │   │   │   ├── 📄 enhanced_analysis.py
+│   │   │   │   ├── 📄 facebook_oauth.py
+│   │   │   │   ├── 📄 flip_car.py
+│   │   │   │   ├── 📄 growth_coach.py
+│   │   │   │   ├── 📄 inventory.py
+│   │   │   │   ├── 📄 knowledge_graph.py
+│   │   │   │   ├── 📄 listener.py
+│   │   │   │   ├── 📄 listings.py
+│   │   │   │   ├── 📄 market_intelligence.py
+│   │   │   │   ├── 📄 market_search.py
+│   │   │   │   ├── 📄 market_search_real_scrape.py
+│   │   │   │   ├── 📄 market_search_scraping.py
+│   │   │   │   ├── 📄 market_search_scrapingbee.py
+│   │   │   │   ├── 📄 member_directory.py
+│   │   │   │   ├── 📄 messages.py
+│   │   │   │   ├── 📄 platform_posting.py
+│   │   │   │   ├── 📄 public_analysis.py
+│   │   │   │   ├── 📄 replies.py
+│   │   │   │   ├── 📄 scheduler.py
+│   │   │   │   ├── 📄 search_history.py
+│   │   │   │   ├── 📄 speech_to_text.py
+│   │   │   │   ├── 📄 supabase_auth.py
+│   │   │   │   ├── 📄 synthesis.py
+│   │   │   │   ├── 📄 test_apis.py
+│   │   │   │   ├── 📄 user.py
+│   │   │   │   ├── 📄 user_ebay_posting.py
+│   │   │   │   ├── 📄 user_facebook_posting.py
+│   │   │   │   ├── 📄 user_presets.py
+│   │   │   │   ├── 📄 vision_test.py
+│   │   ├── 📄 celery.py
+│   │   ├── 📁 core
+│   │   │   ├── 📁 __pycache__
+│   │   │   ├── 📄 config.py
+│   │   │   ├── 📄 database.py
+│   │   │   ├── 📄 security.py
+│   │   │   ├── 📄 supabase_config.py
+│   │   ├── 📁 data
+│   │   │   ├── 📄 mock_cars.json
+│   │   │   ├── 📄 successful_listings.json
+│   │   ├── 📄 main.py
+│   │   ├── 📁 middleware
+│   │   │   ├── 📄 __init__.py
+│   │   │   ├── 📁 __pycache__
+│   │   │   ├── 📄 rate_limiting.py
+│   │   ├── 📁 models
+│   │   │   ├── 📄 __init__.py
+│   │   │   ├── 📁 __pycache__
+│   │   │   ├── 📄 comprehensive_models.py
+│   │   │   ├── 📄 gep_models.py
+│   │   │   ├── 📄 inventory.py
+│   │   │   ├── 📄 knowledge_graph.py
+│   │   │   ├── 📄 listing.py
+│   │   │   ├── 📄 user.py
+│   │   │   ├── 📄 user_platform_connection.py
+│   │   ├── 📁 services
+│   │   │   ├── 📄 __init__.py
+│   │   │   ├── 📁 __pycache__
+│   │   │   ├── 📄 ai_brain.py
+│   │   │   ├── 📄 cache.py
+│   │   │   ├── 📄 car_analysis_agent.py
+│   │   │   ├── 📄 car_listing_generator.py
+│   │   │   ├── 📄 craigslist_poster.py
+│   │   │   ├── 📄 data_collection_service.py
+│   │   │   ├── 📄 ebay_poster.py
+│   │   │   ├── 📄 enhanced_image_analysis.py
+│   │   │   ├── 📄 facebook_marketplace.py
+│   │   │   ├── 📄 facebook_oauth.py
+│   │   │   ├── 📄 facebook_playwright_poster.py
+│   │   │   ├── 📄 funding_readiness_score.py
+│   │   │   ├── 📄 image_analysis_agent.py
+│   │   │   ├── 📄 knowledge_graph_service.py
+│   │   │   ├── 📄 listen_agent.py
+│   │   │   ├── 📄 market_data_service.py
+│   │   │   ├── 📄 message_monitor.py
+│   │   │   ├── 📄 mock_valuation_service.py
+│   │   │   ├── 📄 platform_poster.py
+│   │   │   ├── 📄 rag_service.py
+│   │   │   ├── 📄 real_scraper.py
+│   │   │   ├── 📄 real_valuation_service.py
+│   │   │   ├── 📄 scraping_service.py
+│   │   │   ├── 📄 scrapingbee_service.py
+│   │   │   ├── 📄 smart_image_analysis.py
+│   │   │   ├── 📄 supabase_service.py
+│   │   │   ├── 📄 user_ebay_poster.py
+│   │   │   ├── 📄 user_facebook_poster.py
+│   │   │   ├── 📄 vin_decoder.py
+│   │   │   ├── 📄 vin_knowledge_base.py
+│   │   │   ├── 📄 vision_analyzer.py
+│   │   ├── 📁 utils
+│   │   │   ├── 📁 __pycache__
+│   │   │   ├── 📄 auth.py
+│   │   │   ├── 📄 pricing_rules.py
+│   ├── 📄 celerybeat-schedule
+│   ├── 📄 cloudbuild-accorria.yaml
+│   ├── 📄 cloudbuild-beta.yaml
+│   ├── 📁 database_migrations
+│   │   ├── 📄 001_knowledge_graph_foundation.sql
+│   │   ├── 📄 002_gep_foundation.sql
+│   │   ├── 📄 create_vin_knowledge_base.sql
+│   ├── 📄 deploy-accorria.sh
+│   ├── 📄 deploy-activepieces.sh
+│   ├── 📄 deploy-minimal-fix.sh
+│   ├── 📄 deploy-minimal.sh
+│   ├── 📄 deploy-simple-accorria.sh
+│   ├── 📄 env.example
+│   ├── 📄 ford_demo_result.json
+│   ├── 📄 google-apps-script-automation.js
+│   ├── 📄 google-forms-midnight-automation.js
+│   ├── 📄 midnight-automation.js
+│   ├── 📄 policy.yaml
+│   ├── 📄 public_policy.yaml
+│   ├── 📄 requirements.txt
+│   ├── 📄 run_migration.py
+│   ├── 📄 scrapy.cfg
+│   ├── 📄 setup-production-env.sh
+│   ├── 📄 setup_api_keys.py
+│   ├── 📄 setup_playwright.sh
+│   ├── 📄 start_backend.sh
+│   ├── 📄 start_server.py
+📄 docker-compose.yml
+📁 frontend
+│   ├── 📄 .env.local
+│   ├── 📄 .gitignore
+│   ├── 📁 .next
+│   ├── 📄 Dockerfile
+│   ├── 📄 env.example
+│   ├── 📄 eslint.config.mjs
+│   ├── 📄 jsconfig.json
+│   ├── 📁 lib
+│   │   ├── 📄 supabaseBrowser.ts
+│   │   ├── 📄 supabaseServer.ts
+│   ├── 📄 next-env.d.ts
+│   ├── 📄 next.config.ts
+│   ├── 📁 node_modules
+│   ├── 📄 package-lock.json
+│   ├── 📄 package.json
+│   ├── 📄 postcss.config.js
+│   ├── 📁 public
+│   │   ├── 📄 GEP LOGO.png
+│   │   ├── 📄 GEP LOGO.png:Zone.Identifier
+│   │   ├── 📄 ModernHome.png
+│   │   ├── 📄 Preston Eaton Founder.jpg
+│   │   ├── 📄 favicon-192x192.png
+│   │   ├── 📄 favicon-512x512.png
+│   │   ├── 📄 favicon.ico
+│   │   ├── 📄 file.svg
+│   │   ├── 📄 globe.svg
+│   │   ├── 📄 manifest.json
+│   │   ├── 📄 next.svg
+│   │   ├── 📄 vercel.svg
+│   │   ├── 📄 window.svg
+│   ├── 📄 recreate-env-local.sh
+│   ├── 📄 setup-env.sh
+│   ├── 📁 src
+│   │   ├── 📁 app
+│   │   │   ├── 📁 about
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 admin
+│   │   │   │   ├── 📁 analytics
+│   │   │   │   │   ├── 📄 page.tsx
+│   │   │   │   ├── 📁 beta-signups
+│   │   │   │   │   ├── 📄 page.tsx
+│   │   │   │   ├── 📁 email-campaigns
+│   │   │   │   │   ├── 📄 page.tsx
+│   │   │   │   ├── 📄 layout.tsx
+│   │   │   │   ├── 📁 leads
+│   │   │   │   │   ├── 📄 page.tsx
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   │   ├── 📁 qr-generator
+│   │   │   │   │   ├── 📄 page.tsx
+│   │   │   │   ├── 📁 settings
+│   │   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 analytics
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 api
+│   │   │   │   ├── 📁 admin
+│   │   │   │   │   ├── 📁 beta-signups
+│   │   │   │   │   │   ├── 📄 route.ts
+│   │   │   │   ├── 📁 auth
+│   │   │   │   │   ├── 📁 [...nextauth]
+│   │   │   │   │   │   ├── 📄 route.ts
+│   │   │   │   ├── 📁 beta-signup
+│   │   │   │   │   ├── 📄 route.ts
+│   │   │   │   ├── 📁 chat
+│   │   │   │   │   ├── 📁 enhanced
+│   │   │   │   │   │   ├── 📄 route.ts
+│   │   │   │   │   ├── 📄 route.ts
+│   │   │   │   ├── 📁 email-events
+│   │   │   │   │   ├── 📄 route.ts
+│   │   │   │   ├── 📁 health
+│   │   │   │   │   ├── 📄 route.ts
+│   │   │   │   ├── 📁 leads
+│   │   │   │   │   ├── 📁 [id]
+│   │   │   │   │   │   ├── 📄 route.ts
+│   │   │   │   │   ├── 📄 route.ts
+│   │   │   │   ├── 📁 test-env
+│   │   │   │   │   ├── 📄 route.ts
+│   │   │   │   ├── 📁 test-supabase
+│   │   │   │   │   ├── 📄 route.ts
+│   │   │   │   ├── 📁 v1
+│   │   │   │   │   ├── 📁 car-listing
+│   │   │   │   │   │   ├── 📁 generate
+│   │   │   │   │   │   │   ├── 📄 route.ts
+│   │   │   │   │   ├── 📁 enhanced-analyze
+│   │   │   │   │   │   ├── 📄 route.ts
+│   │   │   │   │   ├── 📁 listener
+│   │   │   │   │   │   ├── 📁 upload
+│   │   │   │   │   │   │   ├── 📄 route.ts
+│   │   │   │   │   ├── 📁 market-intelligence
+│   │   │   │   │   │   ├── 📁 analyze
+│   │   │   │   │   │   │   ├── 📄 route.ts
+│   │   │   │   │   │   ├── 📁 competitor-search
+│   │   │   │   │   │   │   ├── 📄 route.ts
+│   │   │   │   │   │   ├── 📁 profit-thresholds
+│   │   │   │   │   │   │   ├── 📄 route.ts
+│   │   │   │   │   │   ├── 📁 quick-analysis
+│   │   │   │   │   │   │   ├── 📄 route.ts
+│   │   │   │   │   ├── 📁 market-search
+│   │   │   │   │   │   ├── 📄 route.ts
+│   │   │   │   │   ├── 📁 platform-posting
+│   │   │   │   │   │   ├── 📁 analyze-and-post
+│   │   │   │   │   │   │   ├── 📄 route.ts
+│   │   │   │   │   ├── 📁 search-history
+│   │   │   │   │   │   ├── 📄 route.ts
+│   │   │   │   │   ├── 📁 user
+│   │   │   │   │   │   ├── 📁 log_action
+│   │   │   │   │   │   │   ├── 📄 route.ts
+│   │   │   ├── 📁 auth
+│   │   │   │   ├── 📁 callback
+│   │   │   │   │   ├── 📄 page.tsx
+│   │   │   │   ├── 📁 facebook
+│   │   │   │   │   ├── 📁 callback
+│   │   │   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 beta-signup
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 community
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 components
+│   │   │   │   ├── 📄 Dashboard.tsx
+│   │   │   │   ├── 📄 ListenerUpload.tsx
+│   │   │   ├── 📁 contact
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 cookies
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 dashboard
+│   │   │   │   ├── 📁 connections
+│   │   │   │   │   ├── 📄 page.tsx
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 dealer-dashboard
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 demo
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 get-paid
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📄 globals.css
+│   │   │   ├── 📁 growth
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 how-it-works
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📄 layout.tsx
+│   │   │   ├── 📁 listings
+│   │   │   │   ├── 📁 [id]
+│   │   │   │   │   ├── 📄 page.tsx
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 login
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 market-intel
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 messages
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 onboarding
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 pricing
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 privacy
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📄 providers.tsx
+│   │   │   ├── 📁 qa
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 register
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   │   ├── 📄 test-page.tsx
+│   │   │   ├── 📁 terms
+│   │   │   │   ├── 📄 page.tsx
+│   │   │   ├── 📁 test-api
+│   │   │   │   ├── 📄 page.tsx
+│   │   ├── 📁 components
+│   │   │   ├── 📄 AIListingGenerator.tsx
+│   │   │   ├── 📄 Analytics.tsx
+│   │   │   ├── 📄 AnalyticsDashboard.tsx
+│   │   │   ├── 📄 AuthModal.tsx
+│   │   │   ├── 📁 CRM
+│   │   │   │   ├── 📄 CRMHeader.tsx
+│   │   │   │   ├── 📄 CRMSidebar.tsx
+│   │   │   ├── 📄 Chatbot.tsx
+│   │   │   ├── 📄 CompactListing.tsx
+│   │   │   ├── 📄 DashboardListing.tsx
+│   │   │   ├── 📄 DealDashboard.tsx
+│   │   │   ├── 📄 DealerMode.tsx
+│   │   │   ├── 📄 EmailVerification.tsx
+│   │   │   ├── 📄 FacebookAuth.tsx
+│   │   │   ├── 📄 FacebookOAuth2.tsx
+│   │   │   ├── 📄 Header.tsx
+│   │   │   ├── 📄 HotCarsSection.tsx
+│   │   │   ├── 📄 InventoryImporter.tsx
+│   │   │   ├── 📄 LoginForm.tsx
+│   │   │   ├── 📄 MarketIntelligence.tsx
+│   │   │   ├── 📄 MessagesView.tsx
+│   │   │   ├── 📄 QRCodeGenerator.tsx
+│   │   │   ├── 📄 RegisterForm.tsx
+│   │   │   ├── 📄 ScrollToTop.tsx
+│   │   │   ├── 📄 SimpleMarketSearch.tsx
+│   │   │   ├── 📄 SupabaseTest.tsx
+│   │   │   ├── 📄 UserProfile.tsx
+│   │   │   ├── 📄 hero.tsx
+│   │   │   ├── 📁 listings
+│   │   │   │   ├── 📄 CreateListing.tsx
+│   │   │   ├── 📁 onboarding
+│   │   │   │   ├── 📄 OnboardingContainer.tsx
+│   │   │   │   ├── 📁 screens
+│   │   │   │   │   ├── 📄 CategorySelectionScreen.tsx
+│   │   │   │   │   ├── 📄 CompletionScreen.tsx
+│   │   │   │   │   ├── 📄 EscrowFlowVisual.tsx
+│   │   │   │   │   ├── 📄 EscrowPreviewScreen.tsx
+│   │   │   │   │   ├── 📄 MarketplaceEcosystemScreen.tsx
+│   │   │   │   │   ├── 📄 MessagingPreferencesScreen.tsx
+│   │   │   │   │   ├── 📄 ProfileSetupScreen.tsx
+│   │   │   │   │   ├── 📄 SellingExperienceScreen.tsx
+│   │   │   │   │   ├── 📄 WelcomeScreen.tsx
+│   │   │   ├── 📁 platforms
+│   │   │   │   ├── 📄 PlatformConnections.tsx
+│   │   │   ├── 📁 ui
+│   │   │   │   ├── 📄 FeedTicker.tsx
+│   │   │   │   ├── 📄 StatCard.tsx
+│   │   ├── 📁 config
+│   │   │   ├── 📄 api.ts
+│   │   ├── 📁 contexts
+│   │   │   ├── 📄 AuthContext.tsx
+│   │   │   ├── 📄 ThemeContext.tsx
+│   │   ├── 📁 data
+│   │   │   ├── 📄 carData.json
+│   │   │   ├── 📄 carTrims.json
+│   │   ├── 📁 hooks
+│   │   │   ├── 📄 useSupabaseSession.ts
+│   │   ├── 📁 lib
+│   │   │   ├── 📄 email.ts
+│   │   │   ├── 📄 supabase.ts
+│   │   │   ├── 📄 supabaseBrowser.ts
+│   │   ├── 📁 services
+│   │   │   ├── 📄 listingsService.ts
+│   │   │   ├── 📄 onboardingService.ts
+│   │   ├── 📁 types
+│   │   │   ├── 📄 index.ts
+│   │   ├── 📁 utils
+│   │   │   ├── 📄 api.ts
+│   │   │   ├── 📄 dataCollection.ts
+│   │   │   ├── 📄 enhancedDataCollection.ts
+│   │   │   ├── 📄 leadTracking.ts
+│   │   │   ├── 📄 populateTestData.ts
+│   │   │   ├── 📄 spellChecker.ts
+│   │   │   ├── 📄 supabase.ts
+│   │   │   ├── 📄 urls.ts
+│   ├── 📄 tailwind.config.js
+│   ├── 📄 tsconfig.json
+│   ├── 📁 types
+│   │   ├── 📄 db.ts
+📄 generate_tree.sh
+📁 node_modules
+📄 package-lock.json
+📄 package.json

@@ -115,7 +115,7 @@ export default function AdminLayout({
       <div className={`transition-all duration-300 ${sidebarOpen ? 'ml-64' : 'ml-0'}`}>
         <CRMHeader 
           onMenuToggle={() => setSidebarOpen(!sidebarOpen)}
-          title="Accorria CRM"
+          title="GEP Admin"
           subtitle="Lead Management & Analytics"
         />
         

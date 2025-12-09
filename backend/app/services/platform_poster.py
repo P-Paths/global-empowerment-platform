@@ -92,16 +92,9 @@ class FacebookMarketplacePoster:
     """Facebook Marketplace posting implementation"""
     
     def __init__(self):
-        from .facebook_marketplace import get_facebook_config, FacebookMarketplaceAPI, FacebookListingData
-        
-        self.config = get_facebook_config()
+        # Removed facebook_marketplace import - service deleted
+        self.config = None
         self.api = None
-        
-        if self.config:
-            self.api = FacebookMarketplaceAPI(
-                access_token=self.config["access_token"],
-                page_id=self.config["page_id"]
-            )
     
     async def post_listing(self, listing_data: ListingData) -> PostingResult:
         """
@@ -117,25 +110,9 @@ class FacebookMarketplacePoster:
                     error_message="Facebook API not configured. Please set FACEBOOK_ACCESS_TOKEN and FACEBOOK_PAGE_ID environment variables."
                 )
             
-            # Convert to Facebook-specific format
-            from .facebook_marketplace import FacebookListingData
-            
-            fb_listing_data = FacebookListingData(
-                title=listing_data.title,
-                description=listing_data.description,
-                price=listing_data.price,
-                make=listing_data.make,
-                model=listing_data.model,
-                year=listing_data.year,
-                mileage=listing_data.mileage,
-                condition=self._map_condition(listing_data.condition),
-                images=listing_data.images,
-                location=self._get_location_data(listing_data.location)
-            )
-            
-            # Post to Facebook
-            async with self.api as api:
-                result = await api.create_listing(fb_listing_data)
+            # Facebook posting removed - service deleted
+            # TODO: Implement GEP-specific Facebook posting
+            result = {"success": False, "error": "Facebook posting not yet implemented for GEP"}
             
             if result.get("success"):
                 return PostingResult(
@@ -186,16 +163,9 @@ class CraigslistPoster:
     """Craigslist posting implementation"""
     
     def __init__(self):
-        from .craigslist_poster import get_craigslist_config, CraigslistPoster as CLPoster, CraigslistListingData
-        
-        self.config = get_craigslist_config()
+        # Removed craigslist_poster import - service deleted
+        self.config = None
         self.api = None
-        
-        if self.config:
-            self.api = CLPoster(
-                email=self.config["email"],
-                password=self.config["password"]
-            )
     
     async def post_listing(self, listing_data: ListingData) -> PostingResult:
         """
@@ -211,27 +181,9 @@ class CraigslistPoster:
                     error_message="Craigslist credentials not configured. Please set CRAIGSLIST_EMAIL and CRAIGSLIST_PASSWORD environment variables."
                 )
             
-            # Convert to Craigslist-specific format
-            from .craigslist_poster import CraigslistListingData
-            
-            cl_listing_data = CraigslistListingData(
-                title=listing_data.title,
-                description=listing_data.description,
-                price=listing_data.price,
-                make=listing_data.make,
-                model=listing_data.model,
-                year=listing_data.year,
-                mileage=listing_data.mileage,
-                condition=listing_data.condition,
-                images=listing_data.images,
-                location=listing_data.location,
-                email="accorria@example.com",  # TODO: Get from user settings
-                phone=""  # TODO: Get from user settings
-            )
-            
-            # Post to Craigslist
-            async with self.api as api:
-                result = await api.post_listing(cl_listing_data)
+            # Craigslist posting removed - service deleted
+            # TODO: Implement GEP-specific Craigslist posting if needed
+            result = {"success": False, "error": "Craigslist posting not yet implemented for GEP"}
             
             if result.get("success"):
                 return PostingResult(
@@ -260,10 +212,8 @@ class eBayMotorsPoster:
     """eBay Motors posting implementation"""
     
     def __init__(self):
-        from .ebay_poster import eBayPoster as eBayAPI, eBayListingData
-        
+        # Removed ebay_poster import - service deleted
         self.api = None
-        # eBay poster is initialized per request with user tokens
     
     async def post_listing(self, listing_data: ListingData) -> PostingResult:
         """
@@ -272,29 +222,12 @@ class eBayMotorsPoster:
         Note: This requires eBay Trading API setup
         """
         try:
-            # Convert to eBay-specific format
-            from .ebay_poster import eBayListingData
-            
-            ebay_listing_data = eBayListingData(
-                title=listing_data.title,
-                description=listing_data.description,
-                price=listing_data.price,
-                make=listing_data.make,
-                model=listing_data.model,
-                year=listing_data.year,
-                mileage=listing_data.mileage,
-                condition=self._map_condition(listing_data.condition),
-                images=listing_data.images,
-                location=self._get_location_data(listing_data.location)
-            )
-            
-            # Note: Actual posting requires user's eBay OAuth token
-            # This is handled by user_ebay_poster service
-            # For now, return a message that user needs to connect eBay account
+            # eBay posting removed - service deleted
+            # TODO: Implement GEP-specific eBay posting if needed
             return PostingResult(
                 success=False,
                 platform="ebay",
-                error_message="eBay account not connected. Please connect your eBay account first."
+                error_message="eBay posting not yet implemented for GEP"
             )
             
         except Exception as e:

@@ -1,0 +1,145 @@
+{
+  "database_tables": {
+    "found": [
+      "gep_post_likes",
+      "gep_post_comments",
+      "followers",
+      "messages",
+      "gep_event_attendances",
+      "tasks",
+      "funding_score_logs",
+      "pitchdecks",
+      "gep_products",
+      "gep_ai_content",
+      "gep_growth_tasks",
+      "gep_messages",
+      "gep_members",
+      "gep_post_shares",
+      "gep_member_follows",
+      "gep_funding_score_history",
+      "gep_posts",
+      "gep_user_streaks",
+      "persona_clones",
+      "gep_events",
+      "gep_growth_metrics",
+      "posts",
+      "profiles",
+      "comments"
+    ],
+    "missing": []
+  },
+  "models": {
+    "found": [
+      "GEPMember",
+      "Task",
+      "PitchDeck",
+      "GEPMemberFollows",
+      "GEPPost",
+      "PersonaClone",
+      "Message",
+      "GEPProduct",
+      "GEPGrowthMetric",
+      "FundingScoreLog",
+      "GEPUserStreaks",
+      "GEPGrowthTask",
+      "Comment",
+      "Profile",
+      "Post",
+      "Follower",
+      "GEPMessage",
+      "Event",
+      "GEPPostComment",
+      "User",
+      "UserPlatformConnection",
+      "GEPPostLike"
+    ],
+    "missing": []
+  },
+  "routers": {
+    "found": [
+      "score",
+      "demo_test",
+      "followers",
+      "messages",
+      "tasks",
+      "data_test",
+      "public_analysis",
+      "community_feed",
+      "scheduler",
+      "auth",
+      "pitchdeck",
+      "debug_status",
+      "user_presets",
+      "test_apis",
+      "facebook_oauth",
+      "user",
+      "supabase_auth",
+      "user_facebook_posting",
+      "vision_test",
+      "messages_dm",
+      "clone",
+      "analytics",
+      "member_directory",
+      "posts",
+      "growth_coach",
+      "profiles",
+      "comments"
+    ],
+    "missing": []
+  },
+  "services": {
+    "found": [
+      "platform_poster",
+      "rag_service",
+      "data_collection_service",
+      "funding_readiness_score",
+      "user_facebook_poster",
+      "message_monitor",
+      "cache",
+      "supabase_service",
+      "facebook_oauth"
+    ],
+    "missing": []
+  },
+  "frontend_pages": {
+    "found": [
+      "funding-score",
+      "profile",
+      "clone-studio",
+      "messages",
+      "feed",
+      "tasks",
+      "pitchdeck"
+    ],
+    "missing": []
+  },
+  "frontend_hooks": {
+    "found": [
+      "useCreateTask",
+      "useCompleteTask",
+      "usePosts",
+      "useProfile",
+      "useSearchProfiles",
+      "usePersonaClones",
+      "useUpdateProfile",
+      "useSendMessage",
+      "useComments",
+      "useFundingScore",
+      "useFollow",
+      "useCreateComment",
+      "useCreatePost",
+      "usePitchDeck",
+      "useCreatePitchDeck",
+      "useMessages",
+      "useTasks",
+      "useLikePost",
+      "useSupabaseSession",
+      "useCreatePersonaClone",
+      "useFundingScoreLogs"
+    ],
+    "missing": [
+      "useUnfollow"
+    ]
+  },
+  "errors": []
+}

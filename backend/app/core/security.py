@@ -71,8 +71,9 @@ class SecurityConfig:
         return CORSMiddleware(
             allow_origins=[
                 os.getenv("FRONTEND_URL", "http://localhost:3000"),
-                "https://accorria.com",
-                "https://www.accorria.com"
+                "https://globalempowerment.app",
+                "https://www.globalempowerment.app",
+                "https://gep.vercel.app"
             ],
             allow_credentials=True,
             allow_methods=["GET", "POST", "PUT", "DELETE"],
@@ -87,8 +88,8 @@ class SecurityConfig:
             allowed_hosts=[
                 "localhost",
                 "127.0.0.1",
-                "accorria-backend-*.run.app",
-                "*.accorria.com"
+                "gep-backend-*.run.app",
+                "*.globalempowerment.app"
             ]
         )
     

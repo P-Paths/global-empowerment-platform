@@ -11,8 +11,8 @@ export default function GetPaidPage() {
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
           <div className="flex items-center gap-3">
             <img 
-              src="/AccorriaYwLOGO.png" 
-              alt="Accorria" 
+              src="/GEP LOGO.png" 
+              alt="Global Empowerment Platform" 
               className="h-[175px] w-auto"
             />
           </div>
@@ -181,7 +181,7 @@ export default function GetPaidPage() {
       </section>
 
               <footer className="bg-slate-900 py-10 text-center text-sm text-slate-200">
-        © {new Date().getFullYear()} Accorria. All rights reserved.
+        © {new Date().getFullYear()} Global Empowerment Platform. All rights reserved.
       </footer>
     </div>
   );

@@ -101,72 +101,7 @@ export default function Chatbot() {
     }
   };
 
-  const getAccorriaResponse = (input: string): string => {
-    const lowerInput = input.toLowerCase();
-    
-    // Greetings
-    if (lowerInput.includes('hello') || lowerInput.includes('hi') || lowerInput.includes('hey')) {
-      return "Hello! I'm the Accorria AI assistant. I'm here to help you understand how Accorria can transform your car selling experience. What would you like to know about our platform?";
-    }
-    
-    // What is Accorria
-    if (lowerInput.includes('what is accorria') || lowerInput.includes('what does accorria do') || lowerInput.includes('tell me about accorria')) {
-      return "Accorria is an AI-powered platform that transforms car selling from hours to minutes. We use advanced AI to analyze your car photos and automatically generate professional listings, handle negotiations, and facilitate secure transactions with instant payments.";
-    }
-    
-    // How it works
-    if (lowerInput.includes('how does it work') || lowerInput.includes('how it works') || lowerInput.includes('process')) {
-      return "Here's how Accorria works:\n\n1. **Upload Photos** - Take photos of your car\n2. **AI Analysis** - Our AI analyzes your car and market data\n3. **Auto-Listing** - We generate a professional listing automatically\n4. **Smart Negotiations** - AI handles buyer inquiries and negotiations\n5. **Secure Payment** - Get paid instantly when the deal closes\n\nFrom photos to posted in minutes, from listing to closed deal in days!";
-    }
-    
-    // Pricing
-    if (lowerInput.includes('price') || lowerInput.includes('cost') || lowerInput.includes('fee') || lowerInput.includes('how much')) {
-      return "Accorria offers transparent, performance-based pricing. We only succeed when you do! Our fees are competitive and clearly displayed. For specific pricing details, please sign up for early access and we'll notify you when we launch with our final pricing structure.";
-    }
-    
-    // AI Technology
-    if (lowerInput.includes('ai') || lowerInput.includes('artificial intelligence') || lowerInput.includes('technology')) {
-      return "Accorria uses cutting-edge AI technology including:\n\n• **Computer Vision** - Analyzes car photos for condition, features, and value\n• **Natural Language Processing** - Generates compelling listing descriptions\n• **Market Intelligence** - Real-time pricing and demand analysis\n• **Automated Negotiations** - AI handles buyer communications\n• **Blockchain Payments** - Secure, instant settlements\n\nOur AI is trained on millions of car sales to provide accurate valuations and optimal selling strategies.";
-    }
-    
-    // Speed/Time
-    if (lowerInput.includes('fast') || lowerInput.includes('quick') || lowerInput.includes('speed') || lowerInput.includes('time') || lowerInput.includes('minutes')) {
-      return "Accorria is designed for speed:\n\n• **10x Faster** than traditional selling methods\n• **Photos to listing** in minutes, not hours\n• **Listing to sale** in days, not weeks\n• **Instant payments** when deals close\n• **24/7 AI assistance** for buyers and sellers\n\nWhat used to take weeks of back-and-forth now happens in minutes!";
-    }
-    
-    // Safety/Security
-    if (lowerInput.includes('safe') || lowerInput.includes('secure') || lowerInput.includes('scam') || lowerInput.includes('fraud')) {
-      return "Accorria prioritizes safety and security:\n\n• **Blockchain-powered payments** - Funds are locked until deal completion\n• **Identity verification** for all users\n• **Escrow protection** - Money is held securely until delivery\n• **No scams** - AI filters out suspicious buyers\n• **Instant settlements** - No waiting for bank transfers\n\nYour money and your car are protected throughout the entire process.";
-    }
-    
-    // Payment
-    if (lowerInput.includes('payment') || lowerInput.includes('paid') || lowerInput.includes('money') || lowerInput.includes('funds')) {
-      return "Accorria's payment system is revolutionary:\n\n• **Instant payments** when deals close\n• **Blockchain settlements** in 23 hours\n• **No bank delays** or wire transfer fees\n• **Funds locked** until delivery confirmation\n• **Works for cars, homes, and high-value items**\n\nSkip the bank delays. Skip the scams. Get paid instantly!";
-    }
-    
-    // Early Access
-    if (lowerInput.includes('early access') || lowerInput.includes('beta') || lowerInput.includes('sign up') || lowerInput.includes('join')) {
-      return "Get early access to Accorria! We're currently in beta and accepting early users. Sign up now to:\n\n• Be among the first to experience AI-powered car selling\n• Get priority access when we launch\n• Receive exclusive updates and features\n• Help shape the future of car sales\n\nClick 'Get Early Access' to join our beta program!";
-    }
-    
-    // Support/Help
-    if (lowerInput.includes('help') || lowerInput.includes('support') || lowerInput.includes('contact')) {
-      return "I'm here to help! You can:\n\n• Ask me any questions about Accorria\n• Visit our FAQ page for detailed answers\n• Sign up for early access to get priority support\n• Check out our 'How It Works' page for more details\n\nWhat specific question can I answer for you?";
-    }
-    
-    // Features
-    if (lowerInput.includes('feature') || lowerInput.includes('what can') || lowerInput.includes('capabilities')) {
-      return "Accorria's key features include:\n\n• **AI Photo Analysis** - Instant car condition assessment\n• **Auto-Listing Generation** - Professional listings in minutes\n• **Smart Pricing** - Real-time market-based valuations\n• **Automated Negotiations** - AI handles buyer communications\n• **Secure Payments** - Blockchain-powered instant settlements\n• **24/7 Availability** - Never miss a potential buyer\n• **Multi-Platform** - Works for cars, homes, and high-value items";
-    }
-    
-    // Benefits
-    if (lowerInput.includes('benefit') || lowerInput.includes('advantage') || lowerInput.includes('why')) {
-      return "Why choose Accorria?\n\n• **10x Faster** - From hours to minutes\n• **Better Results** - AI-optimized listings and pricing\n• **Safer Deals** - Blockchain security and escrow protection\n• **No Hassle** - AI handles the heavy lifting\n• **Instant Payments** - No waiting for bank transfers\n• **24/7 Support** - AI assistance around the clock\n• **Transparent Pricing** - No hidden fees or surprises";
-    }
-    
-    // Default response
-    return "That's a great question! Accorria is an AI-powered platform that makes selling cars faster, safer, and more profitable. We use advanced AI to analyze photos, generate listings, handle negotiations, and facilitate secure payments.\n\nWould you like to know more about:\n• How the process works\n• Our AI technology\n• Payment and security features\n• Getting early access\n\nJust ask me anything about Accorria!";
-  };
+  // Removed getAccorriaResponse - now using API endpoint for all responses
 
   return (
     <>
@@ -178,7 +113,7 @@ export default function Chatbot() {
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
           </svg>
-          Ask Accorria
+          Ask GEP AI
         </span>
       </button>
 
@@ -199,13 +134,13 @@ export default function Chatbot() {
             <div className="flex items-center justify-between border-b px-4 py-3 bg-gradient-to-r from-amber-50 to-white">
               <div className="flex items-center gap-2">
                 <Image 
-                  src="/LOGOSYMBLOYBLUE.png" 
-                  alt="Accorria" 
+                  src="/GEP LOGO.png" 
+                  alt="Global Empowerment Platform" 
                   width={24}
                   height={24}
                   className="w-6 h-6 rounded-full"
                 />
-                <div className="text-sm font-semibold text-slate-800">Accorria Agent</div>
+                <div className="text-sm font-semibold text-slate-800">GEP AI Assistant</div>
               </div>
               <button 
                 className="text-slate-500 hover:text-slate-800 transition-colors" 
@@ -222,9 +157,9 @@ export default function Chatbot() {
               {msgs.length === 0 && (
                 <div className="text-center text-slate-500 py-8">
                   <div className="text-lg mb-2">🤖</div>
-                  <div className="text-sm font-medium">Hello! I'm the Accorria AI Assistant</div>
+                  <div className="text-sm font-medium">Hello! I'm the GEP AI Assistant</div>
                   <div className="text-xs mt-2 text-slate-400">
-                    Ask me anything about Accorria
+                    Ask me anything about the Global Empowerment Platform
                   </div>
                 </div>
               )}
@@ -233,8 +168,8 @@ export default function Chatbot() {
                 <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"} mb-4`}>
                   {m.role === "assistant" && (
                     <Image 
-                      src="/LOGOSYMBLOYBLUE.png" 
-                      alt="Accorria" 
+                      src="/GEP LOGO.png" 
+                      alt="Global Empowerment Platform" 
                       width={24}
                       height={24}
                       className="w-6 h-6 rounded-full mr-3 mt-1 flex-shrink-0"
@@ -291,8 +226,8 @@ export default function Chatbot() {
               {isLoading && (
                 <div className="flex justify-start mb-4">
                   <Image 
-                    src="/LOGOSYMBLOYBLUE.png" 
-                    alt="Accorria" 
+                    src="/GEP LOGO.png" 
+                    alt="GEP" 
                     width={24}
                     height={24}
                     className="w-6 h-6 rounded-full mr-3 mt-1 flex-shrink-0"
@@ -304,7 +239,7 @@ export default function Chatbot() {
                         <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
                         <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                       </div>
-                      <span className="text-slate-500">Accorria is typing...</span>
+                      <span className="text-slate-500">GEP AI is typing...</span>
                     </div>
                   </div>
                 </div>

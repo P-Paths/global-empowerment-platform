@@ -36,15 +36,27 @@ export default function OnboardingPage() {
 
       // User exists, verify they actually exist in database (not just cached session)
       try {
-        console.log('🔍 Checking if onboarding is complete for user:', user.id);
+        // Check if this is a demo user (demo login)
+        const isDemoUser = user.id === '00000000-0000-0000-0000-000000000123';
+        
+        console.log('🔍 Checking if onboarding is complete for user:', user.id, { isDemoUser });
         const isComplete = await onboardingService.getOnboardingStatus(user.id);
         console.log('📊 Onboarding status:', { userId: user.id, isComplete });
         
-        // If getOnboardingStatus returns false, it could mean:
-        // 1. Profile doesn't exist (user was deleted)
-        // 2. onboarding_complete is false/null
-        // We need to verify the user actually exists
+        // For demo users, skip profile existence check and allow onboarding
+        if (isDemoUser) {
+          if (isComplete) {
+            console.log('✅ Demo user onboarding complete - redirecting to dashboard');
+            router.push('/dashboard');
+            return;
+          } else {
+            console.log('🆕 Demo user - onboarding not complete, allowing to proceed');
+            setCheckingOnboarding(false);
+            return;
+          }
+        }
         
+        // For real users, verify profile exists
         // Check if profile exists by trying to get it
         const { supabase } = await import('@/utils/supabase');
         const { data: profile, error: profileError } = await supabase
@@ -54,11 +66,8 @@ export default function OnboardingPage() {
           .maybeSingle();
         
         if (profileError || !profile) {
-          // Profile doesn't exist - user was deleted or doesn't exist
-          console.log('❌ Profile does not exist - user may have been deleted. Clearing session and redirecting to login');
-          // Clear the invalid session
-          await supabase.auth.signOut();
-          router.push('/login');
+          // Profile doesn't exist - but don't sign out, allow onboarding to create it
+          console.log('⚠️ Profile does not exist yet - allowing onboarding to create it');
           setCheckingOnboarding(false);
           return;
         }
@@ -70,32 +79,23 @@ export default function OnboardingPage() {
           return;
         } else {
           console.log('🆕 Onboarding not complete - user can proceed');
+          setCheckingOnboarding(false);
         }
       } catch (error) {
-        console.error('❌ Error checking onboarding status:', error);
-        // If there's an error checking, verify user exists
-        try {
-          const { supabase } = await import('@/utils/supabase');
-          const { data: profile } = await supabase
-            .from('profiles')
-            .select('id')
-            .eq('id', user.id)
-            .maybeSingle();
-          
-          if (!profile) {
-            console.log('❌ Profile does not exist - clearing session');
-            await supabase.auth.signOut();
-            router.push('/login');
-            setCheckingOnboarding(false);
-            return;
-          }
-        } catch (verifyError) {
-          console.error('Error verifying profile:', verifyError);
+        console.warn('⚠️ Error checking onboarding status:', error);
+        // For demo users, always allow onboarding
+        const isDemoUser = user.id === '00000000-0000-0000-0000-000000000123';
+        if (isDemoUser) {
+          console.log('Demo user - allowing onboarding despite error');
+          setCheckingOnboarding(false);
+          return;
         }
-        // If profile exists, continue with onboarding
-        console.log('⚠️ Error checking status but profile exists - continuing with onboarding');
+        
+        // For real users with errors, still allow onboarding (fail gracefully)
+        // Don't sign out - let onboarding create the profile
+        console.log('⚠️ Error checking onboarding, but allowing user to proceed');
+        setCheckingOnboarding(false);
       }
-      setCheckingOnboarding(false);
     };
 
     checkOnboarding();

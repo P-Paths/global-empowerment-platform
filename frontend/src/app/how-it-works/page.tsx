@@ -14,8 +14,8 @@ export default function HowItWorksPage() {
             <div className="flex items-center">
               <Link href="/" className="flex items-center">
                 <Image 
-                  src="/LogoinBLUEONEword.png" 
-                  alt="Accorria" 
+                  src="/GEP LOGO.png" 
+                  alt="Global Empowerment Platform" 
                   width={120}
                   height={40}
                   className="h-8 w-auto"
@@ -26,12 +26,12 @@ export default function HowItWorksPage() {
             
             <div className="hidden md:flex items-center space-x-8">
               <Link href="/about" className="text-gray-600 hover:text-gray-900 text-sm font-medium">About</Link>
-              <Link href="/how-it-works" className="text-blue-600 hover:text-blue-700 text-sm font-medium">How it works</Link>
-              <Link href="/demo" className="text-gray-600 hover:text-gray-900 text-sm font-medium">Demo</Link>
+              <Link href="/how-it-works" className="text-gep-navy hover:text-gep-gold text-sm font-medium">How it works</Link>
+              <Link href="/community" className="text-gray-600 hover:text-gray-900 text-sm font-medium">Community</Link>
             </div>
             
             <div className="flex items-center space-x-4">
-              <Link href="/beta-signup" className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">
+              <Link href="/register" className="bg-gep-gold text-gep-navy px-4 py-2 rounded-lg text-sm font-medium hover:bg-gep-gold/90 transition-colors">
                 Get started
               </Link>
             </div>
@@ -40,67 +40,67 @@ export default function HowItWorksPage() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-50 to-indigo-100 py-20 lg:py-32">
+      <section className="relative bg-gradient-to-br from-gep-navy to-gep-navy/90 py-20 lg:py-32">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl">
-              Stop wasting time on
+            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
+              Transform from Member to
               <br />
-              <span className="text-blue-600">tire-kickers and lowballers</span>
+              <span className="text-gep-gold">Funded Entrepreneur</span>
             </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-600 max-w-3xl mx-auto">
-              Upload photos, set your price threshold, and let Accorria handle everything. 
-              Only see serious buyers who are ready to buy at your price.
+            <p className="mt-6 text-lg leading-8 text-gray-200 max-w-3xl mx-auto">
+              Build your digital influence, grow your following, and prepare for capital investment—all in one platform. 
+              Join 8,000+ entrepreneurs on their journey to VC-ready.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link 
-                href="/beta-signup" 
-                className="rounded-md bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors"
+                href="/register" 
+                className="rounded-md bg-gep-gold px-6 py-3 text-sm font-semibold text-gep-navy shadow-sm hover:bg-gep-gold/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gep-gold transition-colors"
               >
-                Try it free
+                Join Free
               </Link>
               <Link 
-                href="/demo" 
-                className="text-sm font-semibold leading-6 text-gray-900 hover:text-blue-600 transition-colors"
+                href="/community" 
+                className="text-sm font-semibold leading-6 text-white hover:text-gep-gold transition-colors"
               >
-                Watch demo →
+                Explore Community →
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* What is Accorria */}
+      {/* The Problem We Solve */}
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              The dealership problem we solve
+              The Entrepreneur Challenge We Solve
             </h2>
             <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-              Dealers waste 3-5 hours every day responding to unqualified buyers. 
-              Accorria filters your inbox so you only see serious buyers ready to buy at your price.
+              Entrepreneurs struggle to build digital influence, grow their following, and prepare for funding—all while running their business. 
+              GEP provides the tools, community, and AI guidance to make it happen.
             </p>
           </div>
           
           <div className="bg-red-50 rounded-2xl p-8 mb-16 border-l-4 border-red-500">
             <div className="text-center">
-              <h3 className="text-2xl font-bold text-red-900 mb-4">❌ What dealers deal with now:</h3>
+              <h3 className="text-2xl font-bold text-red-900 mb-4">❌ What entrepreneurs struggle with:</h3>
               <div className="grid md:grid-cols-2 gap-6 text-left">
                 <div>
                   <ul className="space-y-2 text-red-800">
-                    <li>• "Is it still available?" (50+ times per listing)</li>
-                    <li>• "What's your lowest price?" (ignoring asking price)</li>
-                    <li>• "Will you take $7,000?" (on a $10,000 car)</li>
-                    <li>• "How many miles per gallon?" (already in description)</li>
+                    <li>• No time to consistently post on social media</li>
+                    <li>• Don't know what content to create</li>
+                    <li>• Low follower counts and engagement</li>
+                    <li>• Unclear how to prepare for funding</li>
                   </ul>
                 </div>
                 <div>
                   <ul className="space-y-2 text-red-800">
-                    <li>• "Can I see more photos?" (20+ photos already posted)</li>
-                    <li>• "Is it still available?" (asked 3 times by same person)</li>
-                    <li>• "What's the VIN?" (clearly visible in photos)</li>
-                    <li>• Hours spent responding to tire-kickers daily</li>
+                    <li>• No network of fellow entrepreneurs</li>
+                    <li>• Can't track progress toward VC-readiness</li>
+                    <li>• Missing business formation knowledge</li>
+                    <li>• No clear path to investor connections</li>
                   </ul>
                 </div>
               </div>
@@ -109,22 +109,22 @@ export default function HowItWorksPage() {
           
           <div className="bg-green-50 rounded-2xl p-8 mb-16 border-l-4 border-green-500">
             <div className="text-center">
-              <h3 className="text-2xl font-bold text-green-900 mb-4">✅ With Accorria:</h3>
+              <h3 className="text-2xl font-bold text-green-900 mb-4">✅ With GEP:</h3>
               <div className="grid md:grid-cols-2 gap-6 text-left">
                 <div>
                   <ul className="space-y-2 text-green-800">
-                    <li>• "Julie wants to test drive, has pre-approved financing"</li>
-                    <li>• "Samantha offers $9,500 for Friday pickup"</li>
-                    <li>• "Mike is ready to buy at asking price, cash in hand"</li>
-                    <li>• "Sarah scheduled inspection for tomorrow at 2pm"</li>
+                    <li>• AI Growth Coach provides daily personalized tasks</li>
+                    <li>• Auto-generate captions, flyers, and content</li>
+                    <li>• Multi-platform posting to FB, IG, TikTok, YouTube</li>
+                    <li>• Track your Funding Readiness Score (0-100)</li>
                   </ul>
                 </div>
                 <div>
                   <ul className="space-y-2 text-green-800">
-                    <li>• Only serious buyers who meet your price threshold</li>
-                    <li>• No more "is it still available?" messages</li>
-                    <li>• No more lowball offers below your minimum</li>
-                    <li>• Save 3-5 hours per day on unqualified leads</li>
+                    <li>• Connect with 8,000+ member entrepreneur network</li>
+                    <li>• Clear path from Building → Emerging → VC-Ready</li>
+                    <li>• AI-powered business coaching and pitch deck tools</li>
+                    <li>• Get matched with VCs when you're ready</li>
                   </ul>
                 </div>
               </div>
@@ -136,35 +136,35 @@ export default function HowItWorksPage() {
             {/* Step 1 */}
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
-                <div className="inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-800 mb-4">
+                <div className="inline-flex items-center gap-2 rounded-full bg-gep-gold/20 px-4 py-2 text-sm font-semibold text-gep-navy mb-4">
                   Step 1
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-gray-900">Upload Photos & Details</h3>
+                <h3 className="text-2xl font-bold mb-4 text-gray-900">Build Your Digital Presence</h3>
                 <p className="text-lg text-gray-600 mb-6">
-                  Take 5-20 photos of your vehicle from different angles. Add mileage, condition notes (rebuilt title, fixed bumper, alternator, etc.), and any other important details.
+                  Create your profile, upload your first product, and make your first post. Our AI tools help you generate professional content, captions, and flyers automatically.
                 </p>
                 <ul className="space-y-2 text-gray-600">
                   <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                    Upload 5-20 photos (front, back, sides, interior, odometer)
+                    <span className="w-2 h-2 bg-gep-gold rounded-full"></span>
+                    Set up your business profile and bio
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                    Add mileage, condition notes, title status
+                    <span className="w-2 h-2 bg-gep-gold rounded-full"></span>
+                    Upload products with AI-generated descriptions
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                    Include any repairs or modifications
+                    <span className="w-2 h-2 bg-gep-gold rounded-full"></span>
+                    Post to community feed and social platforms
                   </li>
                 </ul>
               </div>
               <div className="bg-gray-50 rounded-2xl p-8">
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">📸</span>
+                  <div className="w-16 h-16 bg-gep-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl">📱</span>
                   </div>
-                  <h4 className="font-semibold text-gray-900 mb-2">Smart Photo Analysis</h4>
-                  <p className="text-sm text-gray-600">AI identifies everything from your photos</p>
+                  <h4 className="font-semibold text-gray-900 mb-2">Multi-Platform Posting</h4>
+                  <p className="text-sm text-gray-600">One post, maximum reach across all platforms</p>
                 </div>
               </div>
             </div>
@@ -172,35 +172,35 @@ export default function HowItWorksPage() {
             {/* Step 2 */}
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="md:order-2">
-                <div className="inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-800 mb-4">
+                <div className="inline-flex items-center gap-2 rounded-full bg-gep-gold/20 px-4 py-2 text-sm font-semibold text-gep-navy mb-4">
                   Step 2
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-gray-900">Set Your Price Threshold</h3>
+                <h3 className="text-2xl font-bold mb-4 text-gray-900">AI Growth Coach Guides You</h3>
                 <p className="text-lg text-gray-600 mb-6">
-                  Set your asking price ($10,000) and minimum acceptable price ($8,000). Accorria coordinates everything else - photo analysis, listing creation, and marketplace posting.
+                  Get daily personalized tasks from your AI Growth Coach. Track your progress, build streaks, and watch your Funding Readiness Score grow from Building (0-49) to Emerging (50-79) to VC-Ready (80-100).
                 </p>
                 <ul className="space-y-2 text-gray-600">
                   <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                    Set asking price and minimum acceptable price
+                    <span className="w-2 h-2 bg-gep-gold rounded-full"></span>
+                    Daily tasks: "Post a reel today", "Engage with 3 members"
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                    Accorria analyzes photos and creates professional listing
+                    <span className="w-2 h-2 bg-gep-gold rounded-full"></span>
+                    Track posting consistency and engagement metrics
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                    Automatically posts to all major marketplaces
+                    <span className="w-2 h-2 bg-gep-gold rounded-full"></span>
+                    Watch your Funding Readiness Score improve
                   </li>
                 </ul>
               </div>
               <div className="bg-gray-50 rounded-2xl p-8 md:order-1">
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-gep-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
                     <span className="text-2xl">🤖</span>
                   </div>
-                  <h4 className="font-semibold text-gray-900 mb-2">AI Writing</h4>
-                  <p className="text-sm text-gray-600">Professional copy in seconds</p>
+                  <h4 className="font-semibold text-gray-900 mb-2">AI-Powered Guidance</h4>
+                  <p className="text-sm text-gray-600">Personalized coaching for your growth journey</p>
                 </div>
               </div>
             </div>
@@ -208,35 +208,35 @@ export default function HowItWorksPage() {
             {/* Step 3 */}
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
-                <div className="inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-800 mb-4">
+                <div className="inline-flex items-center gap-2 rounded-full bg-gep-gold/20 px-4 py-2 text-sm font-semibold text-gep-navy mb-4">
                   Step 3
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-gray-900">Only See Serious Buyers</h3>
+                <h3 className="text-2xl font-bold mb-4 text-gray-900">Get Matched with Funders</h3>
                 <p className="text-lg text-gray-600 mb-6">
-                  Accorria posts to all marketplaces and filters your unified inbox. You only see qualified buyers ready to buy at your price - no more tire-kickers or lowballers.
+                  When you reach VC-Ready status (80-100), get matched with VCs, angel investors, and lenders actively looking for fundable founders. Your Funding Readiness Score and growth metrics speak for themselves.
                 </p>
                 <ul className="space-y-2 text-gray-600">
                   <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                    Unified inbox filters out "is it still available?" messages
+                    <span className="w-2 h-2 bg-gep-gold rounded-full"></span>
+                    Top performers highlighted in VC dashboard
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                    Blocks lowball offers below your minimum price
+                    <span className="w-2 h-2 bg-gep-gold rounded-full"></span>
+                    AI-generated pitch decks and business materials
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                    Only see buyers with financing or serious offers
+                    <span className="w-2 h-2 bg-gep-gold rounded-full"></span>
+                    Direct connections with interested investors
                   </li>
                 </ul>
               </div>
               <div className="bg-gray-50 rounded-2xl p-8">
                 <div className="text-center">
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">🛡️</span>
+                  <div className="w-16 h-16 bg-gep-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl">💰</span>
                   </div>
-                  <h4 className="font-semibold text-gray-900 mb-2">Safe Selling</h4>
-                  <p className="text-sm text-gray-600">Escrow protection for every deal</p>
+                  <h4 className="font-semibold text-gray-900 mb-2">VC Pipeline</h4>
+                  <p className="text-sm text-gray-600">Get discovered by investors when you're ready</p>
                 </div>
               </div>
             </div>
@@ -244,85 +244,15 @@ export default function HowItWorksPage() {
         </div>
       </section>
 
-      {/* Unified Inbox Demo */}
+      {/* Features Section */}
       <section className="py-20 bg-gray-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Your Unified Inbox in Action
+              Everything You Need to Get Funded
             </h2>
             <p className="mt-4 text-lg text-gray-600">
-              See exactly what you'll see vs. what you won't see
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-lg p-6 shadow-sm border-l-4 border-red-500">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">❌ What you WON'T see anymore:</h3>
-              <div className="space-y-3">
-                <div className="bg-red-50 p-3 rounded border-l-2 border-red-300">
-                  <p className="text-sm text-red-800">"Is it still available?"</p>
-                  <p className="text-xs text-red-600">From: John D. • 2 minutes ago</p>
-                </div>
-                <div className="bg-red-50 p-3 rounded border-l-2 border-red-300">
-                  <p className="text-sm text-red-800">"What's your lowest price?"</p>
-                  <p className="text-xs text-red-600">From: Mike S. • 5 minutes ago</p>
-                </div>
-                <div className="bg-red-50 p-3 rounded border-l-2 border-red-300">
-                  <p className="text-sm text-red-800">"Will you take $7,000?" (on $10k car)</p>
-                  <p className="text-xs text-red-600">From: Sarah L. • 8 minutes ago</p>
-                </div>
-                <div className="bg-red-50 p-3 rounded border-l-2 border-red-300">
-                  <p className="text-sm text-red-800">"How many miles per gallon?"</p>
-                  <p className="text-xs text-red-600">From: Tom R. • 12 minutes ago</p>
-                </div>
-                <div className="bg-red-50 p-3 rounded border-l-2 border-red-300">
-                  <p className="text-sm text-red-800">"Can I see more photos?"</p>
-                  <p className="text-xs text-red-600">From: Lisa M. • 15 minutes ago</p>
-                </div>
-              </div>
-              <p className="text-sm text-red-600 mt-4 font-medium">These messages are automatically filtered out</p>
-            </div>
-            
-            <div className="bg-white rounded-lg p-6 shadow-sm border-l-4 border-green-500">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">✅ What you WILL see:</h3>
-              <div className="space-y-3">
-                <div className="bg-green-50 p-3 rounded border-l-2 border-green-300">
-                  <p className="text-sm text-green-800">"Julie wants to test drive, has pre-approved financing"</p>
-                  <p className="text-xs text-green-600">From: Julie K. • 3 minutes ago</p>
-                </div>
-                <div className="bg-green-50 p-3 rounded border-l-2 border-green-300">
-                  <p className="text-sm text-green-800">"Samantha offers $9,500 for Friday pickup"</p>
-                  <p className="text-xs text-green-600">From: Samantha T. • 7 minutes ago</p>
-                </div>
-                <div className="bg-green-50 p-3 rounded border-l-2 border-green-300">
-                  <p className="text-sm text-green-800">"Mike is ready to buy at asking price, cash in hand"</p>
-                  <p className="text-xs text-green-600">From: Mike D. • 10 minutes ago</p>
-                </div>
-                <div className="bg-green-50 p-3 rounded border-l-2 border-green-300">
-                  <p className="text-sm text-green-800">"Sarah scheduled inspection for tomorrow at 2pm"</p>
-                  <p className="text-xs text-green-600">From: Sarah W. • 14 minutes ago</p>
-                </div>
-                <div className="bg-green-50 p-3 rounded border-l-2 border-green-300">
-                  <p className="text-sm text-green-800">"David has bank loan approval, wants to close today"</p>
-                  <p className="text-xs text-green-600">From: David P. • 18 minutes ago</p>
-                </div>
-              </div>
-              <p className="text-sm text-green-600 mt-4 font-medium">Only serious buyers who meet your criteria</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits */}
-      <section className="py-20 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Why Choose Accorria?
-            </h2>
-            <p className="mt-4 text-lg text-gray-600">
-              Stop wasting time on unqualified buyers and focus on serious sales
+              A complete ecosystem for building your business and attracting investors
             </p>
           </div>
           
@@ -330,48 +260,96 @@ export default function HowItWorksPage() {
             <div className="bg-white rounded-lg p-6 shadow-sm">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-md bg-blue-500">
-                    <span className="text-white text-lg">⚡</span>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-md bg-gep-navy">
+                    <span className="text-white text-lg">📊</span>
                   </div>
                 </div>
                 <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900">10x Faster</h3>
+                  <h3 className="text-lg font-medium text-gray-900">Funding Readiness Score</h3>
                 </div>
               </div>
               <p className="mt-4 text-gray-600">
-                From photos to posting in minutes, not hours. No more spending days writing descriptions.
+                Track your progress with a 0-100 score based on posting frequency, engagement, business clarity, and traction.
               </p>
             </div>
             
             <div className="bg-white rounded-lg p-6 shadow-sm">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-md bg-blue-500">
-                    <span className="text-white text-lg">🛡️</span>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-md bg-gep-navy">
+                    <span className="text-white text-lg">🤖</span>
                   </div>
                 </div>
                 <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900">Safer Deals</h3>
+                  <h3 className="text-lg font-medium text-gray-900">AI Business Coach</h3>
                 </div>
               </div>
               <p className="mt-4 text-gray-600">
-                Built-in escrow protection. 1% fee (min $39, cap $149) for secure transactions.
+                Get AI-generated captions, flyers, pitch decks, branding, and social content calendars—all personalized for your business.
               </p>
             </div>
             
             <div className="bg-white rounded-lg p-6 shadow-sm">
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-md bg-blue-500">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-md bg-gep-navy">
+                    <span className="text-white text-lg">👥</span>
+                  </div>
+                </div>
+                <div className="ml-4">
+                  <h3 className="text-lg font-medium text-gray-900">8,000+ Member Network</h3>
+                </div>
+              </div>
+              <p className="mt-4 text-gray-600">
+                Connect with entrepreneurs, collaborate, and build partnerships within our growing community.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-lg p-6 shadow-sm">
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-md bg-gep-navy">
+                    <span className="text-white text-lg">📱</span>
+                  </div>
+                </div>
+                <div className="ml-4">
+                  <h3 className="text-lg font-medium text-gray-900">Multi-Platform Posting</h3>
+                </div>
+              </div>
+              <p className="mt-4 text-gray-600">
+                Post to Facebook, Instagram, TikTok, and YouTube simultaneously. One post, maximum reach.
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-lg p-6 shadow-sm">
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-md bg-gep-navy">
+                    <span className="text-white text-lg">📈</span>
+                  </div>
+                </div>
+                <div className="ml-4">
+                  <h3 className="text-lg font-medium text-gray-900">Growth Analytics</h3>
+                </div>
+              </div>
+              <p className="mt-4 text-gray-600">
+                Track followers, engagement rates, reach, and impressions across all platforms in one dashboard.
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-lg p-6 shadow-sm">
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-md bg-gep-navy">
                     <span className="text-white text-lg">🎯</span>
                   </div>
                 </div>
                 <div className="ml-4">
-                  <h3 className="text-lg font-medium text-gray-900">Better Results</h3>
+                  <h3 className="text-lg font-medium text-gray-900">VC Pipeline</h3>
                 </div>
               </div>
               <p className="mt-4 text-gray-600">
-                AI-optimized listings get more views and higher offers from serious buyers.
+                Top performers get highlighted to VCs, lenders, and angel investors actively looking for fundable founders.
               </p>
             </div>
           </div>
@@ -379,27 +357,27 @@ export default function HowItWorksPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-blue-600">
+      <section className="bg-gep-navy">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Ready to sell your car faster?
+              Ready to Transform Your Business?
             </h2>
-            <p className="mt-4 text-lg text-blue-100">
-              Join hundreds of sellers who are already using Accorria to get better results
+            <p className="mt-4 text-lg text-gray-200">
+              Join 8,000+ entrepreneurs building their digital influence and preparing for funding.
             </p>
             <div className="mt-8 flex items-center justify-center gap-x-6">
               <Link 
-                href="/beta-signup" 
-                className="rounded-md bg-white px-6 py-3 text-sm font-semibold text-blue-600 shadow-sm hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-colors"
+                href="/register" 
+                className="rounded-md bg-gep-gold px-6 py-3 text-sm font-semibold text-gep-navy shadow-sm hover:bg-gep-gold/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gep-gold transition-colors"
               >
-                Get started free
+                Get Started Free
               </Link>
               <Link 
-                href="/demo" 
-                className="text-sm font-semibold leading-6 text-white hover:text-blue-100 transition-colors"
+                href="/community" 
+                className="text-sm font-semibold leading-6 text-white hover:text-gep-gold transition-colors"
               >
-                Watch demo →
+                Explore Community →
               </Link>
             </div>
           </div>
@@ -412,22 +390,22 @@ export default function HowItWorksPage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="col-span-1 md:col-span-2">
               <Image 
-                src="/LogoinBLUEONEword.png" 
-                alt="Accorria" 
+                src="/GEP LOGO.png" 
+                alt="Global Empowerment Platform" 
                 width={120}
                 height={40}
                 className="h-8 w-auto mb-4"
               />
               <p className="text-gray-400 text-sm max-w-md">
-                AI-powered car listings with escrow protection. Sell faster, safer, and for more money.
+                Transform members into funded entrepreneurs through digital influence growth, AI-powered business coaching, and VC-ready preparation.
               </p>
             </div>
             <div>
               <h3 className="text-white font-semibold mb-4">Product</h3>
               <ul className="space-y-2 text-sm">
                 <li><Link href="/how-it-works" className="text-gray-400 hover:text-white">How it works</Link></li>
-                <li><Link href="/demo" className="text-gray-400 hover:text-white">Demo</Link></li>
-                <li><Link href="/pricing" className="text-gray-400 hover:text-white">Pricing</Link></li>
+                <li><Link href="/community" className="text-gray-400 hover:text-white">Community</Link></li>
+                <li><Link href="/about" className="text-gray-400 hover:text-white">About</Link></li>
               </ul>
             </div>
             <div>
@@ -441,7 +419,7 @@ export default function HowItWorksPage() {
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8">
             <p className="text-gray-400 text-sm text-center">
-              © {new Date().getFullYear()} Accorria. All rights reserved.
+              © {new Date().getFullYear()} Global Empowerment Platform. All rights reserved.
             </p>
           </div>
         </div>

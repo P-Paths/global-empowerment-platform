@@ -11,10 +11,12 @@ interface CategorySelectionScreenProps {
   onBack: () => void;
 }
 
+type BusinessCategory = 'social_media' | 'ecommerce' | 'consulting' | 'content_creation' | 'saas' | 'other';
+
 export default function CategorySelectionScreen({ initialData, onNext, onBack }: CategorySelectionScreenProps) {
   const { user } = useAuth();
-  const [selected, setSelected] = useState<OnboardingData['selected_category']>(
-    initialData?.selected_category || undefined
+  const [selected, setSelected] = useState<BusinessCategory | undefined>(
+    (initialData?.selected_category as BusinessCategory) || undefined
   );
   const [showComingSoonModal, setShowComingSoonModal] = useState(false);
   const [comingSoonCategory, setComingSoonCategory] = useState<string>('');
@@ -67,7 +69,7 @@ export default function CategorySelectionScreen({ initialData, onNext, onBack }:
 
   const handleCategoryClick = (category: typeof categories[0]) => {
     if (category.status === 'active') {
-      setSelected(category.value);
+      setSelected(category.value as BusinessCategory);
     } else {
       setComingSoonCategory(category.value);
       setShowComingSoonModal(true);
@@ -84,7 +86,7 @@ export default function CategorySelectionScreen({ initialData, onNext, onBack }:
 
   const handleNext = () => {
     if (selected) {
-      onNext({ selected_category: selected });
+      onNext({ selected_category: selected as OnboardingData['selected_category'] });
     }
   };
 

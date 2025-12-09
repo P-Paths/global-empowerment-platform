@@ -9,8 +9,8 @@ export default function CookiesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <Link href="/" className="flex items-center space-x-2">
-              <img src="/AccorriaYwLOGO.png" alt="Accorria" className="h-8 w-auto" />
-              <span className="text-xl font-bold text-white">Accorria</span>
+              <img src="/GEP LOGO.png" alt="Global Empowerment Platform" className="h-8 w-auto" />
+              <span className="text-xl font-bold text-white">Global Empowerment Platform</span>
             </Link>
             <nav className="hidden md:flex space-x-8">
               <Link href="/" className="text-slate-300 hover:text-white transition-colors">Home</Link>
@@ -28,7 +28,7 @@ export default function CookiesPage() {
           
           <div className="prose prose-lg max-w-none">
             <p className="text-xl text-slate-700 mb-8">
-              Accorria uses cookies to improve your experience.
+              Global Empowerment Platform uses cookies to improve your experience.
             </p>
 
             <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">What Are Cookies?</h2>
@@ -50,7 +50,7 @@ export default function CookiesPage() {
 
             <h2 className="text-2xl font-bold text-slate-900 mt-8 mb-4">Contact</h2>
             <p className="text-slate-700 mb-8">
-              <a href="mailto:cookies@accorria.com" className="text-amber-600 hover:text-amber-700">cookies@accorria.com</a>
+              <a href="mailto:cookies@globalempowerment.app" className="text-amber-600 hover:text-amber-700">cookies@globalempowerment.app</a>
             </p>
 
             <div className="mt-12 pt-8 border-t border-slate-200">
@@ -89,7 +89,7 @@ export default function CookiesPage() {
             </div>
           </div>
           <div className="border-t border-slate-700 pt-8">
-            <p>© {new Date().getFullYear()} Accorria. All rights reserved. | <a href="https://accorria.com" className="hover:text-amber-300">accorria.com</a></p>
+            <p>© {new Date().getFullYear()} Global Empowerment Platform. All rights reserved. | <a href="https://globalempowerment.app" className="hover:text-amber-300">globalempowerment.app</a></p>
           </div>
         </div>
       </footer>
