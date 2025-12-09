@@ -31,11 +31,8 @@ export default function Home() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    if (user && user.email_confirmed_at) {
-      router.push('/dashboard');
-    }
-  }, [user, router]);
+  // Removed automatic redirect - allow authenticated users to browse the landing page
+  // They can access dashboard via the Dashboard button in the header if needed
 
   return (
     <div className="min-h-screen bg-white" suppressHydrationWarning={true}>
