@@ -669,33 +669,33 @@ export function usePersonaClones() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchClones = async () => {
-      try {
-        setLoading(true);
-        const data = await authenticatedFetchJson<PersonaClone[]>(
-          getApiUrl('api/v1/clone')
-        );
-        setClones(data);
+  const fetchClones = useCallback(async () => {
+    try {
+      setLoading(true);
+      const data = await authenticatedFetchJson<PersonaClone[]>(
+        getApiUrl('api/v1/clone')
+      );
+      setClones(data);
+      setError(null);
+    } catch (err: any) {
+      // Silently handle network errors - don't set error state for network failures
+      if (err.isNetworkError || err.message?.includes('Failed to connect') || err.message?.includes('Failed to fetch')) {
+        // Use empty array for network errors - components can use mock data
+        setClones([]);
         setError(null);
-      } catch (err: any) {
-        // Silently handle network errors - don't set error state for network failures
-        if (err.isNetworkError || err.message?.includes('Failed to connect') || err.message?.includes('Failed to fetch')) {
-          // Use empty array for network errors - components can use mock data
-          setClones([]);
-          setError(null);
-        } else {
-          setError(err.message || 'Failed to fetch persona clones');
-        }
-      } finally {
-        setLoading(false);
+      } else {
+        setError(err.message || 'Failed to fetch persona clones');
       }
-    };
-
-    fetchClones();
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
-  return { clones, loading, error };
+  useEffect(() => {
+    fetchClones();
+  }, [fetchClones]);
+
+  return { clones, loading, error, refetch: fetchClones };
 }
 
 export function useCreatePersonaClone() {
