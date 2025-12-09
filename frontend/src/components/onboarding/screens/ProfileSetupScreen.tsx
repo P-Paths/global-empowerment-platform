@@ -16,7 +16,7 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
   const [formData, setFormData] = useState({
     first_name: initialData?.first_name || '',
     last_name: initialData?.last_name || '',
-    email: initialData?.email || user?.email || '',
+    email: user?.email || '',
     phone: initialData?.phone || '',
     zip: initialData?.zip || '',
     city: initialData?.city || '',
