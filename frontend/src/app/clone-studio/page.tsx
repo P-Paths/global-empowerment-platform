@@ -29,18 +29,21 @@ export default function CloneStudioPage() {
   const mockClones: PersonaClone[] = [
     {
       id: '1',
+      user_id: 'mock-user-1',
       title: 'Professional LinkedIn Voice',
       prompt: 'Write in a professional, confident tone suitable for LinkedIn. Use data-driven insights and actionable advice. Keep it concise and engaging.',
       created_at: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
     },
     {
       id: '2',
+      user_id: 'mock-user-1',
       title: 'Casual Instagram Style',
       prompt: 'Friendly, approachable tone perfect for Instagram. Use emojis sparingly, keep it authentic and relatable. Focus on storytelling.',
       created_at: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
     },
     {
       id: '3',
+      user_id: 'mock-user-1',
       title: 'Energetic TikTok Persona',
       prompt: 'High-energy, fun, and engaging. Perfect for short-form video content. Use trending language and keep it entertaining.',
       created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
