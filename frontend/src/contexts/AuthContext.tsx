@@ -336,18 +336,27 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const signOut = async () => {
     try {
-      await supabase.auth.signOut();
+      // Clear state first
       setUser(null);
       setSession(null);
       setIsEmailVerified(false);
       setError(null);
-      // Redirect to homepage after sign out
+      
+      // Sign out from Supabase
+      await supabase.auth.signOut();
+      
+      // Use router for navigation if available, otherwise fallback to window.location
       if (typeof window !== 'undefined') {
-        window.location.href = getHomeUrl();
+        // Force a full page reload to ensure all state is cleared
+        window.location.href = '/';
       }
     } catch (error) {
       setError('Logout failed');
       console.error('Error signing out:', error);
+      // Even if there's an error, try to redirect to clear the session
+      if (typeof window !== 'undefined') {
+        window.location.href = '/';
+      }
     }
   };
 
