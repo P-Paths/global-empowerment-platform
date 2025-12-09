@@ -88,7 +88,7 @@ export default function CompletionScreen({ onComplete }: CompletionScreenProps) 
       onComplete();
       
       // Use window.location to force full page reload and ensure onboarding check passes
-      window.location.href = '/dashboard?action=create';
+      window.location.href = '/feed';
     } catch (error: any) {
       console.error('Error in handleCreateListing:', error);
       alert(`An error occurred: ${error?.message || 'Unknown error'}. You can try refreshing the page.`);
@@ -155,7 +155,7 @@ export default function CompletionScreen({ onComplete }: CompletionScreenProps) 
               <ArrowLeftIcon className="w-6 h-6" />
             </button>
             <div className="flex-1 text-center">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">Welcome to Accorria!</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">Welcome to GEM Platform!</h2>
               <p className="text-sm md:text-base text-gray-600">You're all set</p>
             </div>
             <div className="w-6"></div> {/* Spacer for centering */}
@@ -187,10 +187,10 @@ export default function CompletionScreen({ onComplete }: CompletionScreenProps) 
         {/* Message */}
         <div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Your Accorria profile is ready.
+            Your GEM Platform profile is ready.
           </h1>
           <p className="text-lg text-gray-600">
-            You're all set to start selling!
+            You're all set to start growing your business!
           </p>
         </div>
 
@@ -201,7 +201,7 @@ export default function CompletionScreen({ onComplete }: CompletionScreenProps) 
             disabled={isCompleting}
             className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors shadow-sm active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isCompleting ? 'Completing...' : 'Create First Listing'}
+            {isCompleting ? 'Completing...' : 'Start Growing'}
           </button>
           <button
             onClick={handleGoToDashboard}

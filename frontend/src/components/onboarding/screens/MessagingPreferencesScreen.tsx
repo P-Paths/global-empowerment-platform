@@ -20,20 +20,20 @@ export default function MessagingPreferencesScreen({ initialData, onNext, onBack
       value: 'auto_reply' as const,
       title: 'Auto-Reply',
       icon: '🤖',
-      description: 'Accorria responds automatically to basic questions',
-      shortExplanation: 'Perfect for saving time. Accorria answers repetitive questions like "Still available?" and "How many miles?" instantly. You only get notified for serious buyers or important decisions.',
+      description: 'GEP responds automatically to basic questions',
+      shortExplanation: 'Perfect for saving time. GEP answers repetitive questions instantly. You only get notified for important decisions.',
       example: {
         buyer: 'Is this still available?',
         ai: 'Yes, it\'s still available! Would you like to schedule a viewing?',
-        you: 'You don\'t need to do anything - Accorria handles it automatically'
+        you: 'You don\'t need to do anything - GEP handles it automatically'
       }
     },
     {
       value: 'human_in_loop' as const,
-      title: 'Accorria Drafts → You Approve',
+      title: 'GEP Drafts → You Approve',
       icon: '✍️',
-      description: 'Accorria writes messages, you review before sending',
-      shortExplanation: 'Accorria drafts smart responses using your rules and knowledge, then you review and approve before they send. Perfect for negotiations and complex questions. Human-in-the-loop ensures you stay in control.',
+      description: 'GEP writes messages, you review before sending',
+      shortExplanation: 'GEP drafts smart responses using your rules and knowledge, then you review and approve before they send. Perfect for negotiations and complex questions. Human-in-the-loop ensures you stay in control.',
       example: {
         buyer: 'Would you take $15,000?',
         ai: 'Draft: "I can do $16,500. That\'s my best price."',
@@ -45,7 +45,7 @@ export default function MessagingPreferencesScreen({ initialData, onNext, onBack
       title: 'You Write Everything',
       icon: '✉️',
       description: 'You write all messages yourself',
-      shortExplanation: 'You write every message. Accorria just organizes all your conversations in one inbox.',
+      shortExplanation: 'You write every message. GEP just organizes all your conversations in one inbox.',
       example: {
         buyer: 'Is this still available?',
         ai: 'You write the response yourself',
@@ -111,7 +111,7 @@ export default function MessagingPreferencesScreen({ initialData, onNext, onBack
                       </div>
                     </div>
                     <div className="flex items-start gap-2">
-                      <span className="text-xs font-semibold text-blue-600 w-16 flex-shrink-0">Accorria:</span>
+                      <span className="text-xs font-semibold text-blue-600 w-16 flex-shrink-0">GEP:</span>
                       <div className="flex-1 bg-blue-50 rounded px-2 py-1 text-xs text-gray-700 border border-blue-200">
                         {option.example.ai}
                       </div>

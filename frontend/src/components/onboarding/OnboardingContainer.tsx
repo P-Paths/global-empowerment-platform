@@ -4,11 +4,8 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import WelcomeScreen from './screens/WelcomeScreen';
 import ProfileSetupScreen from './screens/ProfileSetupScreen';
-import SellingExperienceScreen from './screens/SellingExperienceScreen';
+import BusinessExperienceScreen from './screens/BusinessExperienceScreen';
 import CategorySelectionScreen from './screens/CategorySelectionScreen';
-import MarketplaceEcosystemScreen from './screens/MarketplaceEcosystemScreen';
-import MessagingPreferencesScreen from './screens/MessagingPreferencesScreen';
-import EscrowPreviewScreen from './screens/EscrowPreviewScreen';
 import CompletionScreen from './screens/CompletionScreen';
 import { onboardingService, OnboardingData } from '@/services/onboardingService';
 
@@ -32,7 +29,7 @@ export default function OnboardingContainer({ onComplete }: OnboardingContainerP
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const totalScreens = 8;
+  const totalScreens = 5; // Welcome, Profile, Business Experience, Category, Completion
 
   const handleNext = async (data?: Partial<OnboardingData>) => {
     console.log('➡️ Moving to next screen:', {
@@ -137,9 +134,9 @@ export default function OnboardingContainer({ onComplete }: OnboardingContainerP
               onBack={handleBack}
             />
           </div>
-          {/* Screen 3: Selling Experience */}
+          {/* Screen 3: Business Experience */}
           <div className="w-screen flex-shrink-0 h-full overflow-y-auto">
-            <SellingExperienceScreen
+            <BusinessExperienceScreen
               initialData={onboardingData}
               onNext={(data) => handleNext(data)}
               onBack={handleBack}
@@ -153,30 +150,7 @@ export default function OnboardingContainer({ onComplete }: OnboardingContainerP
               onBack={handleBack}
             />
           </div>
-          {/* Screen 5: Marketplace Ecosystem */}
-          <div className="w-screen flex-shrink-0 h-full overflow-y-auto">
-            <MarketplaceEcosystemScreen
-              category={onboardingData.selected_category}
-              onNext={() => handleNext()}
-              onBack={handleBack}
-            />
-          </div>
-          {/* Screen 6: Messaging Preferences */}
-          <div className="w-screen flex-shrink-0 h-full overflow-y-auto">
-            <MessagingPreferencesScreen
-              initialData={onboardingData}
-              onNext={(data) => handleNext(data)}
-              onBack={handleBack}
-            />
-          </div>
-          {/* Screen 7: Escrow Preview */}
-          <div className="w-screen flex-shrink-0 h-full overflow-y-auto">
-            <EscrowPreviewScreen
-              onNext={(data) => handleNext(data)}
-              onBack={handleBack}
-            />
-          </div>
-          {/* Screen 8: Completion */}
+          {/* Screen 5: Completion */}
           <div className="w-screen flex-shrink-0 h-full overflow-y-auto">
             <CompletionScreen onComplete={onComplete} />
           </div>
@@ -193,7 +167,7 @@ export default function OnboardingContainer({ onComplete }: OnboardingContainerP
             />
           )}
           {currentScreen === 2 && (
-            <SellingExperienceScreen
+            <BusinessExperienceScreen
               initialData={onboardingData}
               onNext={(data) => handleNext(data)}
               onBack={handleBack}
@@ -206,27 +180,7 @@ export default function OnboardingContainer({ onComplete }: OnboardingContainerP
               onBack={handleBack}
             />
           )}
-          {currentScreen === 4 && (
-            <MarketplaceEcosystemScreen
-              category={onboardingData.selected_category}
-              onNext={() => handleNext()}
-              onBack={handleBack}
-            />
-          )}
-          {currentScreen === 5 && (
-            <MessagingPreferencesScreen
-              initialData={onboardingData}
-              onNext={(data) => handleNext(data)}
-              onBack={handleBack}
-            />
-          )}
-          {currentScreen === 6 && (
-            <EscrowPreviewScreen
-              onNext={(data) => handleNext(data)}
-              onBack={handleBack}
-            />
-          )}
-          {currentScreen === 7 && <CompletionScreen onComplete={onComplete} />}
+          {currentScreen === 4 && <CompletionScreen onComplete={onComplete} />}
         </div>
       )}
 

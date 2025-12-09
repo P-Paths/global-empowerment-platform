@@ -31,12 +31,12 @@ export default function WelcomeScreen({ onNext }: WelcomeScreenProps) {
 
         {/* Header */}
         <h1 className="text-4xl font-bold text-gray-900">
-          Welcome to Accorria
+          Welcome to Global Empowerment Platform
         </h1>
 
         {/* Subheader */}
         <p className="text-lg text-gray-600">
-          Your trust layer for online marketplaces.
+          Grow your digital influence, build your business, and prepare for funding.
         </p>
 
         {/* CTA Button */}

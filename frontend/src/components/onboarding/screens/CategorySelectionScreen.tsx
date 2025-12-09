@@ -22,40 +22,46 @@ export default function CategorySelectionScreen({ initialData, onNext, onBack }:
 
   const categories = [
     {
-      value: 'automotive' as const,
-      title: 'Automotive',
-      icon: '🚗',
-      status: 'active' as const
+      value: 'social_media' as const,
+      title: 'Social Media',
+      icon: '📱',
+      status: 'active' as const,
+      description: 'Facebook, Instagram, TikTok, YouTube'
     },
     {
-      value: 'real_estate' as const,
-      title: 'Real Estate',
-      icon: '🏠',
-      status: 'coming_soon' as const
+      value: 'ecommerce' as const,
+      title: 'E-Commerce',
+      icon: '🛒',
+      status: 'active' as const,
+      description: 'Online store, products, services'
     },
     {
-      value: 'luxury_items' as const,
-      title: 'Luxury Items',
-      icon: '💎',
-      status: 'coming_soon' as const
+      value: 'consulting' as const,
+      title: 'Consulting',
+      icon: '💼',
+      status: 'active' as const,
+      description: 'Business consulting, coaching'
     },
     {
-      value: 'small_businesses' as const,
-      title: 'Small Businesses',
-      icon: '🏢',
-      status: 'coming_soon' as const
+      value: 'content_creation' as const,
+      title: 'Content Creation',
+      icon: '🎬',
+      status: 'active' as const,
+      description: 'Video, blog, podcast, courses'
     },
     {
-      value: 'high_value_goods' as const,
-      title: 'High-Value Goods',
-      icon: '💰',
-      status: 'coming_soon' as const
+      value: 'saas' as const,
+      title: 'SaaS / Tech',
+      icon: '💻',
+      status: 'active' as const,
+      description: 'Software, apps, tech products'
     },
     {
-      value: 'art_collectibles' as const,
-      title: 'Art & Collectibles',
-      icon: '🎨',
-      status: 'coming_soon' as const
+      value: 'other' as const,
+      title: 'Other',
+      icon: '🚀',
+      status: 'active' as const,
+      description: 'Different business type'
     }
   ];
 
@@ -96,8 +102,8 @@ export default function CategorySelectionScreen({ initialData, onNext, onBack }:
                 <ArrowLeftIcon className="w-6 h-6" />
               </button>
               <div className="flex-1 text-center">
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">What Are You Selling?</h2>
-                <p className="text-sm md:text-base text-gray-600">Select your primary category</p>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">What's Your Business Type?</h2>
+                <p className="text-sm md:text-base text-gray-600">Select the category that best describes your business</p>
               </div>
               <div className="w-6"></div> {/* Spacer for centering */}
             </div>
@@ -123,6 +129,9 @@ export default function CategorySelectionScreen({ initialData, onNext, onBack }:
                 <h3 className="text-lg font-semibold text-gray-900 mb-1">
                   {category.title}
                 </h3>
+                {category.description && (
+                  <p className="text-xs text-gray-600 mt-1">{category.description}</p>
+                )}
                 {category.status === 'coming_soon' && (
                   <p className="text-xs text-gray-500">Coming Soon</p>
                 )}

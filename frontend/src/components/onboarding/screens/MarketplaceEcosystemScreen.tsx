@@ -59,7 +59,8 @@ export default function MarketplaceEcosystemScreen({ category, onNext, onBack }:
     );
   }
 
-  const isComingSoon = category !== 'automotive';
+  // For GEP, all social platforms are available
+  const isComingSoon = false;
 
   const liveIntegrations = integrations.filter(i => i.status === 'live');
   const comingSoonIntegrations = integrations.filter(i => i.status === 'coming_soon');
@@ -77,8 +78,8 @@ export default function MarketplaceEcosystemScreen({ category, onNext, onBack }:
               <ArrowLeftIcon className="w-6 h-6" />
             </button>
             <div className="flex-1 text-center">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">Marketplace Ecosystem</h2>
-              <p className="text-sm md:text-base text-gray-600">Connect to platforms where you'll sell</p>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">Social Platforms</h2>
+              <p className="text-sm md:text-base text-gray-600">Which platforms do you want to grow on?</p>
             </div>
             <div className="w-6"></div> {/* Spacer for centering */}
           </div>
@@ -99,21 +100,21 @@ export default function MarketplaceEcosystemScreen({ category, onNext, onBack }:
                 <div className="bg-amber-50 border-2 border-amber-200 rounded-xl p-4 mb-6">
                   <div className="flex items-start gap-3">
                     <div className="text-2xl">⚠️</div>
-                    <div>
-                      <h4 className="font-semibold text-amber-900 mb-1">This category is coming soon</h4>
-                      <p className="text-sm text-amber-800">
-                        The marketplaces below are not yet available for {category.replace('_', ' ')}. 
-                        You can still see what's planned and get notified when they launch.
-                      </p>
-                    </div>
+              <div>
+                <h4 className="font-semibold text-amber-900 mb-1">Connect Your Social Accounts</h4>
+                <p className="text-sm text-amber-800">
+                  Connect your social media accounts to start growing your digital influence. 
+                  You can connect them now or later in Settings.
+                </p>
+              </div>
                   </div>
                 </div>
               )}
 
-              {/* Live Marketplaces */}
+              {/* Social Platforms */}
               {liveIntegrations.length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Available Now</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Connect Your Accounts</h3>
                   <div className="grid grid-cols-2 gap-3">
                     {liveIntegrations.map((integration) => (
                       <div
@@ -158,8 +159,8 @@ export default function MarketplaceEcosystemScreen({ category, onNext, onBack }:
               {!isComingSoon && (
                 <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mt-6">
                   <p className="text-sm text-blue-900">
-                    <strong>Note:</strong> You can connect your marketplace accounts later in Settings → Connections. 
-                    Marketplace connections are required before posting your first listing.
+                    <strong>Note:</strong> You can connect your social media accounts later in Settings → Connections. 
+                    Connecting accounts helps GEP track your growth and provide personalized coaching.
                   </p>
                 </div>
               )}
