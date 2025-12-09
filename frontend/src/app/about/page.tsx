@@ -23,13 +23,13 @@ export default function AboutPage() {
             </div>
             
             <div className="hidden md:flex items-center space-x-8">
-              <Link href="/about" className="text-blue-600 hover:text-blue-700 text-sm font-medium">About</Link>
+              <Link href="/about" className="text-gep-navy hover:text-gep-gold text-sm font-medium">About</Link>
               <Link href="/how-it-works" className="text-gray-600 hover:text-gray-900 text-sm font-medium">How it works</Link>
-              <Link href="/demo" className="text-gray-600 hover:text-gray-900 text-sm font-medium">Demo</Link>
+              <Link href="/community" className="text-gray-600 hover:text-gray-900 text-sm font-medium">Community</Link>
             </div>
             
             <div className="flex items-center space-x-4">
-              <Link href="/beta-signup" className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">
+              <Link href="/register" className="bg-gep-gold text-gep-navy px-4 py-2 rounded-lg text-sm font-medium hover:bg-gep-gold/90 transition-colors">
                 Get started
               </Link>
             </div>
