@@ -120,10 +120,10 @@ export default function Sidebar({ isOpen, onToggle, className = '' }: SidebarPro
 
   return (
     <>
-      {/* Mobile backdrop */}
+      {/* Mobile backdrop - lighter overlay */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-gray-600 bg-opacity-75 z-40 lg:hidden"
+          className="fixed inset-0 bg-black/20 z-40 lg:hidden transition-opacity duration-300"
           onClick={onToggle}
         />
       )}
