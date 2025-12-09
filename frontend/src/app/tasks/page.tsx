@@ -9,6 +9,7 @@ import Header from '@/components/Header';
 const mockTasks: Task[] = [
   {
     id: '1',
+    user_id: 'mock-user-1',
     title: 'Post a business update on Instagram',
     description: 'Share your progress and engage with your audience. Post should include a clear call-to-action.',
     completed: false,
@@ -17,6 +18,7 @@ const mockTasks: Task[] = [
   },
   {
     id: '2',
+    user_id: 'mock-user-1',
     title: 'Create a LinkedIn article about your industry insights',
     description: 'Write a 500-word article sharing your expertise. This will boost your brand clarity score.',
     completed: false,
@@ -25,6 +27,7 @@ const mockTasks: Task[] = [
   },
   {
     id: '3',
+    user_id: 'mock-user-1',
     title: 'Respond to 5 comments on your recent posts',
     description: 'Engagement is key to building community. Take time to respond thoughtfully.',
     completed: true,
@@ -33,6 +36,7 @@ const mockTasks: Task[] = [
   },
   {
     id: '4',
+    user_id: 'mock-user-1',
     title: 'Add pricing information to your product catalog',
     description: 'Complete your product listings with pricing to improve revenue signals.',
     completed: false,
