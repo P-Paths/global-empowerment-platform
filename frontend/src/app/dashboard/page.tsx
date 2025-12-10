@@ -58,10 +58,10 @@ export default function Dashboard() {
 
   // Mock network pulse stats
   const networkStats = [
-    { label: 'Active Founders Today', value: '1,283', icon: Users, bgColor: 'bg-blue-50', hoverBg: 'hover:bg-blue-100', iconColor: 'text-blue-600' },
-    { label: 'Posts in Last 24h', value: '3,917', icon: FileText, bgColor: 'bg-green-50', hoverBg: 'hover:bg-green-100', iconColor: 'text-green-600' },
-    { label: 'Tasks Completed', value: '8,647', icon: CheckCircle2, bgColor: 'bg-purple-50', hoverBg: 'hover:bg-purple-100', iconColor: 'text-purple-600' },
-    { label: 'VC-Ready Founders', value: '142', icon: Target, bgColor: 'bg-amber-50', hoverBg: 'hover:bg-amber-100', iconColor: 'text-amber-600' },
+    { label: 'Active Founders Today', value: '47', icon: Users, bgColor: 'bg-blue-50', hoverBg: 'hover:bg-blue-100', iconColor: 'text-blue-600' },
+    { label: 'Posts in Last 24h', value: '23', icon: FileText, bgColor: 'bg-green-50', hoverBg: 'hover:bg-green-100', iconColor: 'text-green-600' },
+    { label: 'Tasks Completed', value: '127', icon: CheckCircle2, bgColor: 'bg-purple-50', hoverBg: 'hover:bg-purple-100', iconColor: 'text-purple-600' },
+    { label: 'VC-Ready Founders', value: '8', icon: Target, bgColor: 'bg-amber-50', hoverBg: 'hover:bg-amber-100', iconColor: 'text-amber-600' },
   ];
 
   // Check onboarding status
@@ -259,14 +259,14 @@ export default function Dashboard() {
       <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex flex-col">
         <Header />
         <main className="flex-1 overflow-y-auto">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-24">
-          {/* GEM Network Pulse */}
-          <section className="mb-8">
+          <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8 pb-20 sm:pb-24">
+          {/* GEM Network Pulse - Hidden on mobile, shown after Command Center */}
+          <section className="mb-8 hidden md:block">
             <div className="flex items-center gap-2 mb-4">
               <Sparkles className="w-5 h-5 text-blue-600 dark:text-blue-400" />
               <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-300">GEM Network Pulse</h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
               {networkStats.map((stat, index) => {
                 const Icon = stat.icon;
                 return (
@@ -275,30 +275,57 @@ export default function Dashboard() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-all duration-300 group"
+                    className="bg-white dark:bg-gray-800 rounded-xl p-4 sm:p-5 shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-all duration-300 group"
                   >
                     <div className="flex items-center justify-between mb-2">
-                      <div className={`p-2 rounded-lg ${stat.bgColor} dark:bg-gray-700 ${stat.hoverBg} dark:hover:bg-gray-600 transition-colors`}>
-                        <Icon className={`w-5 h-5 ${stat.iconColor} dark:text-gray-300`} />
+                      <div className={`p-1.5 sm:p-2 rounded-lg ${stat.bgColor} dark:bg-gray-700 ${stat.hoverBg} dark:hover:bg-gray-600 transition-colors`}>
+                        <Icon className={`w-4 h-4 sm:w-5 sm:h-5 ${stat.iconColor} dark:text-gray-300`} />
                       </div>
-                      <TrendingUp className="w-4 h-4 text-green-500" />
+                      <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-green-500" />
                     </div>
-                    <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">{stat.value}</div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">{stat.label}</div>
+                    <div className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-1">{stat.value}</div>
+                    <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 leading-tight">{stat.label}</div>
                   </motion.div>
                 );
               })}
             </div>
           </section>
 
+          {/* GEM Network Pulse - Mobile: Show after Command Center */}
+          <section className="mb-6 md:hidden">
+            <div className="flex items-center gap-2 mb-3">
+              <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <h2 className="text-base font-semibold text-gray-700 dark:text-gray-300">GEM Network Pulse</h2>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              {networkStats.map((stat, index) => {
+                const Icon = stat.icon;
+                return (
+                  <div
+                    key={stat.label}
+                    className="bg-white dark:bg-gray-800 rounded-lg p-3 shadow-sm border border-gray-100 dark:border-gray-700"
+                  >
+                    <div className="flex items-center justify-between mb-1.5">
+                      <div className={`p-1.5 rounded-lg ${stat.bgColor} dark:bg-gray-700`}>
+                        <Icon className={`w-3.5 h-3.5 ${stat.iconColor} dark:text-gray-300`} />
+                      </div>
+                    </div>
+                    <div className="text-lg font-bold text-gray-900 dark:text-white mb-0.5">{stat.value}</div>
+                    <div className="text-[10px] leading-tight text-gray-500 dark:text-gray-400">{stat.label}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+
           {/* Main Content - 2 Column Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
             {/* Left Column - Founder Command Center */}
-            <div className="lg:col-span-2 space-y-6">
+            <div className="lg:col-span-2 space-y-4 sm:space-y-6">
               <div>
-                <div className="flex items-center gap-2 mb-4">
-                  <Target className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                  <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-300">Your Founder Command Center</h2>
+                <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                  <Target className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 dark:text-blue-400" />
+                  <h2 className="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-300">Your Founder Command Center</h2>
                 </div>
 
                 {/* Funding Readiness Score */}
@@ -455,10 +482,10 @@ export default function Dashboard() {
             </div>
 
             {/* Right Column - Community Activity */}
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <Users className="w-5 h-5 text-green-600 dark:text-green-400" />
-                <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-300">Community Activity</h2>
+            <div className="mt-6 lg:mt-0">
+              <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                <Users className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 dark:text-green-400" />
+                <h2 className="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-300">Community Activity</h2>
               </div>
               <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
                 {loadingData ? (
@@ -520,8 +547,8 @@ export default function Dashboard() {
 
           {/* Action Cards */}
           <section>
-            <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4">Quick Actions</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <h2 className="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-300 mb-3 sm:mb-4">Quick Actions</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                   <motion.div
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}

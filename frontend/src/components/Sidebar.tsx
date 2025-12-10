@@ -167,10 +167,16 @@ export default function Sidebar({ isOpen, onToggle, className = '' }: SidebarPro
                     <li key={item.href}>
                       <Link
                         href={item.href}
-                        className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors group ${
+                        onClick={() => {
+                          // Close sidebar on mobile when clicking a link
+                          if (window.innerWidth < 1024) {
+                            onToggle();
+                          }
+                        }}
+                        className={`flex items-center gap-3 px-3 py-2.5 sm:py-2 rounded-lg transition-colors group touch-manipulation ${
                           active
                             ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 font-medium'
-                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50'
+                            : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 active:bg-gray-100 dark:active:bg-gray-700'
                         }`}
                       >
                         <Icon className={`w-5 h-5 flex-shrink-0 ${active ? 'text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-400 group-hover:text-gray-700 dark:group-hover:text-gray-300'}`} />
@@ -251,7 +257,13 @@ export default function Sidebar({ isOpen, onToggle, className = '' }: SidebarPro
             {/* Settings Link */}
             <Link
               href="/settings"
-              className="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+              onClick={() => {
+                // Close sidebar on mobile when clicking a link
+                if (window.innerWidth < 1024) {
+                  onToggle();
+                }
+              }}
+              className="flex items-center gap-3 px-3 py-2.5 sm:py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 active:bg-gray-100 dark:active:bg-gray-700 transition-colors touch-manipulation"
             >
               <Settings className="w-5 h-5" />
               <span className="text-sm font-medium">Settings</span>

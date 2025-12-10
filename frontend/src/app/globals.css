@@ -78,6 +78,20 @@ html, body {
   max-width: 100vw;
 }
 
+/* Better touch targets for mobile */
+@media (max-width: 768px) {
+  a, button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improve tap targets for sidebar links */
+  nav a {
+    display: flex;
+    align-items: center;
+  }
+}
+
 /* Ensure all containers respect viewport width */
 * {
   box-sizing: border-box;

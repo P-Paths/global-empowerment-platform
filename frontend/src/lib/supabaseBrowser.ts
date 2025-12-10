@@ -5,11 +5,35 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
  * This is a function that returns a new client instance
  */
 export function supabaseBrowser(): SupabaseClient {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+  // Trim whitespace and validate environment variables
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim();
 
-  if (!supabaseUrl || !supabaseAnonKey) {
-    throw new Error('Supabase URL and anon key must be provided');
+  const hasValidUrl = supabaseUrl && supabaseUrl.length > 0;
+  const hasValidKey = supabaseAnonKey && supabaseAnonKey.length > 0;
+
+  if (!hasValidUrl || !hasValidKey) {
+    console.error('Missing or invalid Supabase environment variables:', {
+      hasUrl: hasValidUrl,
+      hasKey: hasValidKey,
+      urlLength: supabaseUrl?.length || 0,
+      keyLength: supabaseAnonKey?.length || 0,
+    });
+    // Use fallback values to prevent "split" errors during module import
+    // The actual error will be thrown when trying to use the client
+    return createClient(
+      'https://placeholder.supabase.co',
+      'placeholder-key',
+      {
+        auth: {
+          autoRefreshToken: true,
+          persistSession: true,
+          detectSessionInUrl: true,
+          flowType: 'pkce',
+          storage: typeof window !== 'undefined' ? window.localStorage : undefined,
+        },
+      }
+    );
   }
 
   return createClient(supabaseUrl, supabaseAnonKey, {

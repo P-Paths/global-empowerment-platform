@@ -45,8 +45,13 @@ export default function LoginPage() {
           } else {
             router.push('/dashboard');
           }
-        } catch (error) {
-          console.error('Login: Error checking onboarding, redirecting to onboarding:', error);
+        } catch (error: any) {
+          console.error('Login: Error checking onboarding, redirecting to onboarding:', {
+            error,
+            message: error?.message,
+            stack: error?.stack,
+          });
+          // Redirect to onboarding as fallback - user can complete onboarding or proceed
           router.push('/onboarding');
         }
       }
