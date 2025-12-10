@@ -14,7 +14,7 @@ export default function Header({ currentMode = 'solo', onModeChange }: HeaderPro
   const { toggle: toggleSidebar, isOpen } = useSidebar();
   return (
     <header className="sticky top-0 relative z-[80] bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-      <div className={`flex items-center h-16 ${isOpen ? 'lg:pl-4' : 'px-3 sm:px-4'}`}>
+      <div className={`flex items-center h-16 transition-all duration-300 ${isOpen ? 'lg:pl-4' : 'px-3 sm:px-4 lg:pl-4'}`}>
         <button
           onClick={toggleSidebar}
           className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"

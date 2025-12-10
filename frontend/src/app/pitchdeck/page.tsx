@@ -7,6 +7,7 @@ import { FileText, Sparkles, Download } from 'lucide-react';
 export default function PitchDeckPage() {
   const { generatePitchDeck, loading: generating } = useCreatePitchDeck();
   const [deck, setDeck] = useState<PitchDeck | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [deckData, setDeckData] = useState({
     companyName: '',
     tagline: '',
@@ -21,10 +22,24 @@ export default function PitchDeckPage() {
 
   const handleGenerate = async () => {
     try {
+      setError(null);
       const generated = await generatePitchDeck(deckData);
       setDeck(generated);
-    } catch (err) {
-      console.error('Failed to generate pitch deck:', err);
+    } catch (err: any) {
+      const errorMessage = err?.message || 'Failed to generate pitch deck';
+      const isNetworkError = err?.isNetworkError || errorMessage.includes('Failed to connect');
+      const isSilent = err?.isSilent;
+      
+      if (isNetworkError) {
+        setError('Unable to connect to the server. Please make sure the backend is running or try again later.');
+      } else {
+        setError(errorMessage);
+      }
+      
+      // Only log non-silent errors to avoid console clutter
+      if (!isSilent) {
+        console.error('Failed to generate pitch deck:', err);
+      }
     }
   };
 
@@ -157,6 +172,11 @@ export default function PitchDeckPage() {
                 <Sparkles className="w-5 h-5" />
                 {generating ? 'Generating...' : 'Generate Pitch Deck'}
               </button>
+              {error && (
+                <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                  <p className="text-sm text-red-800 dark:text-red-200">{error}</p>
+                </div>
+              )}
             </div>
           </div>
 

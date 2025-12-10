@@ -166,25 +166,74 @@ export default function CommunityFeedPage() {
         headers['Authorization'] = `Bearer ${session.access_token}`;
       }
       
+      // Optimistic UI update - update local state immediately
+      setPosts(prevPosts => 
+        prevPosts.map(post => 
+          post.id === postId 
+            ? { ...post, likes_count: post.likes_count + 1 }
+            : post
+        )
+      );
+      
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+      
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/v1/community/posts/${postId}/like`,
         {
           method: 'POST',
           headers,
+          signal: controller.signal,
         }
       );
+      
+      clearTimeout(timeoutId);
+      
       if (response.ok) {
-        fetchFeed(); // Refresh feed
+        // Refresh feed to get accurate data from server
+        fetchFeed();
+      } else {
+        // Revert optimistic update on error
+        setPosts(prevPosts => 
+          prevPosts.map(post => 
+            post.id === postId 
+              ? { ...post, likes_count: Math.max(0, post.likes_count - 1) }
+              : post
+          )
+        );
       }
-    } catch (error) {
+    } catch (error: any) {
+      // Silently handle network errors (backend might not be running)
+      if (error.name === 'AbortError' || error.message?.includes('Failed to fetch')) {
+        // Revert optimistic update on network error
+        setPosts(prevPosts => 
+          prevPosts.map(post => 
+            post.id === postId 
+              ? { ...post, likes_count: Math.max(0, post.likes_count - 1) }
+              : post
+          )
+        );
+        // Don't log network errors - they're expected when backend is down
+        return;
+      }
+      // Only log non-network errors
       console.error('Error liking post:', error);
+      // Revert optimistic update
+      setPosts(prevPosts => 
+        prevPosts.map(post => 
+          post.id === postId 
+            ? { ...post, likes_count: Math.max(0, post.likes_count - 1) }
+            : post
+        )
+      );
     }
   };
 
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-        {/* Landing Page Header */}
+        {/* Landing Page Header - only show if user is not authenticated */}
+        {!user && (
         <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
           <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
@@ -226,6 +275,7 @@ export default function CommunityFeedPage() {
             </div>
           </nav>
         </header>
+        )}
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
@@ -240,7 +290,8 @@ export default function CommunityFeedPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex flex-col">
-      {/* Landing Page Header - matches other landing pages */}
+      {/* Landing Page Header - only show if user is not authenticated */}
+      {!user && (
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -282,6 +333,7 @@ export default function CommunityFeedPage() {
           </div>
         </nav>
       </header>
+      )}
       <div className="flex-1 overflow-y-auto">
           <div className="max-w-2xl mx-auto py-8 px-4 pb-24">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Community Feed</h1>

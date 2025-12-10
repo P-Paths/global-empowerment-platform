@@ -555,7 +555,7 @@ export default function Dashboard() {
                 whileTap={{ scale: 0.98 }}
               >
                 <Link
-                  href="/community"
+                  href="/feed"
                   className="block bg-gradient-to-br from-green-500 to-green-600 text-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all group"
                 >
                   <Users className="w-8 h-8 mb-3 group-hover:scale-110 transition-transform" />

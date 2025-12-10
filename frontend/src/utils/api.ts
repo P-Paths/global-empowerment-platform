@@ -60,7 +60,8 @@ export async function authenticatedFetch(
                                  url.includes('/api/v1/clone') ||
                                  url.includes('/api/v1/tasks') ||
                                  url.includes('/api/v1/funding-score') ||
-                                 url.includes('/api/v1/community/feed');
+                                 url.includes('/api/v1/community/feed') ||
+                                 url.includes('/api/v1/pitchdeck');
         
         const error = new Error(`Failed to connect to ${url}. Check your network connection.`);
         // Mark as network error so components can handle gracefully

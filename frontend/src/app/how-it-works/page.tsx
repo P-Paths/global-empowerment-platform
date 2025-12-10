@@ -27,7 +27,6 @@ export default function HowItWorksPage() {
             <div className="hidden md:flex items-center space-x-8">
               <Link href="/about" className="text-gray-600 hover:text-gray-900 text-sm font-medium">About</Link>
               <Link href="/how-it-works" className="text-gep-navy hover:text-gep-gold text-sm font-medium">How it works</Link>
-              <Link href="/community" className="text-gray-600 hover:text-gray-900 text-sm font-medium">Community</Link>
             </div>
             
             <div className="flex items-center space-x-4">
@@ -58,12 +57,6 @@ export default function HowItWorksPage() {
                 className="rounded-md bg-gep-gold px-6 py-3 text-sm font-semibold text-gep-navy shadow-sm hover:bg-gep-gold/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gep-gold transition-colors"
               >
                 Join Free
-              </Link>
-              <Link 
-                href="/community" 
-                className="text-sm font-semibold leading-6 text-white hover:text-gep-gold transition-colors"
-              >
-                Explore Community →
               </Link>
             </div>
           </div>
@@ -372,12 +365,6 @@ export default function HowItWorksPage() {
                 className="rounded-md bg-gep-gold px-6 py-3 text-sm font-semibold text-gep-navy shadow-sm hover:bg-gep-gold/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gep-gold transition-colors"
               >
                 Get Started Free
-              </Link>
-              <Link 
-                href="/community" 
-                className="text-sm font-semibold leading-6 text-white hover:text-gep-gold transition-colors"
-              >
-                Explore Community →
               </Link>
             </div>
           </div>

@@ -36,7 +36,7 @@ export default function SidebarWrapper({ children }: SidebarWrapperProps) {
     '/qa',
     '/beta-signup',
     '/get-paid',
-    '/community', // Community page should be public, accessible from landing page
+    // Removed '/community' - now uses authenticated layout when user is logged in
   ];
   
   const hideSidebar = 
@@ -50,10 +50,10 @@ export default function SidebarWrapper({ children }: SidebarWrapperProps) {
 
   return (
     <div className="min-h-screen flex bg-gray-50 dark:bg-gray-900">
-      {/* Sidebar - fixed on mobile, relative on desktop */}
+      {/* Sidebar - toggleable on all screen sizes */}
       <Sidebar isOpen={isOpen} onToggle={toggle} />
-      {/* Content area - shifts on desktop when sidebar is open */}
-      <div className="flex-1 flex flex-col min-w-0">
+      {/* Content area - shifts when sidebar is open */}
+      <div className={`flex-1 flex flex-col min-w-0 transition-all duration-300 ${isOpen ? 'lg:ml-64' : 'lg:ml-0'}`}>
         {children}
       </div>
     </div>

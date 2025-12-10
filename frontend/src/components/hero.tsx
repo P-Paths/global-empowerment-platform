@@ -60,12 +60,6 @@ export default function HeroSection() {
                 >
                   Join the Platform
                 </Link>
-                <Link
-                  href="/community"
-                  className="inline-flex items-center justify-center rounded-md border-2 border-gep-gold/50 px-6 py-3 text-sm font-semibold text-white hover:border-gep-gold hover:bg-gep-gold/10 transition-all duration-200"
-                >
-                  Explore Community
-                </Link>
               </div>
               
               {/* Community Feed Ticker */}

@@ -746,7 +746,10 @@ export function useCreatePitchDeck() {
       );
       return deck;
     } catch (err: any) {
-      setError(err.message || 'Failed to generate pitch deck');
+      // Only set error for non-silent errors (silent errors are network issues handled gracefully)
+      if (!err?.isSilent) {
+        setError(err.message || 'Failed to generate pitch deck');
+      }
       throw err;
     } finally {
       setLoading(false);

@@ -181,14 +181,41 @@ export default function GrowthCoachPage() {
       if (session?.access_token) {
         headers['Authorization'] = `Bearer ${session.access_token}`;
       }
+      
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+      
       const response = await fetch(`${apiUrl}/api/v1/growth/tasks/${taskId}/complete`, {
         method: 'POST',
         headers,
+        signal: controller.signal,
       });
+      
+      clearTimeout(timeoutId);
+      
       if (response.ok) {
         fetchData();
+      } else {
+        // Revert optimistic update on API error
+        setTasks(prevTasks =>
+          prevTasks.map(task =>
+            task.id === taskId ? { ...task, is_completed: false } : task
+          )
+        );
       }
-    } catch (error) {
+    } catch (error: any) {
+      // Silently handle network errors (backend might not be running)
+      if (error.name === 'AbortError' || error.message?.includes('Failed to fetch')) {
+        // Revert optimistic update on network error
+        setTasks(prevTasks =>
+          prevTasks.map(task =>
+            task.id === taskId ? { ...task, is_completed: false } : task
+          )
+        );
+        // Don't log network errors - they're expected when backend is down
+        return;
+      }
+      // Only log non-network errors
       console.error('Error completing task:', error);
       // Revert optimistic update on error
       setTasks(prevTasks =>
