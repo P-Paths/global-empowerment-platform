@@ -28,13 +28,13 @@ export default function StatCard({ title, value, icon, delay = 0, className = ''
           ease: "easeInOut"
         }
       }}
-      className={`bg-white/10 backdrop-blur-md border border-gep-gold/20 rounded-xl p-4 shadow-lg ${className}`}
+      className={`bg-white/10 backdrop-blur-md border border-gep-gold/20 rounded-xl p-3 sm:p-4 shadow-lg ${className}`}
     >
-      <div className="flex items-start gap-3">
-        <div className="text-2xl">{icon}</div>
+      <div className="flex items-start gap-2 sm:gap-3">
+        <div className="text-xl sm:text-2xl flex-shrink-0">{icon}</div>
         <div className="flex-1 min-w-0">
-          <p className="text-xs text-gray-300 uppercase tracking-wide mb-1">{title}</p>
-          <p className="text-white font-bold text-sm leading-tight">{value}</p>
+          <p className="text-xs sm:text-sm text-gray-300 uppercase tracking-wide mb-1">{title}</p>
+          <p className="text-white font-bold text-xs sm:text-sm leading-tight break-words">{value}</p>
         </div>
       </div>
     </motion.div>

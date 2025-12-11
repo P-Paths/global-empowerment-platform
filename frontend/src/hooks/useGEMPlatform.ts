@@ -733,15 +733,16 @@ export function useCreatePitchDeck() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const generatePitchDeck = useCallback(async (deckJson: Record<string, any>) => {
+  const generatePitchDeck = useCallback(async (deckData: Record<string, any>) => {
     try {
       setLoading(true);
       setError(null);
+      // Send the deck data directly (not wrapped in deck_json)
       const deck = await authenticatedFetchJson<PitchDeck>(
         getApiUrl('api/v1/pitchdeck/generate'),
         {
           method: 'POST',
-          body: JSON.stringify({ deck_json: deckJson }),
+          body: JSON.stringify(deckData),
         }
       );
       return deck;

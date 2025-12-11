@@ -18,6 +18,7 @@ export default function OnboardingContainer({ onComplete }: OnboardingContainerP
   const [currentScreen, setCurrentScreen] = useState(0);
   const [onboardingData, setOnboardingData] = useState<Partial<OnboardingData>>({});
   const [isMobile, setIsMobile] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   // Detect mobile
   useEffect(() => {
@@ -32,6 +33,12 @@ export default function OnboardingContainer({ onComplete }: OnboardingContainerP
   const totalScreens = 5; // Welcome, Profile, Business Experience, Category, Completion
 
   const handleNext = async (data?: Partial<OnboardingData>) => {
+    // Prevent double-clicks
+    if (isSaving) {
+      console.log('⏸️ Already saving, ignoring duplicate click');
+      return;
+    }
+
     console.log('➡️ Moving to next screen:', {
       currentScreen,
       totalScreens,
@@ -42,6 +49,7 @@ export default function OnboardingContainer({ onComplete }: OnboardingContainerP
     });
 
     if (data) {
+      setIsSaving(true);
       const updatedData = { ...onboardingData, ...data };
       setOnboardingData(updatedData);
 
@@ -51,19 +59,30 @@ export default function OnboardingContainer({ onComplete }: OnboardingContainerP
           userId: user.id,
           dataKeys: Object.keys(data)
         });
-        const result = await onboardingService.updateOnboardingData(user.id, data);
-        if (result.error) {
-          console.error('❌ Error saving onboarding data:', result.error);
-          alert(`Failed to save: ${result.error.message}`);
-          return; // Don't proceed to next screen if save failed
-        } else {
-          console.log('✅ Onboarding data saved successfully');
+        try {
+          const result = await onboardingService.updateOnboardingData(user.id, data);
+          if (result.error) {
+            console.error('❌ Error saving onboarding data:', result.error);
+            alert(`Failed to save: ${result.error.message}`);
+            setIsSaving(false);
+            return; // Don't proceed to next screen if save failed
+          } else {
+            console.log('✅ Onboarding data saved successfully');
+          }
+        } catch (error) {
+          console.error('❌ Exception saving onboarding data:', error);
+          alert('An error occurred while saving. Please try again.');
+          setIsSaving(false);
+          return;
+        } finally {
+          setIsSaving(false);
         }
       } else {
         console.warn('⚠️ No user found - cannot save onboarding data');
       }
     }
 
+    // Advance to next screen
     if (currentScreen < totalScreens - 1) {
       setCurrentScreen(currentScreen + 1);
     } else {
@@ -103,7 +122,7 @@ export default function OnboardingContainer({ onComplete }: OnboardingContainerP
   };
 
   return (
-    <div className="fixed inset-0 bg-white z-50 overflow-hidden">
+    <div className="fixed inset-0 bg-white dark:bg-gray-900 z-50 overflow-hidden">
       {/* Progress Bar */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gray-100 z-10">
         <div

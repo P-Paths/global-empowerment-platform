@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -18,15 +18,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
   title: 'Global Empowerment Platform (GEP) – Transform Members Into Funded Entrepreneurs',
   description:
     'Grow your digital influence, build your brand, and prepare for capital investment. The social growth engine that transforms entrepreneurs into fundable founders.',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 5,
-  },
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
@@ -68,9 +69,39 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="manifest" href="/manifest.json" />
+        {/* Theme initialization script - runs before React hydrates */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  // Public pages that should always use light mode
+                  const publicPages = ['/', '/about', '/how-it-works', '/pricing', '/demo', '/register', '/login', '/terms', '/privacy', '/cookies', '/contact', '/qa', '/beta-signup', '/get-paid'];
+                  const currentPath = window.location.pathname;
+                  const isPublicPage = publicPages.includes(currentPath) || currentPath.startsWith('/auth');
+                  
+                  // Public pages always use light mode
+                  if (isPublicPage) {
+                    document.documentElement.classList.remove('dark');
+                  } else {
+                    // Authenticated pages use theme preference
+                    const theme = localStorage.getItem('theme');
+                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    const isDark = theme === 'dark' || (!theme && prefersDark);
+                    if (isDark) {
+                      document.documentElement.classList.add('dark');
+                    } else {
+                      document.documentElement.classList.remove('dark');
+                    }
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

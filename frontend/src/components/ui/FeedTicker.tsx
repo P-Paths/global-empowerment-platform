@@ -19,9 +19,9 @@ export default function FeedTicker() {
   const updates = [...sampleUpdates, ...sampleUpdates];
 
   return (
-    <div className="relative overflow-hidden mt-8">
+    <div className="relative overflow-hidden mt-6 sm:mt-8">
       <div 
-        className="flex gap-8"
+        className="flex gap-4 sm:gap-8"
         style={{
           animation: 'scroll 30s linear infinite',
         }}
@@ -29,10 +29,10 @@ export default function FeedTicker() {
         {updates.map((update, index) => (
           <div
             key={`${update.id}-${index}`}
-            className="flex items-center gap-2 whitespace-nowrap text-sm text-gray-300"
+            className="flex items-center gap-2 whitespace-nowrap text-xs sm:text-sm text-gray-300"
           >
-            <span className="w-2 h-2 bg-gep-gold rounded-full flex-shrink-0"></span>
-            <span>{update.text}</span>
+            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gep-gold rounded-full flex-shrink-0"></span>
+            <span className="truncate max-w-[200px] sm:max-w-none">{update.text}</span>
           </div>
         ))}
       </div>

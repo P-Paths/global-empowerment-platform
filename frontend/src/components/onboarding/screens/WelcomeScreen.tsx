@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 
 interface WelcomeScreenProps {
   onNext: () => void;
@@ -8,41 +9,36 @@ interface WelcomeScreenProps {
 
 export default function WelcomeScreen({ onNext }: WelcomeScreenProps) {
   return (
-    <div className="min-h-full w-full flex flex-col items-center justify-center bg-white px-6 py-8">
+    <div className="min-h-full w-full flex flex-col items-center justify-center bg-white dark:bg-gray-900 px-6 py-8">
       <div className="max-w-md w-full text-center space-y-8">
         {/* Hero Icon/Logo */}
         <div className="mb-8">
-          <div className="w-24 h-24 mx-auto bg-blue-50 rounded-full flex items-center justify-center">
-            <svg
-              className="w-12 h-12 text-blue-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+          <div className="mx-auto flex items-center justify-center">
+            <Image
+              src="/GEP LOGO.png"
+              alt="Global Empowerment Platform"
+              width={200}
+              height={200}
+              className="h-32 w-auto mx-auto"
+              priority
+            />
           </div>
         </div>
 
         {/* Header */}
-        <h1 className="text-4xl font-bold text-gray-900">
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
           Welcome to Global Empowerment Platform
         </h1>
 
         {/* Subheader */}
-        <p className="text-lg text-gray-600">
+        <p className="text-lg text-gray-600 dark:text-gray-300">
           Grow your digital influence, build your business, and prepare for funding.
         </p>
 
         {/* CTA Button */}
         <button
           onClick={onNext}
-          className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors shadow-sm active:scale-95"
+          className="w-full bg-blue-600 dark:bg-blue-500 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors shadow-sm active:scale-95"
         >
           Get Started
         </button>

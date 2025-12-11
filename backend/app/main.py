@@ -120,17 +120,34 @@ async def health_check():
         "timestamp": datetime.now().isoformat()
     }
 
-# Enhanced security headers middleware
+# Enhanced security headers middleware with CORS safety net
 @app.middleware("http")
 async def add_security_headers(request: Request, call_next):
     """Add comprehensive security headers to all responses"""
-    response = await call_next(request)
+    try:
+        response = await call_next(request)
+    except Exception as e:
+        # If an exception occurs, create a response with CORS headers
+        logger.error(f"Exception in middleware: {e}")
+        response = JSONResponse(
+            status_code=500,
+            content={"error": "Internal server error", "message": "Something went wrong"}
+        )
+    
+    # Ensure CORS headers are always present
+    origin = request.headers.get("origin")
+    if origin and origin in cors_origins:
+        if "Access-Control-Allow-Origin" not in response.headers:
+            response.headers["Access-Control-Allow-Origin"] = origin
+        if "Access-Control-Allow-Credentials" not in response.headers:
+            response.headers["Access-Control-Allow-Credentials"] = "true"
     
     # Add all security headers from configuration
     try:
         from app.core.security import SECURITY_HEADERS as headers
         for header, value in headers.items():
-            response.headers[header] = value
+            if header not in response.headers:  # Don't override existing headers
+                response.headers[header] = value
     except Exception as e:
         logger.warning(f"Could not add security headers: {e}")
     
@@ -273,14 +290,35 @@ async def root():
         "status": "healthy"
     }
 
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request: Request, exc: HTTPException):
+    """HTTP exception handler with CORS headers"""
+    logger.error(f"HTTP exception: {exc.status_code} - {exc.detail}")
+    response = JSONResponse(
+        status_code=exc.status_code,
+        content={"error": exc.detail}
+    )
+    # Add CORS headers
+    origin = request.headers.get("origin")
+    if origin and origin in cors_origins:
+        response.headers["Access-Control-Allow-Origin"] = origin
+        response.headers["Access-Control-Allow-Credentials"] = "true"
+    return response
+
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
-    """Global exception handler"""
-    logger.error(f"Unhandled exception: {exc}")
-    return JSONResponse(
+    """Global exception handler with CORS headers"""
+    logger.error(f"Unhandled exception: {exc}", exc_info=True)
+    response = JSONResponse(
         status_code=500,
         content={"error": "Internal server error", "message": "Something went wrong"}
     )
+    # Add CORS headers
+    origin = request.headers.get("origin")
+    if origin and origin in cors_origins:
+        response.headers["Access-Control-Allow-Origin"] = origin
+        response.headers["Access-Control-Allow-Credentials"] = "true"
+    return response
 
 
 if __name__ == "__main__":

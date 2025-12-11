@@ -29,12 +29,12 @@ const sampleStats = [
 
 export default function HeroSection() {
   return (
-    <section className="relative bg-gradient-to-br from-gep-navy via-gep-navy to-gep-navy/80 py-20 lg:py-32 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-gep-navy via-gep-navy to-gep-navy/80 py-12 sm:py-16 lg:py-20 xl:py-32 overflow-hidden">
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-gep-navy via-transparent to-gep-navy/50"></div>
       
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left: Headline and CTAs */}
           <div className="z-10">
             <motion.div
@@ -42,34 +42,36 @@ export default function HeroSection() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight mb-4 sm:mb-6">
                 Build Your Influence.
                 <br />
                 Become <span className="text-gep-gold">Fundable</span>.
               </h1>
               
-              <p className="text-lg text-gray-200 mb-8 max-w-lg">
+              <p className="text-base sm:text-lg text-gray-200 mb-6 sm:mb-8 max-w-lg">
                 Join 8,000+ members building their digital presence and preparing for capital investment.
               </p>
               
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
                 <Link
                   href="/register"
-                  className="inline-flex items-center justify-center rounded-md bg-gep-gold px-6 py-3 text-sm font-semibold text-gep-navy shadow-lg hover:bg-gep-gold/90 transition-all duration-200 hover:scale-105"
+                  className="inline-flex items-center justify-center min-h-[44px] rounded-md bg-gep-gold px-6 py-3 text-sm sm:text-base font-semibold text-gep-navy shadow-lg hover:bg-gep-gold/90 transition-all duration-200 active:scale-95 touch-manipulation"
                 >
                   Join the Platform
                 </Link>
               </div>
               
               {/* Community Feed Ticker */}
-              <FeedTicker />
+              <div className="overflow-hidden">
+                <FeedTicker />
+              </div>
             </motion.div>
           </div>
           
           {/* Right: Floating Cards */}
           <div className="relative hidden lg:block">
-            <div className="relative h-[500px]">
+            <div className="relative h-[400px] xl:h-[500px]">
               {sampleStats.map((stat, index) => (
                 <motion.div
                   key={index}
@@ -80,7 +82,8 @@ export default function HeroSection() {
                   style={{
                     left: index === 0 ? '10%' : index === 1 ? '50%' : '20%',
                     top: index === 0 ? '10%' : index === 1 ? '40%' : '70%',
-                    width: '280px',
+                    width: '260px',
+                    maxWidth: '90%',
                   }}
                 >
                   <StatCard
@@ -95,7 +98,7 @@ export default function HeroSection() {
           </div>
           
           {/* Mobile: Stack cards below */}
-          <div className="lg:hidden space-y-4 mt-8">
+          <div className="lg:hidden space-y-3 sm:space-y-4 mt-6 sm:mt-8">
             {sampleStats.map((stat, index) => (
               <StatCard
                 key={index}

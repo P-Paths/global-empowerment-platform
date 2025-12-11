@@ -169,8 +169,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setLoading(true);
       setError(null);
 
+      // Trim whitespace from email and password
+      const trimmedEmail = email.trim();
+      const trimmedPassword = password.trim();
+
       // Simple dev login - use "user" as email and "register" as password
-      if (email === 'user' && password === 'register') {
+      if (trimmedEmail === 'user' && trimmedPassword === 'register') {
         const mockUser: User = {
           id: '00000000-0000-0000-0000-000000000123',
           email: 'demo@accorria.com',
@@ -193,10 +197,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       }
 
       // Sign up with Supabase
-      console.log('🔵 Attempting to sign up user:', { email, hasPassword: !!password });
+      console.log('🔵 Attempting to sign up user:', { email: trimmedEmail, hasPassword: !!trimmedPassword });
       const { data: signUpData, error } = await supabase.auth.signUp({
-        email,
-        password,
+        email: trimmedEmail,
+        password: trimmedPassword,
         options: {
           data: {
             first_name: firstName,
@@ -242,16 +246,37 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       console.log('✅ User created successfully:', signUpData.user.id);
 
-      // Set the user in context if email is already confirmed (for testing)
-      if (signUpData.user.email_confirmed_at) {
+      // In development, try to sign in immediately if email is not confirmed
+      // This helps with testing when email confirmation might be disabled
+      if (!signUpData.user.email_confirmed_at) {
+        console.log('📧 User needs to verify email, but attempting auto-sign-in for development...');
+        
+        // Try to sign in immediately (works if email confirmation is disabled in Supabase)
+        try {
+          const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+            email: trimmedEmail,
+            password: trimmedPassword
+          });
+          
+          if (!signInError && signInData?.session) {
+            console.log('✅ Auto-sign-in successful (email confirmation may be disabled)');
+            setUser(signInData.user);
+            setIsEmailVerified(true);
+            setSession(signInData.session);
+          } else {
+            console.log('⚠️ Auto-sign-in failed, user must verify email:', signInError?.message);
+            // User needs to verify email - this is normal behavior
+          }
+        } catch (autoSignInError) {
+          console.log('⚠️ Auto-sign-in attempt failed:', autoSignInError);
+          // This is expected if email confirmation is required
+        }
+      } else {
+        // Email already confirmed
         setUser(signUpData.user);
         setIsEmailVerified(true);
-      } else {
-        // User needs to verify email
-        console.log('📧 User needs to verify email');
       }
 
-      // User will need to verify email before accessing dashboard
       return { error: null };
 
     } catch (error) {
@@ -276,8 +301,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setLoading(true);
       setError(null);
 
+      // Trim whitespace from email and password
+      const trimmedEmail = email.trim();
+      const trimmedPassword = password.trim();
+
+      console.log('🔐 Attempting sign in:', { email: trimmedEmail, hasPassword: !!trimmedPassword });
+
       // Simple dev login - use "user" as email and "register" as password
-      if (email === 'user' && password === 'register') {
+      if (trimmedEmail === 'user' && trimmedPassword === 'register') {
         const mockUser: User = {
           id: '00000000-0000-0000-0000-000000000123',
           email: 'demo@accorria.com',
@@ -292,32 +323,83 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           }
         };
         
-          setUser(mockUser as User);
+        setUser(mockUser as User);
         setIsEmailVerified(true);
         setLoading(false);
         return { error: null };
       }
 
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password
+      // Sign in with Supabase
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: trimmedEmail,
+        password: trimmedPassword
+      });
+
+      console.log('🔐 Sign in response:', {
+        hasData: !!data,
+        hasUser: !!data?.user,
+        hasSession: !!data?.session,
+        userId: data?.user?.id,
+        email: data?.user?.email,
+        emailConfirmed: !!data?.user?.email_confirmed_at,
+        hasError: !!error,
+        errorMessage: error?.message,
+        errorCode: error?.code,
+        errorStatus: error?.status
       });
 
       if (error) {
+        console.error('❌ Sign in error:', {
+          message: error.message,
+          code: error.code,
+          status: error.status,
+          name: error.name
+        });
+
         // Improve error message for email confirmation
         let errorMessage = error.message;
         if (error.message.toLowerCase().includes('email not confirmed') || 
-            error.message.toLowerCase().includes('email_not_confirmed')) {
+            error.message.toLowerCase().includes('email_not_confirmed') ||
+            error.message.toLowerCase().includes('email_not_verified')) {
           errorMessage = 'Please confirm your email to log in. Check your inbox for the confirmation link.';
+        } else if (error.message.toLowerCase().includes('invalid') || 
+                   error.message.toLowerCase().includes('credentials')) {
+          errorMessage = 'Invalid login credentials. Please check your email and password.';
         }
+        
         setError(errorMessage);
-        // Return the error as-is (it's already an AuthError from Supabase)
         return { error };
+      }
+
+      // Verify session was created
+      if (!data?.session) {
+        console.error('❌ Sign in succeeded but no session returned');
+        const sessionError: AuthError = {
+          message: 'Sign in succeeded but session was not created. Please try again.',
+          name: 'AuthError',
+          __isAuthError: true,
+          code: 'session_not_created',
+          status: 500
+        } as unknown as AuthError;
+        setError(sessionError.message);
+        return { error: sessionError };
+      }
+
+      // Get fresh session to ensure it's set
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+      if (sessionError) {
+        console.error('❌ Error getting session after sign in:', sessionError);
+      } else if (session) {
+        console.log('✅ Session confirmed after sign in:', {
+          userId: session.user?.id,
+          email: session.user?.email
+        });
       }
 
       return { error: null };
 
     } catch (error) {
+      console.error('❌ Sign in exception:', error);
       const errorMessage = error instanceof Error ? error.message : 'Login failed';
       setError(errorMessage);
       // Create a proper AuthError object (cast through unknown because __isAuthError is protected)

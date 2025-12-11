@@ -163,67 +163,76 @@ export class OnboardingService {
 
       // PRIORITY 3: Check if there's a real error (not just an empty object)
       const errorKeys = result.error ? Object.keys(result.error) : [];
-      const hasRealError = result.error && errorKeys.length > 0 && (
-        result.error.message || 
-        result.error.code || 
-        result.error.details || 
-        result.error.hint
+      const errorObj = result.error;
+      
+      // Check if error has meaningful content
+      const hasErrorContent = errorObj && (
+        (errorKeys.length > 0 && (
+          errorObj.message || 
+          errorObj.code || 
+          errorObj.details || 
+          errorObj.hint ||
+          // Check if any value is truthy
+          Object.values(errorObj).some(val => val !== null && val !== undefined && val !== '')
+        ))
       );
 
       console.log('Error check:', {
         hasError: !!result.error,
-        hasRealError,
+        hasErrorContent,
         errorKeys,
         errorKeysLength: errorKeys.length,
-        errorMessage: result.error?.message,
-        errorCode: result.error?.code
+        errorMessage: errorObj?.message,
+        errorCode: errorObj?.code,
+        errorStringified: errorObj ? JSON.stringify(errorObj) : 'null'
       });
 
-      if (hasRealError) {
-        // Try to extract error info in multiple ways
-        const errorObj = result.error;
-        const errorInfo: any = {
-          rawError: errorObj,
-          errorType: typeof errorObj,
-          errorString: String(errorObj),
-          errorJSON: JSON.stringify(errorObj, null, 2),
-          errorKeys: errorObj ? Object.keys(errorObj) : [],
-          errorValues: errorObj ? Object.values(errorObj) : [],
-          hasCode: 'code' in (errorObj || {}),
-          hasMessage: 'message' in (errorObj || {}),
-          code: errorObj?.code,
-          message: errorObj?.message,
-          details: errorObj?.details,
-          hint: errorObj?.hint,
-          userId
-        };
-
-        console.error('❌ Error creating profile - full error info:', errorInfo);
-
-        // Try to get error message
-        const errorMessage = errorObj?.message || errorObj?.details || errorObj?.hint || String(errorObj) || 'Failed to create profile';
+      // If error object exists but is empty or has no useful info, treat as success
+      // This can happen with RLS policies that silently block but don't return errors
+      if (result.error && !hasErrorContent) {
+        console.log('ℹ️ Empty or invalid error object received - likely RLS policy blocking silently. Backend API will handle profile creation.');
+        // Check one more time if profile exists (might have been created by trigger)
+        const { data: finalCheck } = await this.supabase
+          .from('profiles')
+          .select('id')
+          .eq('id', userId)
+          .maybeSingle();
         
-        // If foreign key constraint error, the user doesn't exist in auth.users yet
-        const errorCode = errorObj?.code;
-        if (errorCode === '23503' || errorMessage.includes('foreign key') || errorMessage.includes('violates foreign key')) {
-          console.warn('⚠️ Profile not created yet - trigger may still be processing. User ID:', userId);
-          // Don't return error - let the update proceed anyway
+        if (finalCheck) {
+          console.log('✅ Profile exists after empty error - success!');
           return { error: null };
         }
         
-        return { error: new Error(errorMessage) };
+        // Profile still doesn't exist, but no real error - continue anyway
+        // The backend API will create it via service role
+        console.log('ℹ️ Profile not created via frontend client (expected - RLS blocking). Backend API will create it.');
+        return { error: null };
       }
 
-      // If we get here, no data, no profile exists, but no real error either
-      // This might mean the operation is still processing or RLS is blocking silently
-      console.warn('⚠️ Upsert completed but profile still doesn\'t exist and no error details - continuing anyway');
-      return { error: null }; // Continue anyway - might work on next attempt or profile might exist
-
-      // Success - profile was created or updated
-      if (result.data) {
-        console.log('Profile created/updated successfully via upsert');
+      if (hasErrorContent) {
+        // Try to extract error info in multiple ways
+        const errorMessage = errorObj?.message || errorObj?.details || errorObj?.hint || String(errorObj) || 'Failed to create profile';
+        const errorCode = errorObj?.code;
+        
+        // If foreign key constraint error, the user doesn't exist in auth.users yet
+        // This is expected for new users - backend API will handle it
+        if (errorCode === '23503' || errorMessage.includes('foreign key') || errorMessage.includes('violates foreign key')) {
+          console.log('ℹ️ Foreign key constraint (expected for new users). Backend API will handle profile creation.');
+          return { error: null };
+        }
+        
+        // For other real errors, log but don't fail - backend API will try to create it
+        console.warn('⚠️ Error creating profile via frontend client:', {
+          code: errorCode,
+          message: errorMessage,
+          userId
+        });
+        console.log('ℹ️ Continuing anyway - backend API will attempt to create profile via service role.');
+        return { error: null };
       }
 
+      // If we get here, no error object at all - treat as success
+      console.log('✅ No error object - treating as success');
       return { error: null };
     } catch (exception: any) {
       // Catch any exceptions that might be thrown
@@ -258,25 +267,15 @@ export class OnboardingService {
       }
 
       // Try to ensure profile exists (non-blocking - won't fail if it doesn't exist yet)
-      // Wait a bit longer for the trigger to create the profile
-      const profileResult = await this.ensureProfileExists(userId);
-      
-      // If profile creation failed with foreign key error, wait a bit more and try again
-      if (profileResult.error && profileResult.error.message?.includes('still being set up')) {
-        console.log('⏳ Profile not ready yet, waiting 2 more seconds...');
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        
-        // Check again if profile exists now
-        const { data: retryProfile } = await this.supabase
-          .from('profiles')
-          .select('id')
-          .eq('id', userId)
-          .maybeSingle();
-        
-        if (!retryProfile) {
-          console.warn('⚠️ Profile still doesn\'t exist after waiting - continuing anyway (will be created by trigger)');
-          // Continue anyway - the trigger should create it eventually
+      // The backend API will create the profile if it doesn't exist, so this is just a best-effort check
+      try {
+        const profileResult = await this.ensureProfileExists(userId);
+        if (profileResult.error) {
+          console.log('ℹ️ Profile not created via frontend client (expected). Backend API will create it.');
         }
+      } catch (error) {
+        // Don't fail the flow if ensureProfileExists throws - backend API will handle it
+        console.log('ℹ️ Error in ensureProfileExists (non-critical). Backend API will create profile:', error);
       }
 
       // Use backend API to bypass RLS (uses service role)
