@@ -117,6 +117,9 @@ test_*.py
 # Security files
 setup_secure_env.sh
 secure-env-setup.sh
+configure_token.sh
+*_token*.sh
+*.token
 
 # Strategic Documentation (CRITICAL SECURITY)
 SECRET_WEAPON_*.md
