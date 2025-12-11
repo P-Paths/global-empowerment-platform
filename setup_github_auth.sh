@@ -4,7 +4,23 @@
 
 cd /home/eaton/code/GEP
 
-TOKEN="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"
+# Token should be set as environment variable: export GITHUB_TOKEN=your_token_here
+# Or it will prompt you to enter it
+TOKEN="${GITHUB_TOKEN}"
+
+if [ -z "$TOKEN" ]; then
+    echo "🔐 GitHub token not found in environment."
+    echo "   Set it with: export GITHUB_TOKEN=your_token_here"
+    echo "   Or enter it now:"
+    read -sp "GitHub Personal Access Token: " TOKEN
+    echo ""
+fi
+
+if [ -z "$TOKEN" ]; then
+    echo "❌ Token is required. Exiting."
+    exit 1
+fi
+
 REPO_URL="https://github.com/P-Paths/global-empowerment-platform.git"
 
 echo "🔐 Configuring GitHub Authentication"

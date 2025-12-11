@@ -8,12 +8,28 @@ echo "============================="
 echo ""
 
 # Step 1: Configure GitHub token if needed
-TOKEN="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"
+# Token should be set as environment variable: export GITHUB_TOKEN=your_token_here
+# Or it will prompt you to enter it
+TOKEN="${GITHUB_TOKEN}"
+
+if [ -z "$TOKEN" ]; then
+    echo "🔐 GitHub token not found in environment."
+    echo "   Set it with: export GITHUB_TOKEN=your_token_here"
+    echo "   Or enter it now (it won't be saved):"
+    read -sp "GitHub Personal Access Token: " TOKEN
+    echo ""
+fi
+
 USERNAME=$(git config user.name 2>/dev/null)
 
 if [ -z "$USERNAME" ]; then
     echo "Enter your GitHub username:"
     read USERNAME
+fi
+
+if [ -z "$TOKEN" ] || [ -z "$USERNAME" ]; then
+    echo "❌ Token and username are required"
+    exit 1
 fi
 
 # Check if remote is already configured with token
