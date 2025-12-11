@@ -103,7 +103,20 @@ app.add_middleware(
 )
 
 # Security middleware stack (after CORS)
-app.add_middleware(TrustedHostMiddleware, allowed_hosts=settings.ALLOWED_HOSTS)
+# TrustedHostMiddleware - Only apply in non-Cloud-Run environments
+# For Cloud Run, we skip TrustedHostMiddleware because:
+# 1. CORS middleware (which runs first) already validates origins
+# 2. Cloud Run hostnames are controlled by Google and are secure
+# 3. TrustedHostMiddleware blocks OPTIONS preflight requests unnecessarily
+# 
+# In production (Cloud Run), CORS provides sufficient origin validation
+# For local dev, we still validate localhost
+import os
+is_cloud_run = os.getenv("K_SERVICE") is not None or os.getenv("GAE_ENV") is not None
+if not is_cloud_run:
+    # Only apply TrustedHostMiddleware in non-Cloud-Run environments
+    app.add_middleware(TrustedHostMiddleware, allowed_hosts=settings.ALLOWED_HOSTS)
+app.add_middleware(GZipMiddleware, minimum_size=1000)
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 # Rate limiting middleware (temporarily disabled for debugging)

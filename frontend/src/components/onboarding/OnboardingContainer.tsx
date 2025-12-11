@@ -63,23 +63,43 @@ export default function OnboardingContainer({ onComplete }: OnboardingContainerP
           const result = await onboardingService.updateOnboardingData(user.id, data);
           if (result.error) {
             console.error('❌ Error saving onboarding data:', result.error);
-            alert(`Failed to save: ${result.error.message}`);
+            // Check if it's a network error
+            const isNetworkError = result.error.message?.includes('Failed to connect') || 
+                                  result.error.message?.includes('network');
+            if (isNetworkError) {
+              alert(`Connection error: ${result.error.message}. Please check your internet connection and try again.`);
+            } else {
+              alert(`Failed to save: ${result.error.message}`);
+            }
             setIsSaving(false);
             return; // Don't proceed to next screen if save failed
           } else {
             console.log('✅ Onboarding data saved successfully');
           }
-        } catch (error) {
+        } catch (error: any) {
           console.error('❌ Exception saving onboarding data:', error);
-          alert('An error occurred while saving. Please try again.');
+          const errorMessage = error?.message || error?.toString() || 'An error occurred while saving.';
+          const isNetworkError = errorMessage.includes('Failed to connect') || 
+                                errorMessage.includes('network') ||
+                                error?.isNetworkError;
+          if (isNetworkError) {
+            alert(`Connection error: ${errorMessage}. Please check your internet connection and try again.`);
+          } else {
+            alert(`An error occurred while saving: ${errorMessage}. Please try again.`);
+          }
           setIsSaving(false);
           return;
         } finally {
+          // Always reset saving state
           setIsSaving(false);
         }
       } else {
         console.warn('⚠️ No user found - cannot save onboarding data');
+        setIsSaving(false);
       }
+    } else {
+      // No data to save, just advance
+      setIsSaving(false);
     }
 
     // Advance to next screen

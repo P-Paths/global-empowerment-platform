@@ -1,5 +1,5 @@
 """
-Accorria Backend Security Configuration
+GEP Backend Security Configuration
 150% SECURE - Zero Trust Architecture
 """
 
@@ -63,7 +63,7 @@ SECURITY_HEADERS = {
 }
 
 class SecurityConfig:
-    """150% Secure Configuration for Accorria"""
+    """150% Secure Configuration for GEP"""
     
     @staticmethod
     def get_cors_middleware():
@@ -89,6 +89,7 @@ class SecurityConfig:
                 "localhost",
                 "127.0.0.1",
                 "gep-backend-*.run.app",
+                "gem-backend-*.run.app",
                 "*.globalempowerment.app"
             ]
         )

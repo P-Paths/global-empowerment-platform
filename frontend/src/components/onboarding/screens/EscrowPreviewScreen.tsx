@@ -66,9 +66,9 @@ export default function EscrowPreviewScreen({ onNext, onBack }: EscrowPreviewScr
                 </p>
               </div>
               <div className="bg-white rounded-lg p-3 border border-green-200">
-                <div className="font-semibold text-green-600 mb-1">✅ With Accorria Smart Contracts:</div>
+                <div className="font-semibold text-green-600 mb-1">✅ With GEP Smart Contracts:</div>
                 <p className="text-gray-700">
-                  Your money is held safely by Accorria using smart contracts until you receive the item and confirm everything is correct. Everything is checked and verified. Only then does the seller get paid. Both parties are protected. Locked down together - no backing out, no scams.
+                  Your money is held safely by GEP using smart contracts until you receive the item and confirm everything is correct. Everything is checked and verified. Only then does the seller get paid. Both parties are protected. Locked down together - no backing out, no scams.
                 </p>
               </div>
             </div>
