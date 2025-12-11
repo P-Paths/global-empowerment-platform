@@ -6,7 +6,7 @@ export default function GlobalError({
   error,
   reset,
 }: {
-  error: Error & { digest?: string };
+  error: Error & { digest?: string } | unknown;
   reset: () => void;
 }) {
   useEffect(() => {
@@ -50,7 +50,11 @@ export default function GlobalError({
       };
     } else if (error && typeof error === 'object') {
       // Handle Event objects or other non-Error objects
-      if (error.toString() === '[object Event]' || error.constructor?.name === 'Event') {
+      const errorObj = error as { toString?: () => string; constructor?: { name?: string } };
+      if (
+        (errorObj.toString && errorObj.toString() === '[object Event]') ||
+        errorObj.constructor?.name === 'Event'
+      ) {
         errorMessage = 'An unexpected event error occurred';
         errorDetails = {
           type: 'Event',
@@ -79,7 +83,7 @@ export default function GlobalError({
                 ? error.message || 'An unexpected error occurred'
                 : 'An unexpected error occurred'}
             </p>
-            {error.toString() === '[object Event]' && (
+            {error && typeof error === 'object' && (error as { toString?: () => string }).toString?.() === '[object Event]' && (
               <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 p-4 rounded-lg mb-4">
                 <p className="font-semibold mb-2">Event Object Error Detected</p>
                 <p className="text-sm">
