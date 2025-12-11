@@ -88,7 +88,9 @@ cors_origins = list(set(settings.ALLOWED_ORIGINS + [
     "http://127.0.0.1:3000",
     "https://www.globalempowerment.com",
     "https://globalempowerment.com",
-    "https://gep.vercel.app"
+    "https://gep.vercel.app",
+    "https://global-empowerment-platform.vercel.app",
+    "https://global-empowerment-platform-*.vercel.app"
 ]))
 logger.info(f"CORS origins configured: {cors_origins}")
 app.add_middleware(

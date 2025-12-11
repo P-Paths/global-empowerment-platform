@@ -76,6 +76,8 @@ class Settings(BaseSettings):
         "http://localhost:3000",
         "http://127.0.0.1:3000",
         "https://gep.vercel.app",
+        "https://global-empowerment-platform.vercel.app",
+        "https://global-empowerment-platform-*.vercel.app",
         "https://globalempowerment.app",
         "https://www.globalempowerment.app"
     ]
