@@ -275,8 +275,10 @@ export default function Sidebar({ isOpen, onToggle, className = '' }: SidebarPro
               className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
               aria-label="Toggle dark mode"
             >
-              <span className="text-xl">{isDarkMode ? '☀️' : '🌙'}</span>
-              <span className="text-sm font-medium">
+              <span className="text-xl" suppressHydrationWarning>
+                {isDarkMode ? '☀️' : '🌙'}
+              </span>
+              <span className="text-sm font-medium" suppressHydrationWarning>
                 {isDarkMode ? 'Light Mode' : 'Dark Mode'}
               </span>
             </button>

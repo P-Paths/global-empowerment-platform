@@ -43,33 +43,30 @@ function isPublicPage(pathname: string | null): boolean {
   return PUBLIC_PAGES.includes(pathname) || pathname.startsWith('/auth');
 }
 
-// Helper function to get initial theme (runs on both server and client)
-function getInitialTheme(): boolean {
-  if (typeof window === 'undefined') {
-    return false; // Default to light mode on server
-  }
-  
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'dark' || savedTheme === 'light') {
-    return savedTheme === 'dark';
-  }
-  
-  // If no saved preference, check system preference
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  return prefersDark;
-}
-
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const pathname = usePathname();
   const isPublic = isPublicPage(pathname);
   
-  // Initialize with the theme from localStorage immediately
-  const [isDarkMode, setIsDarkMode] = useState(() => getInitialTheme());
+  // Always start with false (light mode) to match server render and avoid hydration mismatch
+  // We'll update it after hydration in useEffect
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
     // Mark as hydrated
     setIsHydrated(true);
+    
+    // Now that we're on the client, read the actual theme preference
+    if (!isPublic && typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark' || savedTheme === 'light') {
+        setIsDarkMode(savedTheme === 'dark');
+      } else {
+        // If no saved preference, check system preference
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setIsDarkMode(prefersDark);
+      }
+    }
     
     // Apply theme immediately on mount
     const root = document.documentElement;
@@ -79,10 +76,17 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       root.classList.remove('dark');
     } else {
       // Authenticated pages use theme preference
-      if (isDarkMode) {
+      const currentTheme = typeof window !== 'undefined' 
+        ? (localStorage.getItem('theme') === 'dark' || 
+           (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches))
+        : false;
+      
+      if (currentTheme) {
         root.classList.add('dark');
+        setIsDarkMode(true);
       } else {
         root.classList.remove('dark');
+        setIsDarkMode(false);
       }
     }
   }, [isPublic]);
