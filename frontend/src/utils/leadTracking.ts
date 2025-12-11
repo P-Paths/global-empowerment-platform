@@ -126,7 +126,7 @@ class LeadTrackingService {
    * Open Calendly for meeting booking
    */
   openCalendly(leadData: LeadData, meetingType: 'discovery' | 'demo' = 'discovery') {
-    const calendlyUrl = `https://calendly.com/accorria/${meetingType}?name=${encodeURIComponent(leadData.name || '')}&email=${encodeURIComponent(leadData.email)}`;
+    const calendlyUrl = `https://calendly.com/gep/${meetingType}?name=${encodeURIComponent(leadData.name || '')}&email=${encodeURIComponent(leadData.email)}`;
     
     // Track meeting booking attempt
     this.trackGA4Event('meeting_booking_started', {

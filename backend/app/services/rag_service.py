@@ -1,5 +1,5 @@
 """
-RAG Service - Retrieval-Augmented Generation for Accorria
+RAG Service - Retrieval-Augmented Generation for GEP
 
 Provides real-time access to successful listings and market intelligence
 to enhance AI responses with actual data from successful sales.

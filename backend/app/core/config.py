@@ -1,6 +1,8 @@
 from pydantic_settings import BaseSettings
-from typing import List, Optional
+from pydantic import field_validator
+from typing import List, Optional, Union
 import os
+import json
 
 
 class Settings(BaseSettings):
@@ -71,8 +73,8 @@ class Settings(BaseSettings):
         "*.globalempowerment.app"
     ]
     
-    # CORS
-    ALLOWED_ORIGINS: List[str] = [
+    # CORS - Can be overridden via ALLOWED_ORIGINS environment variable
+    ALLOWED_ORIGINS: Union[List[str], str] = [
         "http://localhost:3000",
         "http://127.0.0.1:3000",
         "https://gep.vercel.app",
@@ -81,6 +83,21 @@ class Settings(BaseSettings):
         "https://globalempowerment.app",
         "https://www.globalempowerment.app"
     ]
+    
+    @field_validator('ALLOWED_ORIGINS', mode='before')
+    @classmethod
+    def parse_allowed_origins(cls, v):
+        """Parse ALLOWED_ORIGINS from env var if it's a string"""
+        if isinstance(v, str):
+            try:
+                # Try parsing as JSON array
+                parsed = json.loads(v)
+                if isinstance(parsed, list):
+                    return parsed
+            except json.JSONDecodeError:
+                # If not JSON, try comma-separated
+                return [o.strip() for o in v.split(",") if o.strip()]
+        return v
     
     # AI Services
     OPENAI_API_KEY: Optional[str] = None

@@ -1,5 +1,5 @@
 """
-Supabase Authentication API for Accorria MVP
+Supabase Authentication API for GEP
 Simplified auth endpoints using Supabase
 """
 

@@ -7,13 +7,9 @@
 // GEM Platform backend (gem-platform-480517 project)
 // Service: gem-backend
 const GEM_BACKEND_URL = 'https://gem-backend-1094576259070.us-central1.run.app';
-// Accorria backends (separate project - NOT for GEM Platform)
-const ACCORRIA_BACKEND_URL = 'https://accorria-backend-beta-19949436301.us-central1.run.app';
-const ACCORRIA_BACKEND_URL_ALT = 'https://accorria-backend-tv2qihivdq-uc.a.run.app';
 
-// Use GEM backend for GEM Platform
+// Use GEM backend for GEP Platform
 const PRODUCTION_BACKEND_URL = GEM_BACKEND_URL;
-const PRODUCTION_BACKEND_URL_ALT = ACCORRIA_BACKEND_URL; // Fallback only if needed
 
 // Development backend URL (if you want to use local backend during development)
 const DEVELOPMENT_BACKEND_URL = 'http://localhost:8000';

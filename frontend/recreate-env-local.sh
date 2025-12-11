@@ -63,7 +63,7 @@ NEXT_PUBLIC_API_URL=http://localhost:8000
 AUTH_FACEBOOK_ID=your-facebook-app-id-here
 AUTH_FACEBOOK_SECRET=your-facebook-app-secret-here
 
-# OpenAI API Key for Accorria Chatbot
+# OpenAI API Key for GEP Chatbot
 OPENAI_API_KEY=your-openai-api-key-here
 EOF
     echo "✅ Created .env.local from template"

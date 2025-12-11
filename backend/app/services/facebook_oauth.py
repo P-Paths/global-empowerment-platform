@@ -84,7 +84,7 @@ class FacebookPageInfo:
 class FacebookOAuthService:
     """
     Facebook OAuth2 service for multi-tenant user connections
-    Each user connects their own Facebook account to Accorria
+    Each user connects their own Facebook account to GEP
     """
     
     def __init__(self, config: FacebookOAuthConfig):
@@ -108,7 +108,7 @@ class FacebookOAuthService:
         Generate Facebook OAuth2 authorization URL for a user
         
         Args:
-            user_id: Accorria user ID
+            user_id: GEP user ID
             additional_scopes: Additional scopes beyond the default ones
             
         Returns:

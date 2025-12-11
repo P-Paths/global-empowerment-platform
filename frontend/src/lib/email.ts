@@ -26,7 +26,7 @@ export async function sendBetaSignupNotification(signupData: BetaSignupData) {
 
   const msg = {
     to: process.env.SENDGRID_TO_EMAIL,
-    from: process.env.SENDGRID_FROM_EMAIL || 'preston@accorria.com',
+    from: process.env.SENDGRID_FROM_EMAIL || 'noreply@globalempowerment.app',
     subject: `🎉 New Beta Signup: ${signupData.email}`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -76,39 +76,33 @@ export async function sendWelcomeEmail(signupData: BetaSignupData) {
 
   const msg = {
     to: signupData.email,
-    from: process.env.SENDGRID_FROM_EMAIL || 'preston@accorria.com',
-    subject: 'Welcome to Accorria Beta! 🚀',
+    from: process.env.SENDGRID_FROM_EMAIL || 'noreply@globalempowerment.app',
+    subject: 'Welcome to Global Empowerment Platform! 🚀',
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #1f2937;">Welcome to Accorria Beta!</h2>
+        <h2 style="color: #1f2937;">Welcome to Global Empowerment Platform!</h2>
         
         <p>Hi there!</p>
         
-        <p>Thanks for signing up for early access to Accorria! I'm Preston, the founder, and I'm excited to have you on board.</p>
+        <p>Thanks for signing up for early access to GEP! I'm Preston, the founder, and I'm excited to have you on board.</p>
         
-        <p>Accorria is an AI-powered platform that's revolutionizing how people buy and sell cars (and soon homes). We're building something special that will make the entire process faster, smarter, and more transparent.</p>
+        <p>Global Empowerment Platform (GEP) is an AI-powered platform that transforms members into funded entrepreneurs through digital influence growth, AI-powered business coaching, and VC-ready preparation. We're building something special that will help you grow your business and prepare for funding.</p>
         
         <div style="background: #f3f4f6; padding: 20px; border-radius: 8px; margin: 20px 0;">
           <h3 style="color: #374151; margin-top: 0;">What's Next?</h3>
           <ul>
-            <li>You'll be among the first to try our AI-powered listing platform</li>
+            <li>You'll be among the first to access our AI-powered business coaching platform</li>
             <li>We'll notify you as soon as early access is ready</li>
             <li>I'll personally send you exclusive updates and behind-the-scenes insights</li>
             <li>Your feedback will directly shape the product</li>
           </ul>
         </div>
 
-        <p>We're still gathering feedback and fine-tuning everything, so your input will be incredibly valuable. I'm personally committed to making this the best platform possible.</p>
-
-        <p>In the meantime, feel free to follow us on social media for updates:</p>
-        <ul>
-          <li><a href="https://www.facebook.com/accorria">Facebook</a></li>
-          <li><a href="https://www.linkedin.com/company/accorria">LinkedIn</a></li>
-        </ul>
+        <p>We're still gathering feedback and fine-tuning everything, so your input will be incredibly valuable. I'm personally committed to making this the best platform possible for entrepreneurs.</p>
 
         <p>Thanks again for believing in what we're building!</p>
         
-        <p>Best regards,<br>Preston Eaton<br>Founder, Accorria</p>
+        <p>Best regards,<br>Preston Eaton<br>Founder, Global Empowerment Platform</p>
       </div>
     `,
   };

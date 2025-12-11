@@ -2,7 +2,7 @@
 FROM activepieces/activepieces:latest
 
 # Set environment variables for production
-ENV AP_FRONTEND_URL=https://activepieces-accorria-19949436301.us-central1.run.app
+ENV AP_FRONTEND_URL=https://activepieces-gep-1094576259070.us-central1.run.app
 ENV AP_POSTGRES_HOST=db.your-project-ref.supabase.co
 ENV AP_POSTGRES_PORT=5432
 ENV AP_POSTGRES_USERNAME=postgres

@@ -43,7 +43,7 @@ def run_migration():
         return False
 
 if __name__ == "__main__":
-    print("🚀 Running Accorria Listings Table Migration")
+    print("🚀 Running GEP Listings Table Migration")
     print("=" * 50)
     
     success = run_migration()

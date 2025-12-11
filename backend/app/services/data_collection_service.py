@@ -1,5 +1,5 @@
 """
-Accorria Data Collection Service
+GEP Data Collection Service
 Implements best practices from major data companies for comprehensive, compliant data collection
 """
 

@@ -65,7 +65,7 @@ const CRMSidebar: React.FC<CRMSidebarProps> = ({ isOpen, onToggle }) => {
             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">A</span>
             </div>
-            <span className="ml-3 text-xl font-bold text-gray-900">Accorria CRM</span>
+            <span className="ml-3 text-xl font-bold text-gray-900">GEP CRM</span>
           </div>
           <button
             onClick={onToggle}

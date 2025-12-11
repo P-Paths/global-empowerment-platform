@@ -70,8 +70,8 @@ export default function BusinessExperienceScreen({ initialData, onNext, onBack }
       </div>
 
       {/* Options */}
-      <div className="flex-1 overflow-y-auto px-6 pt-6">
-        <div className="max-w-4xl mx-auto pb-24">
+      <div className="flex-1 overflow-y-auto px-6 pt-6 pb-32">
+        <div className="max-w-4xl mx-auto">
           {/* Desktop: 3 columns side-by-side */}
           <div className="hidden md:grid md:grid-cols-3 gap-4">
             {options.map((option) => (
@@ -148,18 +148,19 @@ export default function BusinessExperienceScreen({ initialData, onNext, onBack }
             ))}
           </div>
 
-          {/* Continue Button - Fixed at bottom */}
-          <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-10 px-6 py-4">
-            <div className="max-w-4xl mx-auto">
-              <button
-                onClick={handleNext}
-                disabled={!selected}
-                className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors shadow-sm active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Continue
-              </button>
-            </div>
-          </div>
+        </div>
+      </div>
+      
+      {/* Continue Button - Fixed at bottom */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-10 px-6 py-4">
+        <div className="max-w-4xl mx-auto">
+          <button
+            onClick={handleNext}
+            disabled={!selected}
+            className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors shadow-sm active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Continue
+          </button>
         </div>
       </div>
     </div>

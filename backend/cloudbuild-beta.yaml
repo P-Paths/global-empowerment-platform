@@ -1,12 +1,12 @@
 steps:
   # Build the container image from backend directory only
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/accorria-backend/accorria-backend-beta', '.']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/gem-backend/gem-backend', '.']
     dir: './backend'
   
   # Push the container image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/accorria-backend/accorria-backend-beta']
+    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/gem-backend/gem-backend']
   
   # Deploy container image to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -14,9 +14,9 @@ steps:
     args:
       - 'run'
       - 'deploy'
-      - 'accorria-backend-beta'
+      - 'gem-backend'
       - '--image'
-      - 'us-central1-docker.pkg.dev/$PROJECT_ID/accorria-backend/accorria-backend-beta'
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/gem-backend/gem-backend'
       - '--region'
       - 'us-central1'
       - '--platform'
@@ -42,5 +42,5 @@ steps:
       - '19949436301-compute@developer.gserviceaccount.com'
 
 images:
-  - 'us-central1-docker.pkg.dev/$PROJECT_ID/accorria-backend/accorria-backend-beta'
+  - 'us-central1-docker.pkg.dev/$PROJECT_ID/gem-backend/gem-backend'
 

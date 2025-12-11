@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Accorria Production Environment Setup
+# GEP Production Environment Setup
 # Secure configuration for 24/7 production deployment
 
 set -e
 
-echo "🔒 ACCORRIA PRODUCTION ENVIRONMENT SETUP"
+echo "🔒 GEP PRODUCTION ENVIRONMENT SETUP"
 echo "========================================"
 
 # Colors for output
@@ -150,7 +150,7 @@ main() {
     print_status "Creating production environment file..."
     
     cat > .env.production << EOF
-# Accorria Production Environment
+# GEP Production Environment
 # Generated on $(date)
 # DO NOT COMMIT THIS FILE TO VERSION CONTROL
 
@@ -171,7 +171,7 @@ JWT_SECRET_KEY=$JWT_SECRET_KEY
 SENDGRID_API_KEY=$SENDGRID_API_KEY
 
 # Application Configuration
-APP_NAME=Accorria
+APP_NAME=GEP
 APP_VERSION=1.0.0
 ENVIRONMENT=production
 

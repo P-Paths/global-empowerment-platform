@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     
     // Get the backend URL from environment variable
-    const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'https://accorria-backend-19949436301.us-central1.run.app';
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'https://gem-backend-1094576259070.us-central1.run.app';
     
     // Forward the request to the backend
     const response = await fetch(`${backendUrl}/api/v1/user/log_action`, {

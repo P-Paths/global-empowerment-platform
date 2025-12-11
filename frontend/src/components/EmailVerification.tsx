@@ -66,7 +66,7 @@ export const EmailVerification: React.FC<EmailVerificationProps> = ({
               <div className="ml-3">
                 <h3 className="text-sm font-medium text-blue-800">Check your inbox</h3>
                 <div className="mt-2 text-sm text-blue-700">
-                  <p>Click the verification link in the email to activate your account and access Accorria.</p>
+                  <p>Click the verification link in the email to activate your account and access GEP.</p>
                 </div>
               </div>
             </div>

@@ -31,7 +31,7 @@ export default function EmailCampaignsPage() {
         {
           id: '1',
           name: 'Welcome Series - New Dealers',
-          subject: 'Welcome to Accorria - Your Inventory Management Solution',
+          subject: 'Welcome to GEP - Your Business Growth Platform',
           status: 'sent',
           recipients: 25,
           sent: 25,
@@ -53,7 +53,7 @@ export default function EmailCampaignsPage() {
         {
           id: '3',
           name: 'Follow-up - Demo Request',
-          subject: 'Ready to see Accorria in action?',
+          subject: 'Ready to see GEP in action?',
           status: 'draft',
           recipients: 0,
           sent: 0,

@@ -177,7 +177,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (trimmedEmail === 'user' && trimmedPassword === 'register') {
         const mockUser: User = {
           id: '00000000-0000-0000-0000-000000000123',
-          email: 'demo@accorria.com',
+          email: 'demo@globalempowerment.app',
           email_confirmed_at: new Date().toISOString(),
           created_at: new Date().toISOString(),
           app_metadata: {},
@@ -311,7 +311,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (trimmedEmail === 'user' && trimmedPassword === 'register') {
         const mockUser: User = {
           id: '00000000-0000-0000-0000-000000000123',
-          email: 'demo@accorria.com',
+          email: 'demo@globalempowerment.app',
           email_confirmed_at: new Date().toISOString(),
           created_at: new Date().toISOString(),
           app_metadata: {},

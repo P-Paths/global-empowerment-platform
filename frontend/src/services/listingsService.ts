@@ -213,7 +213,7 @@ export class ListingsService {
       const { data: { user } } = await this.supabase.auth.getUser();
       
       // For development, return mock data if no Supabase user or if it's the demo user
-      if (!user || user.id === '00000000-0000-0000-0000-000000000123' || user.email === 'preston@accorria.com') {
+      if (!user || user.id === '00000000-0000-0000-0000-000000000123' || user.email === 'preston@path-suite.com') {
         console.log('Demo user detected, returning mock data for development');
         const mockListings = this.getMockListings();
         console.log('Mock listings loaded:', mockListings.length, 'listings');
@@ -270,11 +270,11 @@ export class ListingsService {
       console.log('User check conditions:', {
         noUser: !user,
         isDemoId: user?.id === '00000000-0000-0000-0000-000000000123',
-        isPrestonEmail: user?.email === 'preston@accorria.com'
+        isPrestonEmail: user?.email === 'preston@path-suite.com'
       });
       
       // For demo user or any user without a profile, store in localStorage instead of database
-      if (!user || user.id === '00000000-0000-0000-0000-000000000123' || user.email === 'preston@accorria.com') {
+      if (!user || user.id === '00000000-0000-0000-0000-000000000123' || user.email === 'preston@path-suite.com') {
         console.log('✅ Demo user detected, storing listing in localStorage');
         return this.createMockListing(listingData);
       }
@@ -287,7 +287,7 @@ export class ListingsService {
           title: listingData.title,
           description: listingData.description,
           price: listingData.price,
-          platform: listingData.platforms?.[0] || 'accorria',
+          platform: listingData.platforms?.[0] || 'gep',
           status: listingData.status,
           images: listingData.images,
           user_id: user.id,
@@ -333,7 +333,7 @@ export class ListingsService {
           title: updates.title,
           description: updates.description,
           price: updates.price,
-          platform: updates.platforms?.[0] || 'accorria',
+          platform: updates.platforms?.[0] || 'gep',
           status: updates.status,
           images: updates.images,
           updated_at: new Date().toISOString()
@@ -363,7 +363,7 @@ export class ListingsService {
       const { data: { user } } = await this.supabase.auth.getUser();
       
       // For demo users, delete from localStorage
-      if (!user || user.id === '00000000-0000-0000-0000-000000000123' || user.email === 'preston@accorria.com') {
+      if (!user || user.id === '00000000-0000-0000-0000-000000000123' || user.email === 'preston@path-suite.com') {
         console.log('Demo user detected, deleting from localStorage');
         const testListings = JSON.parse(localStorage.getItem('testListings') || '[]');
         const demoListings = JSON.parse(localStorage.getItem('demoListings') || '[]');
@@ -483,7 +483,7 @@ export class ListingsService {
       const { data: { user } } = await this.supabase.auth.getUser();
       
       // For demo users, skip migration to prevent quota issues
-      if (!user || user.id === '00000000-0000-0000-0000-000000000123' || user.email === 'preston@accorria.com') {
+      if (!user || user.id === '00000000-0000-0000-0000-000000000123' || user.email === 'preston@path-suite.com') {
         console.log('Demo user detected, skipping migration to prevent quota issues');
         return true;
       }

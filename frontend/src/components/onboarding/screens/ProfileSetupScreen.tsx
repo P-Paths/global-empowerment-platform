@@ -162,9 +162,9 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
         </div>
       </div>
 
-      {/* Form */}
-      <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto px-6 pt-6">
-        <div className="max-w-md mx-auto space-y-6 pb-24">
+      {/* Form - Scrollable container with padding for fixed button */}
+      <form id="profile-form" onSubmit={handleSubmit} className="flex-1 overflow-y-auto px-6 pt-6 pb-32">
+        <div className="max-w-md mx-auto space-y-6">
           {/* Profile Photo */}
           <div className="flex flex-col items-center">
             <label className="cursor-pointer">
@@ -299,19 +299,21 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
             />
           </div>
 
-          {/* Submit Button - Fixed at bottom of scrollable area */}
-          <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-10 px-6 py-4">
-            <div className="max-w-md mx-auto">
-              <button
-                type="submit"
-                className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors shadow-sm active:scale-95"
-              >
-                Continue
-              </button>
-            </div>
-          </div>
         </div>
       </form>
+      
+      {/* Submit Button - Fixed at bottom, outside form */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-10 px-6 py-4">
+        <div className="max-w-md mx-auto">
+          <button
+            type="submit"
+            form="profile-form"
+            className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors shadow-sm active:scale-95"
+          >
+            Continue
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

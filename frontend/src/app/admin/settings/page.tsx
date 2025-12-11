@@ -43,7 +43,7 @@ export default function SettingsPage() {
       warmThreshold: 50
     },
     emailTemplates: {
-      welcomeEmail: 'Welcome to Accorria! We\'re excited to help you manage your inventory.',
+      welcomeEmail: 'Welcome to GEP! We\'re excited to help you grow your business.',
       followUpEmail: 'Thanks for your interest! Let\'s schedule a demo.',
       confirmationEmail: 'Your early access request has been confirmed.'
     }

@@ -36,7 +36,7 @@ export default function QRGeneratorPage() {
     <div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">QR Code Generator</h1>
-        <p className="mt-2 text-gray-600">Generate QR codes for sharing Accorria links</p>
+        <p className="mt-2 text-gray-600">Generate QR codes for sharing GEP links</p>
       </div>
 
         {/* Custom URL Generator */}
@@ -106,7 +106,7 @@ export default function QRGeneratorPage() {
         <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
           <h3 className="text-lg font-semibold text-blue-900 mb-2">How to Use</h3>
           <ul className="text-blue-800 space-y-1">
-            <li>• Generate QR codes for easy sharing of Accorria links</li>
+            <li>• Generate QR codes for easy sharing of GEP links</li>
             <li>• Use UTM parameters to track where signups come from</li>
             <li>• Download QR codes for offline use (print, social media, etc.)</li>
             <li>• Copy URLs to clipboard for easy sharing</li>

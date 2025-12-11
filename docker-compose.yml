@@ -4,35 +4,35 @@ services:
   # PostgreSQL Database
   postgres:
     image: postgres:15
-    container_name: accorria-postgres
+    container_name: gep-postgres
     environment:
-      POSTGRES_DB: accorria
-      POSTGRES_USER: accorria_user
-      POSTGRES_PASSWORD: accorria_password
+      POSTGRES_DB: gep
+      POSTGRES_USER: gep_user
+      POSTGRES_PASSWORD: gep_password
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - accorria-network
+      - gep-network
 
   # Redis for caching and sessions
   redis:
     image: redis:7-alpine
-    container_name: accorria-redis
+    container_name: gep-redis
     ports:
       - "6379:6379"
     volumes:
       - redis_data:/data
     networks:
-      - accorria-network
+      - gep-network
 
   # Backend API
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: accorria-backend
+    container_name: gep-backend
     environment:
       - DATABASE_URL=${DATABASE_URL}
       - REDIS_URL=redis://redis:6379
@@ -47,7 +47,7 @@ services:
       - ./backend:/app
       - /app/venv
     networks:
-      - accorria-network
+      - gep-network
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
   # Frontend
@@ -55,7 +55,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: accorria-frontend
+    container_name: gep-frontend
     ports:
       - "3000:3000"
     environment:
@@ -63,7 +63,7 @@ services:
     depends_on:
       - backend
     networks:
-      - accorria-network
+      - gep-network
     command: npm run start
 
   # Celery worker for background tasks
@@ -71,7 +71,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: accorria-celery-worker
+    container_name: gep-celery-worker
     environment:
       - DATABASE_URL=${DATABASE_URL}
       - REDIS_URL=redis://redis:6379
@@ -82,7 +82,7 @@ services:
     volumes:
       - ./backend:/app
     networks:
-      - accorria-network
+      - gep-network
     command: celery -A app.celery:celery_app worker --loglevel=info
 
   # Celery beat for scheduled tasks
@@ -90,7 +90,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: accorria-celery-beat
+    container_name: gep-celery-beat
     environment:
       - DATABASE_URL=${DATABASE_URL}
       - REDIS_URL=redis://redis:6379
@@ -101,7 +101,7 @@ services:
     volumes:
       - ./backend:/app
     networks:
-      - accorria-network
+      - gep-network
     command: celery -A app.celery:celery_app beat --loglevel=info
 
 volumes:
@@ -109,5 +109,5 @@ volumes:
   redis_data:
 
 networks:
-  accorria-network:
+  gep-network:
     driver: bridge 

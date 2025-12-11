@@ -34,11 +34,11 @@ export function useSupabaseSession(deviceId?: string): UseSupabaseSessionReturn 
     
     // Generate a persistent device ID (stored in sessionStorage, not localStorage)
     // sessionStorage is OK for device ID as it's not critical data
-    const storedDeviceId = sessionStorage.getItem('accorria_device_id');
+    const storedDeviceId = sessionStorage.getItem('gep_device_id');
     if (storedDeviceId) return storedDeviceId;
     
     const newDeviceId = `device_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    sessionStorage.setItem('accorria_device_id', newDeviceId);
+    sessionStorage.setItem('gep_device_id', newDeviceId);
     return newDeviceId;
   }, [deviceId]);
 
@@ -186,11 +186,11 @@ export function useSupabaseSession(deviceId?: string): UseSupabaseSessionReturn 
 export function ensureNoLocalStorageUsage() {
   // Check for any localStorage usage of critical data
   const criticalKeys = [
-    'accorria_listings',
-    'accorria_drafts',
-    'accorria_messages',
-    'accorria_knowledge',
-    'accorria_session',
+    'gep_listings',
+    'gep_drafts',
+    'gep_messages',
+    'gep_knowledge',
+    'gep_session',
   ];
 
   criticalKeys.forEach((key) => {

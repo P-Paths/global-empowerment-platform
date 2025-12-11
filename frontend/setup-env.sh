@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Setup environment variables for Accorria Frontend
+# Setup environment variables for GEP Frontend
 
-echo "🚀 Setting up Accorria Frontend Environment Variables"
+echo "🚀 Setting up GEP Frontend Environment Variables"
 
 # Create .env.local file
 cat > .env.local << EOF

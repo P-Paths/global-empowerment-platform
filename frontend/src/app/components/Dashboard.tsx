@@ -160,7 +160,7 @@ export default function Dashboard({
             🚀 Welcome back, Preston!
           </Typography>
           <Typography variant="subtitle1" color="text.secondary">
-            Here's your Accorria dashboard overview
+            Here's your GEP dashboard overview
           </Typography>
         </Box>
         <Button

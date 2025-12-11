@@ -5,7 +5,7 @@ import os
 os.environ.setdefault('CELERY_CONFIG_MODULE', 'app.core.config')
 
 celery_app = Celery(
-    'accorria',
+    'gep',
     broker=os.getenv('CELERY_BROKER_URL', 'redis://redis:6379/0'),
     backend=os.getenv('CELERY_RESULT_BACKEND', 'redis://redis:6379/0')
 )

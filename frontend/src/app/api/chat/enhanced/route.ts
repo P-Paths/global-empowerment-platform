@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'https://accorria-backend-19949436301.us-central1.run.app';
+const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'https://gem-backend-1094576259070.us-central1.run.app';
 
 export async function POST(request: NextRequest) {
   try {
