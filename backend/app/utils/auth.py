@@ -41,12 +41,17 @@ def get_current_user(request: Request) -> Dict[str, Any]:
     
     # In production, require auth header
     if not auth_header or not auth_header.startswith("Bearer "):
+        logger.warning(f"Missing or invalid authorization header. Header present: {auth_header is not None}, starts with Bearer: {auth_header.startswith('Bearer ') if auth_header else False}")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, 
             detail="Missing or invalid authorization header"
         )
 
     token = auth_header.split(" ")[1]
+    
+    # Log token info for debugging (first 20 chars only for security)
+    logger.info(f"Received token (first 20 chars): {token[:20]}...")
+    logger.info(f"SUPABASE_JWT_SECRET is set: {SUPABASE_JWT_SECRET is not None}")
 
     try:
         # Decode and verify the JWT token
@@ -56,20 +61,21 @@ def get_current_user(request: Request) -> Dict[str, Any]:
             algorithms=["HS256"]
         )
         
-        logger.info(f"Authenticated user: {payload.get('email', 'unknown')}")
+        logger.info(f"✅ Authenticated user: {payload.get('email', 'unknown')}, user_id: {payload.get('sub', 'unknown')}")
         return payload
         
     except JWTError as e:
-        logger.error(f"JWT decode error: {e}")
+        logger.error(f"❌ JWT decode error: {type(e).__name__}: {str(e)}")
+        logger.error(f"Token length: {len(token)}, JWT secret length: {len(SUPABASE_JWT_SECRET) if SUPABASE_JWT_SECRET else 0}")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, 
-            detail="Invalid or expired token"
+            detail=f"Invalid or expired token: {str(e)}"
         )
     except Exception as e:
-        logger.error(f"Authentication error: {e}")
+        logger.error(f"❌ Authentication error: {type(e).__name__}: {str(e)}")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, 
-            detail="Authentication failed"
+            detail=f"Authentication failed: {str(e)}"
         )
 
 def get_optional_user(request: Request) -> Optional[Dict[str, Any]]:

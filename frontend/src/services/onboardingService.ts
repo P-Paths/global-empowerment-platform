@@ -303,7 +303,19 @@ export class OnboardingService {
         onboarding_complete: data.onboarding_complete
       };
       
-      console.log('📤 Calling backend API to update profile:', { apiUrl, userId });
+      // Verify we have a session before making the request
+      const { data: { session: currentSession } } = await this.supabase.auth.getSession();
+      if (!currentSession?.access_token) {
+        console.error('❌ No access token available for API call');
+        return { error: new Error('Not authenticated. Please log in again.') };
+      }
+      
+      console.log('📤 Calling backend API to update profile:', { 
+        apiUrl, 
+        userId,
+        hasToken: !!currentSession.access_token,
+        tokenLength: currentSession.access_token.length
+      });
       
       const response = await authenticatedFetch(apiUrl, {
         method: 'POST',

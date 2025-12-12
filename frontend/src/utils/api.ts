@@ -20,6 +20,24 @@ export async function authenticatedFetch(
     // Add authorization header if user is authenticated
     if (session?.access_token) {
       headers['Authorization'] = `Bearer ${session.access_token}`;
+      // Log token info for debugging (first 20 chars only)
+      if (process.env.NODE_ENV === 'development' || url.includes('onboarding')) {
+        console.log('🔐 Auth token present:', {
+          hasToken: !!session.access_token,
+          tokenLength: session.access_token.length,
+          tokenPreview: session.access_token.substring(0, 20) + '...',
+          userId: session.user?.id
+        });
+      }
+    } else {
+      // Log when token is missing
+      if (process.env.NODE_ENV === 'development' || url.includes('onboarding')) {
+        console.warn('⚠️ No auth token in session:', {
+          hasSession: !!session,
+          hasUser: !!session?.user,
+          url
+        });
+      }
     }
     
     // Use provided signal or create a default timeout
