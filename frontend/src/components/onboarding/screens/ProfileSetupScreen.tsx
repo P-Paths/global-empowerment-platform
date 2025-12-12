@@ -95,61 +95,77 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
     }
   };
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     
-    // Upload profile photo if selected
-    let avatarUrl = null;
-    if (profilePhoto && user) {
-      try {
-        const { supabase } = await import('@/utils/supabase');
-        const fileExt = profilePhoto.name.split('.').pop() || 'jpg';
-        const fileName = `${user.id}-${Date.now()}.${fileExt}`;
-        const filePath = `avatars/${fileName}`;
-
-        const { data: uploadData, error: uploadError } = await supabase.storage
-          .from('car-images') // Using existing bucket, or create 'avatars' bucket
-          .upload(filePath, profilePhoto, {
-            cacheControl: '3600',
-            upsert: true
-          });
-
-        if (!uploadError && uploadData) {
-          const { data: urlData } = supabase.storage
-            .from('car-images')
-            .getPublicUrl(filePath);
-          avatarUrl = urlData.publicUrl;
-          
-          // Update profile with avatar URL
-          const { error: updateError } = await supabase
-            .from('profiles')
-            .update({ avatar_url: avatarUrl })
-            .eq('id', user.id);
-          
-          if (updateError) {
-            console.error('Error updating profile with avatar:', updateError);
-          }
-        } else {
-          console.error('Error uploading avatar:', uploadError);
-        }
-      } catch (error) {
-        console.error('Error handling avatar upload:', error);
-        // Continue with onboarding even if avatar upload fails
-      }
+    // Prevent double submission
+    if (isSubmitting) {
+      return;
     }
     
-    onNext(formData);
+    setIsSubmitting(true);
+    
+    try {
+      // Upload profile photo if selected (non-blocking)
+      if (profilePhoto && user) {
+        // Don't await - let it upload in background
+        import('@/utils/supabase').then(({ supabase }) => {
+          const fileExt = profilePhoto.name.split('.').pop() || 'jpg';
+          const fileName = `${user.id}-${Date.now()}.${fileExt}`;
+          const filePath = `avatars/${fileName}`;
+
+          supabase.storage
+            .from('car-images')
+            .upload(filePath, profilePhoto, {
+              cacheControl: '3600',
+              upsert: true
+            })
+            .then(({ data: uploadData, error: uploadError }) => {
+              if (!uploadError && uploadData) {
+                const { data: urlData } = supabase.storage
+                  .from('car-images')
+                  .getPublicUrl(filePath);
+                
+                supabase
+                  .from('profiles')
+                  .update({ avatar_url: urlData.publicUrl })
+                  .eq('id', user.id)
+                  .then(() => {
+                    console.log('Avatar uploaded successfully');
+                  });
+              } else {
+                console.error('Error uploading avatar:', uploadError);
+              }
+            })
+            .catch((error: any) => {
+              console.error('Error handling avatar upload:', error);
+            });
+        }).catch((error: any) => {
+          console.error('Error importing supabase:', error);
+        });
+      }
+      
+      // Immediately proceed with onboarding
+      onNext(formData);
+    } catch (error) {
+      console.error('Error in handleSubmit:', error);
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <div className="min-h-full w-full flex flex-col bg-white">
+    <div className="h-full w-full flex flex-col bg-white overflow-hidden">
       {/* Top Center Header Banner */}
-      <div className="w-full bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-200 px-6 py-6">
+      <div className="flex-shrink-0 w-full bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-200 px-6 py-6">
         <div className="max-w-2xl mx-auto">
           <div className="flex items-center justify-between mb-4">
             <button
               onClick={onBack}
               className="text-gray-600 hover:text-gray-900 transition-colors"
+              type="button"
             >
               <ArrowLeftIcon className="w-6 h-6" />
             </button>
@@ -163,7 +179,12 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
       </div>
 
       {/* Form - Scrollable container with padding for fixed button */}
-      <form id="profile-form" onSubmit={handleSubmit} className="flex-1 overflow-y-auto px-6 pt-6 pb-32">
+      <form 
+        id="profile-form" 
+        onSubmit={handleSubmit} 
+        className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden px-6 pt-6 pb-32"
+        style={{ WebkitOverflowScrolling: 'touch' }}
+      >
         <div className="max-w-md mx-auto space-y-6">
           {/* Profile Photo */}
           <div className="flex flex-col items-center">
@@ -197,7 +218,7 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
           </div>
 
           {/* First Name */}
-          <div>
+          <div className="relative">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               First Name *
             </label>
@@ -206,12 +227,13 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
               required
               value={formData.first_name}
               onChange={(e) => setFormData(prev => ({ ...prev, first_name: e.target.value }))}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none text-gray-900 bg-white"
+              style={{ outline: 'none', boxShadow: 'none' }}
             />
           </div>
 
           {/* Last Name */}
-          <div>
+          <div className="relative">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Last Name *
             </label>
@@ -220,12 +242,13 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
               required
               value={formData.last_name}
               onChange={(e) => setFormData(prev => ({ ...prev, last_name: e.target.value }))}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none text-gray-900 bg-white"
+              style={{ outline: 'none', boxShadow: 'none' }}
             />
           </div>
 
           {/* Email */}
-          <div>
+          <div className="relative">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Email *
             </label>
@@ -234,12 +257,13 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
               required
               value={formData.email}
               onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none text-gray-900 bg-white"
+              style={{ outline: 'none', boxShadow: 'none' }}
             />
           </div>
 
           {/* Phone */}
-          <div>
+          <div className="relative">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Phone (Optional)
             </label>
@@ -263,12 +287,13 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
               }}
               placeholder="(555) 123-4567"
               maxLength={14}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none text-gray-900 bg-white"
+              style={{ outline: 'none', boxShadow: 'none' }}
             />
           </div>
 
           {/* Zip Code */}
-          <div>
+          <div className="relative">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Zip Code *
             </label>
@@ -279,12 +304,13 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
               value={formData.zip}
               onChange={(e) => setFormData(prev => ({ ...prev, zip: e.target.value.replace(/\D/g, '') }))}
               placeholder="48239"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none text-gray-900 bg-white"
+              style={{ outline: 'none', boxShadow: 'none' }}
             />
           </div>
 
           {/* City (Auto-filled) */}
-          <div>
+          <div className="relative">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               City *
             </label>
@@ -295,7 +321,8 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
               onChange={(e) => setFormData(prev => ({ ...prev, city: e.target.value }))}
               disabled={loadingCity}
               placeholder={loadingCity ? 'Loading...' : 'Detroit'}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-50 text-gray-900 bg-white"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none disabled:bg-gray-50 text-gray-900 bg-white"
+              style={{ outline: 'none', boxShadow: 'none' }}
             />
           </div>
 
@@ -308,9 +335,18 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
           <button
             type="submit"
             form="profile-form"
-            className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors shadow-sm active:scale-95"
+            disabled={isSubmitting}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              const form = document.getElementById('profile-form') as HTMLFormElement;
+              if (form) {
+                form.requestSubmit();
+              }
+            }}
+            className="w-full bg-blue-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-blue-700 active:bg-blue-800 transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
           >
-            Continue
+            {isSubmitting ? 'Processing...' : 'Continue'}
           </button>
         </div>
       </div>

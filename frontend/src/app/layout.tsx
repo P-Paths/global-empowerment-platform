@@ -30,12 +30,12 @@ export const metadata: Metadata = {
     'Grow your digital influence, build your brand, and prepare for capital investment. The social growth engine that transforms entrepreneurs into fundable founders.',
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/favicon-192x192.png', sizes: '192x192', type: 'image/png' },
-      { url: '/favicon-512x512.png', sizes: '512x512', type: 'image/png' },
+      { url: '/GEP LOGO.png', sizes: 'any' },
+      { url: '/GEP LOGO.png', sizes: '192x192', type: 'image/png' },
+      { url: '/GEP LOGO.png', sizes: '512x512', type: 'image/png' },
     ],
-    apple: '/favicon-192x192.png',
-    shortcut: '/favicon.ico',
+    apple: '/GEP LOGO.png',
+    shortcut: '/GEP LOGO.png',
   },
   openGraph: {
     title: 'Global Empowerment Platform (GEP) – Transform Members Into Funded Entrepreneurs',

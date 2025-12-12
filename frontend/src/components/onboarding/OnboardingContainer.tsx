@@ -158,7 +158,10 @@ export default function OnboardingContainer({ onComplete }: OnboardingContainerP
           style={{
             transform: `translateX(-${currentScreen * 100}vw)`,
             transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-            width: `${totalScreens * 100}vw`
+            width: `${totalScreens * 100}vw`,
+            willChange: 'transform',
+            backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden'
           }}
         >
           {/* Screen 1: Welcome */}
@@ -166,7 +169,7 @@ export default function OnboardingContainer({ onComplete }: OnboardingContainerP
             <WelcomeScreen onNext={() => handleNext()} />
           </div>
           {/* Screen 2: Profile Setup */}
-          <div className="w-screen flex-shrink-0 h-full overflow-y-auto">
+          <div className="w-screen flex-shrink-0 h-full overflow-hidden">
             <ProfileSetupScreen
               initialData={onboardingData}
               onNext={(data) => handleNext(data)}
@@ -195,7 +198,7 @@ export default function OnboardingContainer({ onComplete }: OnboardingContainerP
           </div>
         </div>
       ) : (
-        <div className="h-full w-full relative">
+        <div className="h-full w-full relative overflow-hidden">
           {/* Desktop: Show only current screen with fade */}
           {currentScreen === 0 && <WelcomeScreen onNext={() => handleNext()} />}
           {currentScreen === 1 && (

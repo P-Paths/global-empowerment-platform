@@ -79,7 +79,7 @@ export class ListingsService {
       title: listingData.title,
       description: listingData.description,
       price: listingData.price,
-      platforms: listingData.platforms || ['accorria'],
+      platforms: listingData.platforms || ['gep'],
       status: listingData.status || 'active',
       images: preservedImages, // Preserve all URLs (Supabase, http/https, and data URLs)
       make: listingData.make,

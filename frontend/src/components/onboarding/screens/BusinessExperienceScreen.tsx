@@ -49,9 +49,9 @@ export default function BusinessExperienceScreen({ initialData, onNext, onBack }
   };
 
   return (
-    <div className="min-h-full w-full flex flex-col bg-white">
+    <div className="h-full w-full flex flex-col bg-white">
       {/* Top Center Header Banner */}
-      <div className="w-full bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-200 px-6 py-6">
+      <div className="flex-shrink-0 w-full bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-200 px-6 py-6">
         <div className="max-w-2xl mx-auto">
           <div className="flex items-center justify-between mb-4">
             <button
@@ -70,7 +70,7 @@ export default function BusinessExperienceScreen({ initialData, onNext, onBack }
       </div>
 
       {/* Options */}
-      <div className="flex-1 overflow-y-auto px-6 pt-6 pb-32">
+      <div className="flex-1 min-h-0 overflow-y-auto px-6 pt-6 pb-32">
         <div className="max-w-4xl mx-auto">
           {/* Desktop: 3 columns side-by-side */}
           <div className="hidden md:grid md:grid-cols-3 gap-4">

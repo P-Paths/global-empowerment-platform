@@ -1,4 +1,5 @@
 {
+  "name": "global-empowerment-platform",
   "scripts": {
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:backend": "cd backend && bash -c 'source venv/bin/activate && python start_server.py'",

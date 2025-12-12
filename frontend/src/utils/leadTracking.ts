@@ -184,7 +184,7 @@ class LeadTrackingService {
    */
   private fireCustomEvent(eventName: string, data: Record<string, any>) {
     // Dispatch custom event for other tracking systems
-    window.dispatchEvent(new CustomEvent('accorria_lead_event', {
+    window.dispatchEvent(new CustomEvent('gep_lead_event', {
       detail: { eventName, data }
     }));
   }
