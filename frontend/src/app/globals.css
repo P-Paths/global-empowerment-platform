@@ -183,23 +183,49 @@ img {
 /* Prevent rendering artifacts and diagonal lines in onboarding */
 html, body {
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
   transform-style: flat !important;
+  backface-visibility: visible !important;
+  -webkit-backface-visibility: visible !important;
+  perspective: none !important;
+  -webkit-perspective: none !important;
 }
 
 .onboarding-container,
-[class*="onboarding"] {
-  contain: paint;
+[class*="onboarding"],
+[class*="Onboarding"] {
+  contain: paint layout style;
   transform-style: flat !important;
+  backface-visibility: visible !important;
+  -webkit-backface-visibility: visible !important;
+  isolation: auto !important;
+  will-change: auto !important;
+}
+
+/* Kill all 3D transforms and GPU acceleration artifacts */
+[class*="onboarding"] *,
+[class*="Onboarding"] * {
+  transform-style: flat !important;
+  backface-visibility: visible !important;
+  -webkit-backface-visibility: visible !important;
+  perspective: none !important;
+  -webkit-perspective: none !important;
 }
 
 [class*="onboarding"] [class*="fixed"],
 [class*="Onboarding"] [class*="fixed"] {
   border-top: none !important;
+  border-bottom: none !important;
   background-image: none !important;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1) !important;
+  transform: translateZ(0) !important;
+  -webkit-transform: translateZ(0) !important;
+  backface-visibility: visible !important;
+  -webkit-backface-visibility: visible !important;
 }
 
 [class*="onboarding"] [class*="fixed"]::before,
@@ -208,14 +234,25 @@ html, body {
 [class*="Onboarding"] [class*="fixed"]::after {
   display: none !important;
   content: none !important;
+  background-image: none !important;
 }
 
 /* Remove any background patterns or decorative elements */
-[class*="onboarding"] * {
+[class*="onboarding"] *,
+[class*="Onboarding"] * {
   background-image: none !important;
 }
 
 [class*="onboarding"] *::before,
-[class*="onboarding"] *::after {
+[class*="onboarding"] *::after,
+[class*="Onboarding"] *::before,
+[class*="Onboarding"] *::after {
   background-image: none !important;
+}
+
+/* Ensure smooth transforms without GPU artifacts */
+.onboarding-container {
+  will-change: transform;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }

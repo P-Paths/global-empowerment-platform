@@ -83,19 +83,23 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # CORS middleware - MUST be first to handle preflight requests
 # Ensure localhost:3000 is always included and all GEP domains
+# Note: FastAPI CORS doesn't support wildcards, so we need to allow all Vercel preview domains
 cors_origins = list(set(settings.ALLOWED_ORIGINS + [
     "http://localhost:3000", 
     "http://127.0.0.1:3000",
     "https://www.globalempowerment.com",
     "https://globalempowerment.com",
     "https://gep.vercel.app",
-    "https://global-empowerment-platform.vercel.app",
-    "https://global-empowerment-platform-*.vercel.app"
+    "https://global-empowerment-platform.vercel.app"
 ]))
+
+# Add all Vercel preview domains (they follow pattern: global-empowerment-platform-*.vercel.app)
+# Since FastAPI doesn't support wildcards, we'll handle this in the middleware
 logger.info(f"CORS origins configured: {cors_origins}")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=cors_origins,
+    allow_origin_regex=r"https://global-empowerment-platform-.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
     allow_headers=["*"],
@@ -139,6 +143,31 @@ async def health_check():
 @app.middleware("http")
 async def add_security_headers(request: Request, call_next):
     """Add comprehensive security headers to all responses"""
+    import re
+    
+    # Handle OPTIONS preflight requests explicitly
+    if request.method == "OPTIONS":
+        origin = request.headers.get("origin")
+        # Check if origin is allowed (either in list or matches Vercel pattern)
+        is_allowed = False
+        if origin:
+            if origin in cors_origins:
+                is_allowed = True
+            elif re.match(r"https://global-empowerment-platform-.*\.vercel\.app", origin):
+                is_allowed = True
+        
+        if is_allowed:
+            response = Response(status_code=200)
+            response.headers["Access-Control-Allow-Origin"] = origin
+            response.headers["Access-Control-Allow-Credentials"] = "true"
+            response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS, PATCH"
+            response.headers["Access-Control-Allow-Headers"] = "*"
+            return response
+        else:
+            # Return 200 even if origin not in list (let CORS middleware handle it)
+            response = Response(status_code=200)
+            return response
+    
     try:
         response = await call_next(request)
     except Exception as e:
@@ -149,13 +178,15 @@ async def add_security_headers(request: Request, call_next):
             content={"error": "Internal server error", "message": "Something went wrong"}
         )
     
-    # Ensure CORS headers are always present
+    # Ensure CORS headers are always present for allowed origins
     origin = request.headers.get("origin")
-    if origin and origin in cors_origins:
-        if "Access-Control-Allow-Origin" not in response.headers:
-            response.headers["Access-Control-Allow-Origin"] = origin
-        if "Access-Control-Allow-Credentials" not in response.headers:
-            response.headers["Access-Control-Allow-Credentials"] = "true"
+    if origin:
+        is_allowed = origin in cors_origins or re.match(r"https://global-empowerment-platform-.*\.vercel\.app", origin)
+        if is_allowed:
+            if "Access-Control-Allow-Origin" not in response.headers:
+                response.headers["Access-Control-Allow-Origin"] = origin
+            if "Access-Control-Allow-Credentials" not in response.headers:
+                response.headers["Access-Control-Allow-Credentials"] = "true"
     
     # Add all security headers from configuration
     try:
