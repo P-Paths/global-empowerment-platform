@@ -179,3 +179,39 @@ img {
   display: none !important;
   content: none !important;
 }
+
+/* Prevent rendering artifacts and diagonal lines in onboarding */
+[class*="onboarding"] [class*="fixed"],
+[class*="Onboarding"] [class*="fixed"] {
+  border-top: none !important;
+  background-image: none !important;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+[class*="onboarding"] [class*="fixed"]::before,
+[class*="onboarding"] [class*="fixed"]::after,
+[class*="Onboarding"] [class*="fixed"]::before,
+[class*="Onboarding"] [class*="fixed"]::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Prevent transform rendering artifacts that cause diagonal lines */
+[class*="onboarding"] {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+
+/* Remove any background patterns or decorative elements */
+[class*="onboarding"] * {
+  background-image: none !important;
+}
+
+[class*="onboarding"] *::before,
+[class*="onboarding"] *::after {
+  background-image: none !important;
+}

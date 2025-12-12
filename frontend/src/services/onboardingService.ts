@@ -1,5 +1,5 @@
 import { supabaseBrowser } from '@/lib/supabaseBrowser';
-import { getApiUrl } from '@/config/api';
+import { getApiUrl, getBackendUrl } from '@/config/api';
 import { authenticatedFetch } from '@/utils/api';
 
 export interface OnboardingData {
@@ -280,7 +280,19 @@ export class OnboardingService {
 
       // Use backend API to bypass RLS (uses service role)
       // The backend API handles both create and update (upsert)
-      const apiUrl = getApiUrl('api/v1/profiles/onboarding');
+      // Always use NEXT_PUBLIC_API_URL if set (should be the full base URL without /api/v1)
+      // Example: NEXT_PUBLIC_API_URL=https://gem-backend-1094576259070.us-central1.run.app
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL || getBackendUrl();
+      // Ensure baseUrl doesn't end with /api/v1 or trailing slash (we'll add /api/v1)
+      const cleanBaseUrl = baseUrl.replace(/\/api\/v1\/?$/, '').replace(/\/$/, '');
+      const apiUrl = `${cleanBaseUrl}/api/v1/profiles/onboarding`;
+      
+      console.log('🔗 Constructed API URL:', {
+        NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+        baseUrl,
+        cleanBaseUrl,
+        finalUrl: apiUrl
+      });
       
       const requestBody = {
         user_id: userId,

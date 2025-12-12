@@ -152,7 +152,7 @@ export default function BusinessExperienceScreen({ initialData, onNext, onBack }
       </div>
       
       {/* Continue Button - Fixed at bottom */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-10 px-6 py-4">
+      <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg z-10 px-6 py-4" style={{ borderTop: 'none' }}>
         <div className="max-w-4xl mx-auto">
           <button
             onClick={handleNext}

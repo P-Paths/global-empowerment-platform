@@ -53,50 +53,33 @@ export default function OnboardingContainer({ onComplete }: OnboardingContainerP
       const updatedData = { ...onboardingData, ...data };
       setOnboardingData(updatedData);
 
-      // Save to Supabase
+      // Save to Supabase (non-blocking - allow user to continue even if save fails)
       if (user) {
         console.log('💾 Saving onboarding data to Supabase...', {
           userId: user.id,
           dataKeys: Object.keys(data)
         });
-        try {
-          const result = await onboardingService.updateOnboardingData(user.id, data);
-          if (result.error) {
-            console.error('❌ Error saving onboarding data:', result.error);
-            // Check if it's a network error
-            const isNetworkError = result.error.message?.includes('Failed to connect') || 
-                                  result.error.message?.includes('network');
-            if (isNetworkError) {
-              alert(`Connection error: ${result.error.message}. Please check your internet connection and try again.`);
+        // Don't await - save in background and allow user to continue
+        onboardingService.updateOnboardingData(user.id, data)
+          .then((result) => {
+            if (result.error) {
+              console.error('❌ Error saving onboarding data (non-blocking):', result.error);
+              // Log error but don't block user - they can continue onboarding
+              // The data will be saved when they complete onboarding or when backend is available
             } else {
-              alert(`Failed to save: ${result.error.message}`);
+              console.log('✅ Onboarding data saved successfully');
             }
-            setIsSaving(false);
-            return; // Don't proceed to next screen if save failed
-          } else {
-            console.log('✅ Onboarding data saved successfully');
-          }
-        } catch (error: any) {
-          console.error('❌ Exception saving onboarding data:', error);
-          const errorMessage = error?.message || error?.toString() || 'An error occurred while saving.';
-          const isNetworkError = errorMessage.includes('Failed to connect') || 
-                                errorMessage.includes('network') ||
-                                error?.isNetworkError;
-          if (isNetworkError) {
-            alert(`Connection error: ${errorMessage}. Please check your internet connection and try again.`);
-          } else {
-            alert(`An error occurred while saving: ${errorMessage}. Please try again.`);
-          }
-          setIsSaving(false);
-          return;
-        } finally {
-          // Always reset saving state
-          setIsSaving(false);
-        }
+          })
+          .catch((error: any) => {
+            console.error('❌ Exception saving onboarding data (non-blocking):', error);
+            // Log error but don't block user
+          });
       } else {
         console.warn('⚠️ No user found - cannot save onboarding data');
-        setIsSaving(false);
       }
+      
+      // Always reset saving state immediately so user can continue
+      setIsSaving(false);
     } else {
       // No data to save, just advance
       setIsSaving(false);
