@@ -256,3 +256,6 @@ html, body {
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
 }
+
+/* Force CSS recompilation - v2.1 - Fix diagonal lines in production */
+/* This ensures Vercel rebuilds CSS bundle - Dec 12 2025 */
