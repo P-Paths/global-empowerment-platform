@@ -159,11 +159,8 @@ export default function OnboardingContainer({ onComplete }: OnboardingContainerP
             transform: `translateX(-${currentScreen * 100}vw)`,
             transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             width: `${totalScreens * 100}vw`,
-            willChange: 'transform',
-            backfaceVisibility: 'hidden',
-            WebkitBackfaceVisibility: 'hidden',
             isolation: 'isolate',
-            transformStyle: 'preserve-3d'
+            contain: 'layout style paint'
           }}
         >
           {/* Screen 1: Welcome */}

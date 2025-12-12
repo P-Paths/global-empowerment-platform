@@ -168,3 +168,14 @@ a:focus-visible {
 img {
   display: block;
 }
+
+/* Remove any decorative background lines or patterns from onboarding form */
+#profile-form {
+  background-image: none !important;
+}
+
+#profile-form::before,
+#profile-form::after {
+  display: none !important;
+  content: none !important;
+}

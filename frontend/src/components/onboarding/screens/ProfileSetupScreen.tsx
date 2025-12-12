@@ -185,12 +185,10 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
         className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden px-6 pt-6 pb-32"
         style={{ 
           WebkitOverflowScrolling: 'touch',
-          isolation: 'isolate',
-          position: 'relative',
-          zIndex: 1
+          position: 'relative'
         }}
       >
-        <div className="max-w-md mx-auto space-y-6" style={{ isolation: 'isolate', position: 'relative' }}>
+        <div className="max-w-md mx-auto space-y-6">
           {/* Profile Photo */}
           <div className="flex flex-col items-center">
             <label className="cursor-pointer">
@@ -223,12 +221,14 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
           </div>
 
           {/* First Name */}
-          <div className="relative isolate">
+          <div className="relative">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               First Name *
             </label>
             <input
               type="text"
+              name="first_name"
+              id="first_name"
               required
               autoComplete="given-name"
               value={formData.first_name}
@@ -238,12 +238,14 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
           </div>
 
           {/* Last Name */}
-          <div className="relative isolate">
+          <div className="relative">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Last Name *
             </label>
             <input
               type="text"
+              name="last_name"
+              id="last_name"
               required
               autoComplete="family-name"
               value={formData.last_name}
@@ -253,12 +255,14 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
           </div>
 
           {/* Email */}
-          <div className="relative isolate">
+          <div className="relative">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Email *
             </label>
             <input
               type="email"
+              name="email"
+              id="email"
               required
               autoComplete="email"
               value={formData.email}
@@ -268,12 +272,14 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
           </div>
 
           {/* Phone */}
-          <div className="relative isolate">
+          <div className="relative">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Phone (Optional)
             </label>
             <input
               type="tel"
+              name="phone"
+              id="phone"
               autoComplete="tel"
               value={formData.phone}
               onChange={(e) => {
@@ -298,12 +304,14 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
           </div>
 
           {/* Zip Code */}
-          <div className="relative isolate">
+          <div className="relative">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Zip Code *
             </label>
             <input
               type="text"
+              name="zip"
+              id="zip"
               required
               autoComplete="postal-code"
               maxLength={5}
@@ -315,12 +323,14 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
           </div>
 
           {/* City (Auto-filled) */}
-          <div className="relative isolate">
+          <div className="relative">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               City *
             </label>
             <input
               type="text"
+              name="city"
+              id="city"
               required
               autoComplete="address-level2"
               value={formData.city}
