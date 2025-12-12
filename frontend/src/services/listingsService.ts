@@ -517,7 +517,7 @@ export class ListingsService {
             // Required fields for component compatibility
             postedAt: listing.postedAt || new Date().toISOString(),
             titleStatus: listing.titleStatus || 'Clean',
-            platforms: listing.platforms || ['accorria'],
+            platforms: listing.platforms || ['gem'],
             messages: listing.messages || 0,
             clicks: listing.clicks || 0,
             soldAt: listing.soldAt,
