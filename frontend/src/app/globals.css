@@ -181,6 +181,20 @@ img {
 }
 
 /* Prevent rendering artifacts and diagonal lines in onboarding */
+html, body {
+  overflow-x: hidden;
+}
+
+* {
+  transform-style: flat !important;
+}
+
+.onboarding-container,
+[class*="onboarding"] {
+  contain: paint;
+  transform-style: flat !important;
+}
+
 [class*="onboarding"] [class*="fixed"],
 [class*="Onboarding"] [class*="fixed"] {
   border-top: none !important;
@@ -194,16 +208,6 @@ img {
 [class*="Onboarding"] [class*="fixed"]::after {
   display: none !important;
   content: none !important;
-}
-
-/* Prevent transform rendering artifacts that cause diagonal lines */
-[class*="onboarding"] {
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  perspective: 1000px;
-  -webkit-perspective: 1000px;
 }
 
 /* Remove any background patterns or decorative elements */

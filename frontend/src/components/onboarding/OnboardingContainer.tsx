@@ -137,21 +137,20 @@ export default function OnboardingContainer({ onComplete }: OnboardingContainerP
       {/* Screen Container */}
       {isMobile ? (
         <div
-          className="h-full flex relative"
+          className="h-full flex relative onboarding-container"
           style={{
-            transform: `translateX(-${currentScreen * 100}vw)`,
+            transform: `translateX(-${currentScreen * 100}%)`,
             transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-            width: `${totalScreens * 100}vw`,
-            isolation: 'isolate',
-            contain: 'layout style paint'
+            width: `${totalScreens * 100}%`,
+            willChange: 'transform'
           }}
         >
           {/* Screen 1: Welcome */}
-          <div className="w-screen flex-shrink-0 h-full overflow-y-auto">
+          <div className="flex-shrink-0 h-full overflow-y-auto" style={{ width: `${100 / totalScreens}%` }}>
             <WelcomeScreen onNext={() => handleNext()} />
           </div>
           {/* Screen 2: Profile Setup */}
-          <div className="w-screen flex-shrink-0 h-full overflow-hidden">
+          <div className="flex-shrink-0 h-full overflow-hidden" style={{ width: `${100 / totalScreens}%` }}>
             <ProfileSetupScreen
               initialData={onboardingData}
               onNext={(data) => handleNext(data)}
@@ -159,7 +158,7 @@ export default function OnboardingContainer({ onComplete }: OnboardingContainerP
             />
           </div>
           {/* Screen 3: Business Experience */}
-          <div className="w-screen flex-shrink-0 h-full overflow-y-auto">
+          <div className="flex-shrink-0 h-full overflow-y-auto" style={{ width: `${100 / totalScreens}%` }}>
             <BusinessExperienceScreen
               initialData={onboardingData}
               onNext={(data) => handleNext(data)}
@@ -167,7 +166,7 @@ export default function OnboardingContainer({ onComplete }: OnboardingContainerP
             />
           </div>
           {/* Screen 4: Category Selection */}
-          <div className="w-screen flex-shrink-0 h-full overflow-y-auto">
+          <div className="flex-shrink-0 h-full overflow-y-auto" style={{ width: `${100 / totalScreens}%` }}>
             <CategorySelectionScreen
               initialData={onboardingData}
               onNext={(data) => handleNext(data)}
@@ -175,7 +174,7 @@ export default function OnboardingContainer({ onComplete }: OnboardingContainerP
             />
           </div>
           {/* Screen 5: Completion */}
-          <div className="w-screen flex-shrink-0 h-full overflow-y-auto">
+          <div className="flex-shrink-0 h-full overflow-y-auto" style={{ width: `${100 / totalScreens}%` }}>
             <CompletionScreen onComplete={onComplete} />
           </div>
         </div>
