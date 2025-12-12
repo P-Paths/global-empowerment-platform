@@ -183,9 +183,14 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
         id="profile-form" 
         onSubmit={handleSubmit} 
         className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden px-6 pt-6 pb-32"
-        style={{ WebkitOverflowScrolling: 'touch' }}
+        style={{ 
+          WebkitOverflowScrolling: 'touch',
+          isolation: 'isolate',
+          position: 'relative',
+          zIndex: 1
+        }}
       >
-        <div className="max-w-md mx-auto space-y-6">
+        <div className="max-w-md mx-auto space-y-6" style={{ isolation: 'isolate', position: 'relative' }}>
           {/* Profile Photo */}
           <div className="flex flex-col items-center">
             <label className="cursor-pointer">
@@ -218,57 +223,58 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
           </div>
 
           {/* First Name */}
-          <div className="relative">
+          <div className="relative isolate">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               First Name *
             </label>
             <input
               type="text"
               required
+              autoComplete="given-name"
               value={formData.first_name}
               onChange={(e) => setFormData(prev => ({ ...prev, first_name: e.target.value }))}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none text-gray-900 bg-white"
-              style={{ outline: 'none', boxShadow: 'none' }}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
             />
           </div>
 
           {/* Last Name */}
-          <div className="relative">
+          <div className="relative isolate">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Last Name *
             </label>
             <input
               type="text"
               required
+              autoComplete="family-name"
               value={formData.last_name}
               onChange={(e) => setFormData(prev => ({ ...prev, last_name: e.target.value }))}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none text-gray-900 bg-white"
-              style={{ outline: 'none', boxShadow: 'none' }}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
             />
           </div>
 
           {/* Email */}
-          <div className="relative">
+          <div className="relative isolate">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Email *
             </label>
             <input
               type="email"
               required
+              autoComplete="email"
               value={formData.email}
               onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none text-gray-900 bg-white"
-              style={{ outline: 'none', boxShadow: 'none' }}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
             />
           </div>
 
           {/* Phone */}
-          <div className="relative">
+          <div className="relative isolate">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Phone (Optional)
             </label>
             <input
               type="tel"
+              autoComplete="tel"
               value={formData.phone}
               onChange={(e) => {
                 // Format phone number as user types: (555) 123-4567
@@ -287,42 +293,41 @@ export default function ProfileSetupScreen({ initialData, onNext, onBack }: Prof
               }}
               placeholder="(555) 123-4567"
               maxLength={14}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none text-gray-900 bg-white"
-              style={{ outline: 'none', boxShadow: 'none' }}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
             />
           </div>
 
           {/* Zip Code */}
-          <div className="relative">
+          <div className="relative isolate">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Zip Code *
             </label>
             <input
               type="text"
               required
+              autoComplete="postal-code"
               maxLength={5}
               value={formData.zip}
               onChange={(e) => setFormData(prev => ({ ...prev, zip: e.target.value.replace(/\D/g, '') }))}
               placeholder="48239"
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none text-gray-900 bg-white"
-              style={{ outline: 'none', boxShadow: 'none' }}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
             />
           </div>
 
           {/* City (Auto-filled) */}
-          <div className="relative">
+          <div className="relative isolate">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               City *
             </label>
             <input
               type="text"
               required
+              autoComplete="address-level2"
               value={formData.city}
               onChange={(e) => setFormData(prev => ({ ...prev, city: e.target.value }))}
               disabled={loadingCity}
               placeholder={loadingCity ? 'Loading...' : 'Detroit'}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none disabled:bg-gray-50 text-gray-900 bg-white"
-              style={{ outline: 'none', boxShadow: 'none' }}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-50 text-gray-900 bg-white"
             />
           </div>
 

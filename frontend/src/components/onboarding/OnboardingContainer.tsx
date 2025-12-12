@@ -161,7 +161,9 @@ export default function OnboardingContainer({ onComplete }: OnboardingContainerP
             width: `${totalScreens * 100}vw`,
             willChange: 'transform',
             backfaceVisibility: 'hidden',
-            WebkitBackfaceVisibility: 'hidden'
+            WebkitBackfaceVisibility: 'hidden',
+            isolation: 'isolate',
+            transformStyle: 'preserve-3d'
           }}
         >
           {/* Screen 1: Welcome */}
