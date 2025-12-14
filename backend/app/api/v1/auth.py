@@ -14,7 +14,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.database import get_db
 from app.core.config import settings
 from app.models.user import User
+from app.utils.auth import SUPABASE_JWT_SECRET
+from fastapi import Request
 import logging
+import os
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -300,4 +303,51 @@ async def forgot_password(password_data: PasswordReset):
     """Send password reset email"""
     # In a real implementation, you would send an email with a reset link
     # For now, we'll just return success
-    return {"message": "If an account with this email exists, a password reset link has been sent"} 
+    return {"message": "If an account with this email exists, a password reset link has been sent"}
+
+@router.get("/diagnostic")
+async def auth_diagnostic(request: Request):
+    """Diagnostic endpoint to check JWT authentication configuration"""
+    auth_header = request.headers.get("Authorization")
+    has_auth_header = auth_header is not None and auth_header.startswith("Bearer ")
+    
+    result = {
+        "jwt_secret_configured": SUPABASE_JWT_SECRET is not None,
+        "jwt_secret_length": len(SUPABASE_JWT_SECRET) if SUPABASE_JWT_SECRET else 0,
+        "has_auth_header": has_auth_header,
+        "auth_header_present": auth_header is not None,
+        "auth_header_starts_with_bearer": auth_header.startswith("Bearer ") if auth_header else False,
+    }
+    
+    # Try to decode the token if present
+    if has_auth_header:
+        try:
+            from jose import jwt, JWTError
+            token = auth_header.split(" ")[1]
+            result["token_length"] = len(token)
+            result["token_preview"] = token[:20] + "..." if len(token) > 20 else token
+            
+            if SUPABASE_JWT_SECRET:
+                try:
+                    payload = jwt.decode(
+                        token,
+                        SUPABASE_JWT_SECRET,
+                        algorithms=["HS256"],
+                        options={"verify_aud": False}
+                    )
+                    result["token_valid"] = True
+                    result["user_id"] = payload.get("sub", "unknown")
+                    result["email"] = payload.get("email", "unknown")
+                except JWTError as e:
+                    result["token_valid"] = False
+                    result["jwt_error"] = str(e)
+                    result["error_type"] = type(e).__name__
+            else:
+                result["token_valid"] = None
+                result["error"] = "JWT secret not configured - cannot validate token"
+        except Exception as e:
+            result["token_parse_error"] = str(e)
+    else:
+        result["error"] = "No Authorization header found"
+    
+    return result 
