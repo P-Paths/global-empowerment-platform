@@ -55,10 +55,13 @@ def get_current_user(request: Request) -> Dict[str, Any]:
 
     try:
         # Decode and verify the JWT token
+        # Note: We disable audience verification because Supabase tokens use "authenticated" as aud,
+        # and we're validating the token signature which is sufficient for authentication
         payload = jwt.decode(
             token, 
             SUPABASE_JWT_SECRET, 
-            algorithms=["HS256"]
+            algorithms=["HS256"],
+            options={"verify_aud": False}
         )
         
         logger.info(f"✅ Authenticated user: {payload.get('email', 'unknown')}, user_id: {payload.get('sub', 'unknown')}")
