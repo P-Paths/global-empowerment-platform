@@ -6,7 +6,8 @@ import { UserPlus, UserMinus, MapPin, Briefcase } from 'lucide-react';
 
 export default function ProfilePage() {
   const params = useParams();
-  const profileId = params.id as string;
+  // Extract ID immediately to avoid serialization issues
+  const profileId = (params?.id as string) || '';
   const { profile, loading, error } = useProfile(profileId);
   const { follow, unfollow, loading: following } = useFollow();
 

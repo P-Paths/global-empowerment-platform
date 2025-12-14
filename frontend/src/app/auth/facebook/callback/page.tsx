@@ -15,6 +15,7 @@ function FacebookCallbackContent() {
 
   useEffect(() => {
     const handleCallback = async () => {
+      // Extract values immediately to avoid serialization issues
       const code = searchParams.get('code');
       const state = searchParams.get('state');
       const error = searchParams.get('error');
@@ -134,7 +135,8 @@ function FacebookCallbackContent() {
     };
 
     handleCallback();
-  }, [searchParams, router]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router]); // Only depend on router, not searchParams to avoid serialization issues
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-4">
