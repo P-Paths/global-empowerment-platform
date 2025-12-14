@@ -70,9 +70,13 @@ def get_current_user(request: Request) -> Dict[str, Any]:
     except JWTError as e:
         logger.error(f"❌ JWT decode error: {type(e).__name__}: {str(e)}")
         logger.error(f"Token length: {len(token)}, JWT secret length: {len(SUPABASE_JWT_SECRET) if SUPABASE_JWT_SECRET else 0}")
+        # Provide more helpful error message
+        error_detail = f"Invalid or expired token: {str(e)}"
+        if "signature" in str(e).lower():
+            error_detail += ". This usually means SUPABASE_JWT_SECRET doesn't match your Supabase project's JWT secret."
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, 
-            detail=f"Invalid or expired token: {str(e)}"
+            detail=error_detail
         )
     except Exception as e:
         logger.error(f"❌ Authentication error: {type(e).__name__}: {str(e)}")
