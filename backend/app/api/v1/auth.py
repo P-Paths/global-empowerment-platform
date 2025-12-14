@@ -308,15 +308,26 @@ async def forgot_password(password_data: PasswordReset):
 @router.get("/diagnostic")
 async def auth_diagnostic(request: Request):
     """Diagnostic endpoint to check JWT authentication configuration"""
+    import os
     auth_header = request.headers.get("Authorization")
     has_auth_header = auth_header is not None and auth_header.startswith("Bearer ")
+    
+    # Get the secret from environment directly to compare
+    env_secret = os.getenv("SUPABASE_JWT_SECRET")
     
     result = {
         "jwt_secret_configured": SUPABASE_JWT_SECRET is not None,
         "jwt_secret_length": len(SUPABASE_JWT_SECRET) if SUPABASE_JWT_SECRET else 0,
+        "env_secret_configured": env_secret is not None,
+        "env_secret_length": len(env_secret) if env_secret else 0,
+        "secrets_match": SUPABASE_JWT_SECRET == env_secret if (SUPABASE_JWT_SECRET and env_secret) else False,
         "has_auth_header": has_auth_header,
         "auth_header_present": auth_header is not None,
         "auth_header_starts_with_bearer": auth_header.startswith("Bearer ") if auth_header else False,
+        "jwt_secret_first_10": SUPABASE_JWT_SECRET[:10] if SUPABASE_JWT_SECRET else None,
+        "jwt_secret_last_10": SUPABASE_JWT_SECRET[-10:] if SUPABASE_JWT_SECRET else None,
+        "expected_secret_first_10": "qQtYmpyZ+Z" if SUPABASE_JWT_SECRET else None,
+        "expected_secret_last_10": "vVIA==" if SUPABASE_JWT_SECRET else None,
     }
     
     # Try to decode the token if present

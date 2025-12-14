@@ -206,13 +206,30 @@ async def upsert_profile_onboarding(
     try:
         user_id = data.user_id
         
-        # Verify user is authenticated (but allow demo users)
-        current_user = get_current_user(request)
-        auth_user_id = current_user.get("sub") or current_user.get("id")
-        
-        # Log for debugging
+        # Enhanced logging for debugging JWT issues
         logger = logging.getLogger(__name__)
-        logger.info(f"Onboarding update request - user_id: {user_id}, auth_user_id: {auth_user_id}, current_user keys: {list(current_user.keys())}")
+        auth_header = request.headers.get("Authorization")
+        from app.utils.auth import SUPABASE_JWT_SECRET
+        
+        logger.info(f"=== ONBOARDING REQUEST DEBUG ===")
+        logger.info(f"User ID from request: {user_id}")
+        logger.info(f"Auth header present: {auth_header is not None}")
+        logger.info(f"Auth header starts with Bearer: {auth_header.startswith('Bearer ') if auth_header else False}")
+        logger.info(f"SUPABASE_JWT_SECRET is set: {SUPABASE_JWT_SECRET is not None}")
+        logger.info(f"SUPABASE_JWT_SECRET length: {len(SUPABASE_JWT_SECRET) if SUPABASE_JWT_SECRET else 0}")
+        if SUPABASE_JWT_SECRET:
+            logger.info(f"SUPABASE_JWT_SECRET first 20 chars: {SUPABASE_JWT_SECRET[:20]}...")
+            logger.info(f"SUPABASE_JWT_SECRET last 20 chars: ...{SUPABASE_JWT_SECRET[-20:]}")
+        
+        # Verify user is authenticated (but allow demo users)
+        try:
+            current_user = get_current_user(request)
+            auth_user_id = current_user.get("sub") or current_user.get("id")
+            logger.info(f"✅ Authentication successful - auth_user_id: {auth_user_id}, current_user keys: {list(current_user.keys())}")
+        except Exception as auth_error:
+            logger.error(f"❌ Authentication failed: {type(auth_error).__name__}: {str(auth_error)}")
+            logger.error(f"Auth error details: {auth_error}")
+            raise
         
         # Check if we're in development mode (no SUPABASE_JWT_SECRET) or running on localhost
         # Also check if request is from localhost (development)
